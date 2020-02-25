@@ -13,7 +13,7 @@ export default class Login extends Component {
     success=(res)=>{
         res = JSON.parse(res);
         if(res.msg == '成功'){
-            document.cookie='JSESSION'+res.data.token;
+            document.cookie='JSESSION='+res.data.token;
             window.location.href = '/index';
         }else{
             alert(res.msg);
