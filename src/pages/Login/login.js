@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../../css/login.less';
+import 'pageStyle/login.less';
 import * as AJAX from 'component/AJAX.js';
 import * as utils from 'component/utils.js';
 export default class Login extends Component {
@@ -28,12 +28,10 @@ export default class Login extends Component {
         var password = event.target.parentNode.querySelector('.pwd').value;
         if(!username){
             alert('用户名不能为空!');
-            window.location.reload();
             return;
         }
         if(!password){
-            alert('用户名不能为空!');
-            window.location.reload();
+            alert('密码不能为空!');
             return;
         }
         this.loginIn(username,password);
