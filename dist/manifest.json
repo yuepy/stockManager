@@ -1,0 +1,5 @@
+{
+  "index.js": "index.js",
+  "login.js": "login.js",
+  "main.js": "bundle.js"
+}
