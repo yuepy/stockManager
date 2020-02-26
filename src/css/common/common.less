@@ -54,22 +54,60 @@ table { border-collapse:collapse; border-spacing:0; }
     	background: #FFFFFF;
     	overflow-y: auto;
     	.optContent{
-    		width: 100%;
+    		width: 95%;
+            margin: 0 auto;
     		height: 50px;
     		margin-top: 20px;
     		display: flex;
     		align-items:center;
+            .searchSelect{
+                width: 120px;
+                height: 30px;
+                font-size: 8px;
+                border:2px solid #F3F3F3;
+                border-radius:5px;
+                color: #000000;
+                text-indent: 3px;
+                cursor: pointer;
+            }
+            .searchValue{
+                width: 150px;
+                height: 26px;
+                font-size: 8px;
+                border:2px solid #F3F3F3;
+                border-radius:5px;
+                color: #000000;
+                text-indent: 3px;
+                margin-left: 10px;
+            }
     		.enterBtn{
-    			width: 90px;
-    			height: 30px;
+    			width: 60px;
+    			height: 26px;
     			background:#2B79D9;
     			color: #FFFFFF;
     			border-radius:3px;
     			text-align: center;
-    			line-height: 30px;
-    			font-size: 14px;
-    			margin-left: 2.5%;
+    			line-height: 28px;
+    			font-size: 12px;
+    			margin-left: 15px;
+                border:1px #2B79D9 solid;
+                cursor: pointer;
     		}
+            .clear{
+                background:#FEFEFE!important;
+                color: #000000!important;
+                border:1px #807575 solid;
+            }
+            .dateValue{
+                margin-left: auto;
+                width: 120px;
+                height: 25px;
+                font-size: 8px;
+                border:1px solid rgba(0,0,0,0.2);
+                border-radius:5px;
+                color: #000000;
+                text-indent: 3px;
+            }
     	}
 		table{
 			width: 95%;
