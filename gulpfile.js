@@ -14,7 +14,7 @@ var gulp = require('gulp');
     var reactTools = require('react-tools');  //gulp构建reacr环境
     gulp.task('less',function(){
         // 找到less文件
-        return gulp.src('src/css/All.less')
+        return gulp.src('src/css/All.less')
         // 用gulp-less做处理
         .pipe(less({
             paths:[path.join(__dirname,'less','includes')]
