@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import 'pageStyle/warehousing.less';
 import CommonLeftMenu from 'component/commonLeftMenu.js';
 import NavHeader from 'component/header.js';
+import PageFooter from 'component/footer.js';
 import * as AJAX from 'component/AJAX.js'
 import * as utils from 'component/utils.js'
 export default class Warehousing extends Component {
@@ -190,6 +191,7 @@ export default class Warehousing extends Component {
                 			</tr>
                             </tbody>
                 		</table>
+                		<PageFooter />
                 	</div>
                 </div>
             </div>

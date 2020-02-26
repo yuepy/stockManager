@@ -13,6 +13,10 @@ export default class navHeader extends Component {
                     <span>虚拟用户</span>
                     <i></i>
                 </div>
+                <div className="userMask">
+                    <li>登出</li>
+                </div>
+                
             </header>
         )
     }
