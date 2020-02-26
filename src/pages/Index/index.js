@@ -4,6 +4,7 @@ import CommonLeftMenu from 'component/commonLeftMenu.js';
 import NavHeader from 'component/header.js';
 import * as AJAX from 'component/AJAX.js';
 import * as utils from 'component/utils.js';
+import CommonContent from 'component/commonContent.js';
 export default class Index extends Component {
     constructor(props) {
         super(props);
@@ -45,33 +46,15 @@ export default class Index extends Component {
                 <header className="rightHeader">
                 		<span>商品库存入库</span>
                 	</header>
-                	
                 	<div className="dataContent">
                 		<div className="optContent">
-                			<div className="enterBtn">商品录入</div>
+                			<div className="enterBtn">搜索</div>
                 		</div>
-                            <table className='data'>
-                                <thead>
-                                    <tr>
-                                        <th>供货商</th>
-                                        <th>商品种类</th>
-                                        <th>商品编号</th>
-                                        <th>克重(件/g)</th>
-                                        <th>总计件数</th>
-                                        <th>总计克重(g)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>{_this.state.data.length>0 && _this.state.data.map((item,index)=>{
-                                    return <tr>
-                                        <td>{item.supplier}</td>
-                                        <td>{item.goods_name}</td>
-                                        <td>{item.goods_number}</td>
-                                        <td>{item.weight}</td>
-                                        <td>{item.num}</td>
-                                        <td>{item.weight_all}</td>
-                                    </tr>
-                                })}</tbody>
-                            </table>
+                        <CommonContent 
+                            HEAD={[{title:'供货商',name:'supplier'},{title:'商品种类',name:'goods_name'},{title:'商品编号',name:'goods_number'},{title:'克重(件/g)',
+                                    name:'weight'},{title:'总计件数',name:'num'},{title:'总计克重(g)',name:'weight_all'}]}
+                            CONTENT={_this.state.data}
+                        />
                     </div>
                 </div>
             </div>

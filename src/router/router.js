@@ -4,8 +4,8 @@ import Bundle from './Bundle';
 import Login from 'bundle-loader?lazy&name=login!pages/Login/login';
 import Index from 'bundle-loader?lazy&name=index!pages/Index/index';
 import warehousing from 'bundle-loader?lazy&name=warehousing!pages/warehousing/warehousing';
-import outStock from 'bundle-loader?lazy&name=warehousing!pages/outStock/outStock';
-import stockHistory from 'bundle-loader?lazy&name=warehousing!pages/stockHistory/stockHistory';
+import outStock from 'bundle-loader?lazy&name=outStock!pages/outStock/outStock';
+import stockHistory from 'bundle-loader?lazy&name=stockHistory!pages/stockHistory/stockHistory';
 const Loading = function () {
     return <div>Loading...</div>
 };
