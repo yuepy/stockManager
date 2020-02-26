@@ -15,39 +15,27 @@ export default class Index extends Component {
         AJAX.AJAX('http://106.12.194.98/api/goods/all','GET',false,head,this.isLogin,this.error);
     }
     isLogin=(res)=>{
+        var _this = this;
         res = JSON.parse(res);
         if(res.msg == '身份失效'){
             window.location.href = '/';
         }
-        this.setState({
+        _this.setState({
             data : res.data.data
-        }) 
+        })
     }
     loadData=(data)=>{
-        if(!this.state.data){
-            return <div>暂无数据</div>
+        var _this = this;
+        if(!_this.state.data){
+            return (<div>暂无数据</div>)
         }
-        return <tbody>
-            {this.state.data.map((item,index)=>{
-                return
-                <tr>
-                    <td>{item.id}</td>
-                    <td>{item.goods_id}</td>
-                    <td>{item.num}</td>
-                    <td>{item.goods_name}</td>
-                    <td>{item.weight}</td>
-                    <td>{item.weight_all}</td>
-                    <td>{item.create_time}</td>
-                    <td>{item.update_time}</td>
-                    <td>{item.supplier_id}</td>
-                    <td>{item.supplier}</td>
-                    <td>{item.goods_number}</td>
-                    <td>{item.price}</td>
-                </tr>
-            })}
-        </tbody>
+        debugger;
+        _this.state.data.map(function(item,index){
+            return<tr>123</tr>
+            })
     }
     render() {
+        var _this = this;
         return (
             <div className='allStock'>
                 <CommonLeftMenu />
@@ -63,9 +51,16 @@ export default class Index extends Component {
                                     <th>总计件数</th>
                                     <th>总计克重(g)</th>
                                 </thead>
-                                <tbody>
-                                    {this.loadData()}
-                                </tbody>
+                                <tbody>{_this.state.data.length>0 && _this.state.data.map((item,index)=>{
+                                    return <tr>
+                                        <td>{item.supplier}</td>
+                                        <td>{item.goods_name}</td>
+                                        <td>{item.goods_number}</td>
+                                        <td>{item.weight}</td>
+                                        <td>{item.num}</td>
+                                        <td>{item.weight_all}</td>
+                                    </tr>
+                                })}</tbody>
                             </table>
                         </div>
                     </div>
