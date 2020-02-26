@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import 'pageStyle/index.less';
 import CommonLeftMenu from 'component/commonLeftMenu.js';
+import NavHeader from 'component/header.js';
 import * as AJAX from 'component/AJAX.js';
 import * as utils from 'component/utils.js';
 export default class Index extends Component {
@@ -38,18 +39,27 @@ export default class Index extends Component {
         var _this = this;
         return (
             <div className='allStock'>
+                <NavHeader />
                 <CommonLeftMenu />
                 <div className='rightContent'>
-                    <div className='right'>
-                        <div className='content'>
+                <header className="rightHeader">
+                		<span>商品库存入库</span>
+                	</header>
+                	
+                	<div className="dataContent">
+                		<div className="optContent">
+                			<div className="enterBtn">商品录入</div>
+                		</div>
                             <table className='data'>
                                 <thead>
-                                    <th>供货商</th>
-                                    <th>商品种类</th>
-                                    <th>商品编号</th>
-                                    <th>克重(件/g)</th>
-                                    <th>总计件数</th>
-                                    <th>总计克重(g)</th>
+                                    <tr>
+                                        <th>供货商</th>
+                                        <th>商品种类</th>
+                                        <th>商品编号</th>
+                                        <th>克重(件/g)</th>
+                                        <th>总计件数</th>
+                                        <th>总计克重(g)</th>
+                                    </tr>
                                 </thead>
                                 <tbody>{_this.state.data.length>0 && _this.state.data.map((item,index)=>{
                                     return <tr>
@@ -62,7 +72,6 @@ export default class Index extends Component {
                                     </tr>
                                 })}</tbody>
                             </table>
-                        </div>
                     </div>
                 </div>
             </div>

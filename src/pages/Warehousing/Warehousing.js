@@ -20,6 +20,7 @@ export default class Warehousing extends Component {
                 			<div className="enterBtn">商品录入</div>
                 		</div>
                 		<table>
+                            <thead>
                 			<tr>
                 				<th>日期</th>
                 				<th>供货商</th>
@@ -31,6 +32,8 @@ export default class Warehousing extends Component {
                 				<th>总计克重</th>
                 				<th>总价（￥）</th>		
                 			</tr>
+                            </thead>
+                            <tbody>
                 			<tr>
                 				<td>2010-01-28</td>
                 				<td>虚拟供货商1</td>
@@ -185,6 +188,7 @@ export default class Warehousing extends Component {
                 				<td>200g</td>
                 				<td>1600元</td>
                 			</tr>
+                            </tbody>
                 		</table>
                 	</div>
                 </div>
