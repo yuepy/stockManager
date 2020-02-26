@@ -1,27 +1,95 @@
 .commonLeftMenu{
-    height:100vh;
+    position: absolute;
+    left: 0;
+    top: 50px;
+    bottom: 0;
     width:200px;
-    min-width: 200px;
-    width: 16vw;
-    max-width: 18px;
     text-align: center;
-    background-color: #333;
-    h4{
-        margin-top: 20px;
-    }
+    background-color: #323340;
     .title{
-        background-color:#aaa ;
         padding:20px 0;
+        color: #FFF;
     }
-    ul{
+    .Allmenu{
+      position:absolute;
+      top: 60px;
+      bottom:0;
+      width: 100%;
+      background-color:#323340;
+      overflow-x: hidden;
+      overflow-y: auto;
+      ul{
         margin-top: 20px;
         li{
-            height: 30px;
-            background-color: #aaa;
+            height: 40px;
             font-size: 18px;
-            line-height: 32px;
+            line-height: 40px;
             margin-bottom: 15px;
             padding: 5px 0;
+            a{
+                color:rgb(135, 136, 143);
+            }
+        }
+      }  
+    }
+    .active{
+        background-color:#0077fb!important;
+        a{
+          color: #FFF!important;  
+        }
+        
+    }
+    
+}
+.navHeader{
+    height: 50px;
+    width: 100%;
+    background-color:#0077fb;
+    display: flex;
+    align-items:center;
+    justify-content:space-between;
+    position:relative;
+    .navLeft{
+        margin-left: 30px;
+        color: #FFFFFF;
+        span{
+            display: inline-block;  
+            &:first-child{
+                width: 80px;
+                height:30px;
+                line-height: 27px;
+                font-size: 20px;
+                margin-right: 5px;
+            }
+            &:last-child{
+                width: 120px;
+                height: 20px;
+                line-height: 25px;
+                font-size: 14px;
+                margin-left: 5px;
+                padding-left:5px;
+                border-left: 1px solid #FFFFFF;
+            }
+        }
+    }
+    .navRight{
+        margin-right: 40px;
+        color: #FFFFFF;
+        span{
+            display: inline-block;  
+            width: 60px;
+            height: 20px;
+            font-size: 14px;
+        }
+        i{
+            display: inline-block;
+            position:absolute;
+            right: 22px;
+            top: 15px;
+            width: 22px;
+            height: 22px;
+            background:url('/dist/images/arrow.png') center;
+            background-size:22px 22px;
         }
     }
 }

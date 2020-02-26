@@ -1,0 +1,93 @@
+.commonLeftMenu {
+  position: absolute;
+  left: 0;
+  top: 50px;
+  bottom: 0;
+  width: 200px;
+  text-align: center;
+  background-color: #323340;
+}
+.commonLeftMenu .title {
+  padding: 20px 0;
+  color: #FFF;
+}
+.commonLeftMenu .Allmenu {
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+  width: 100%;
+  background-color: #323340;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.commonLeftMenu .Allmenu ul {
+  margin-top: 20px;
+}
+.commonLeftMenu .Allmenu ul li {
+  height: 40px;
+  font-size: 18px;
+  line-height: 40px;
+  margin-bottom: 15px;
+  padding: 5px 0;
+}
+.commonLeftMenu .Allmenu ul li a {
+  color: #87888f;
+}
+.commonLeftMenu .active {
+  background-color: #0077fb !important;
+}
+.commonLeftMenu .active a {
+  color: #FFF !important;
+}
+.navHeader {
+  height: 50px;
+  width: 100%;
+  background-color: #0077fb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+.navHeader .navLeft {
+  margin-left: 30px;
+  color: #FFFFFF;
+}
+.navHeader .navLeft span {
+  display: inline-block;
+}
+.navHeader .navLeft span:first-child {
+  width: 80px;
+  height: 30px;
+  line-height: 27px;
+  font-size: 20px;
+  margin-right: 5px;
+}
+.navHeader .navLeft span:last-child {
+  width: 120px;
+  height: 20px;
+  line-height: 25px;
+  font-size: 14px;
+  margin-left: 5px;
+  padding-left: 5px;
+  border-left: 1px solid #FFFFFF;
+}
+.navHeader .navRight {
+  margin-right: 40px;
+  color: #FFFFFF;
+}
+.navHeader .navRight span {
+  display: inline-block;
+  width: 60px;
+  height: 20px;
+  font-size: 14px;
+}
+.navHeader .navRight i {
+  display: inline-block;
+  position: absolute;
+  right: 22px;
+  top: 15px;
+  width: 22px;
+  height: 22px;
+  background: url('/dist/images/arrow.png') center;
+  background-size: 22px 22px;
+}

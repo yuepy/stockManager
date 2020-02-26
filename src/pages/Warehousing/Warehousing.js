@@ -1,13 +1,193 @@
 import React, {Component} from 'react';
+import 'pageStyle/warehousing.less';
 import CommonLeftMenu from 'component/commonLeftMenu.js';
+import NavHeader from 'component/header.js';
 import * as AJAX from 'component/AJAX.js'
 import * as utils from 'component/utils.js'
 export default class Warehousing extends Component {
     render(){
         return(
             <div className='allStock'>
+            	<NavHeader />
                 <CommonLeftMenu />
-                <div className='rightContent'>商品入库</div>
+                <div className='rightContent'>
+                	<header className="rightHeader">
+                		<span>商品库存入库</span>
+                	</header>
+                	
+                	<div className="dataContent">
+                		<div className="optContent">
+                			<div className="enterBtn">商品录入</div>
+                		</div>
+                		<table>
+                			<tr>
+                				<th>日期</th>
+                				<th>供货商</th>
+                				<th>商品名称</th>
+                				<th>商品编号</th>
+                				<th>进货价格（1g）</th>
+                				<th>商品重量（件/g）</th>
+                				<th>总计件数</th>
+                				<th>总计克重</th>
+                				<th>总价（￥）</th>		
+                			</tr>
+                			<tr>
+                				<td>2010-01-28</td>
+                				<td>虚拟供货商1</td>
+                				<td>银壶</td>
+                				<td>10_20200109</td>
+                				<td>8</td>
+                				<td>10g</td>
+                				<td>20</td>
+                				<td>200g</td>
+                				<td>1600元</td>
+                			</tr>
+                			<tr>
+                				<td>2010-01-28</td>
+                				<td>虚拟供货商1</td>
+                				<td>银壶</td>
+                				<td>10_20200109</td>
+                				<td>8</td>
+                				<td>10g</td>
+                				<td>20</td>
+                				<td>200g</td>
+                				<td>1600元</td>
+                			</tr>
+                			<tr>
+                				<td>2010-01-28</td>
+                				<td>虚拟供货商1</td>
+                				<td>银壶</td>
+                				<td>10_20200109</td>
+                				<td>8</td>
+                				<td>10g</td>
+                				<td>20</td>
+                				<td>200g</td>
+                				<td>1600元</td>
+                			</tr>
+                			<tr>
+                				<td>2010-01-28</td>
+                				<td>虚拟供货商1</td>
+                				<td>银壶</td>
+                				<td>10_20200109</td>
+                				<td>8</td>
+                				<td>10g</td>
+                				<td>20</td>
+                				<td>200g</td>
+                				<td>1600元</td>
+                			</tr>
+                			<tr>
+                				<td>2010-01-28</td>
+                				<td>虚拟供货商1</td>
+                				<td>银壶</td>
+                				<td>10_20200109</td>
+                				<td>8</td>
+                				<td>10g</td>
+                				<td>20</td>
+                				<td>200g</td>
+                				<td>1600元</td>
+                			</tr>
+                			<tr>
+                				<td>2010-01-28</td>
+                				<td>虚拟供货商1</td>
+                				<td>银壶</td>
+                				<td>10_20200109</td>
+                				<td>8</td>
+                				<td>10g</td>
+                				<td>20</td>
+                				<td>200g</td>
+                				<td>1600元</td>
+                			</tr>
+                			<tr>
+                				<td>2010-01-28</td>
+                				<td>虚拟供货商1</td>
+                				<td>银壶</td>
+                				<td>10_20200109</td>
+                				<td>8</td>
+                				<td>10g</td>
+                				<td>20</td>
+                				<td>200g</td>
+                				<td>1600元</td>
+                			</tr>
+                			<tr>
+                				<td>2010-01-28</td>
+                				<td>虚拟供货商1</td>
+                				<td>银壶</td>
+                				<td>10_20200109</td>
+                				<td>8</td>
+                				<td>10g</td>
+                				<td>20</td>
+                				<td>200g</td>
+                				<td>1600元</td>
+                			</tr>
+                			<tr>
+                				<td>2010-01-28</td>
+                				<td>虚拟供货商1</td>
+                				<td>银壶</td>
+                				<td>10_20200109</td>
+                				<td>8</td>
+                				<td>10g</td>
+                				<td>20</td>
+                				<td>200g</td>
+                				<td>1600元</td>
+                			</tr>
+                			<tr>
+                				<td>2010-01-28</td>
+                				<td>虚拟供货商1</td>
+                				<td>银壶</td>
+                				<td>10_20200109</td>
+                				<td>8</td>
+                				<td>10g</td>
+                				<td>20</td>
+                				<td>200g</td>
+                				<td>1600元</td>
+                			</tr>
+                			<tr>
+                				<td>2010-01-28</td>
+                				<td>虚拟供货商1</td>
+                				<td>银壶</td>
+                				<td>10_20200109</td>
+                				<td>8</td>
+                				<td>10g</td>
+                				<td>20</td>
+                				<td>200g</td>
+                				<td>1600元</td>
+                			</tr>
+                			<tr>
+                				<td>2010-01-28</td>
+                				<td>虚拟供货商1</td>
+                				<td>银壶</td>
+                				<td>10_20200109</td>
+                				<td>8</td>
+                				<td>10g</td>
+                				<td>20</td>
+                				<td>200g</td>
+                				<td>1600元</td>
+                			</tr>
+                			<tr>
+                				<td>2010-01-28</td>
+                				<td>虚拟供货商1</td>
+                				<td>银壶</td>
+                				<td>10_20200109</td>
+                				<td>8</td>
+                				<td>10g</td>
+                				<td>20</td>
+                				<td>200g</td>
+                				<td>1600元</td>
+                			</tr>
+                			<tr>
+                				<td>2010-01-28</td>
+                				<td>虚拟供货商1</td>
+                				<td>银壶</td>
+                				<td>10_20200109</td>
+                				<td>8</td>
+                				<td>10g</td>
+                				<td>20</td>
+                				<td>200g</td>
+                				<td>1600元</td>
+                			</tr>
+                		</table>
+                	</div>
+                </div>
             </div>
         )
     }
