@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
-import 'pageStyle/index.less';
+import 'pageStyle/common/common.less'
 import CommonLeftMenu from 'component/commonLeftMenu.js';
 import NavHeader from 'component/header.js';
 import * as AJAX from 'component/AJAX.js';
 import * as utils from 'component/utils.js';
 import CommonContent from 'component/commonContent.js';
+import PageFooter from 'component/footer.js';
 export default class Index extends Component {
     constructor(props) {
         super(props);
         this.state = {
-           data : ''
+           data : '',
+           deleteFlag:false
         }
     }
     componentDidMount=()=>{
@@ -36,6 +38,12 @@ export default class Index extends Component {
             return<tr>123</tr>
             })
     }
+    selectDelete(){
+        var _this = this;
+        _this.setState({
+            deleteFlag:!_this.state.deleteFlag
+        })
+    }
     render() {
         var _this = this;
         return (
@@ -48,13 +56,15 @@ export default class Index extends Component {
                 	</header>
                 	<div className="dataContent">
                 		<div className="optContent">
-                			<div className="enterBtn">搜索</div>
+                			<div className="enterBtn" onClick={_this.selectDelete.bind(_this)}>批量删除</div>
                 		</div>
                         <CommonContent 
                             HEAD={[{title:'供货商',name:'supplier'},{title:'商品种类',name:'goods_name'},{title:'商品编号',name:'goods_number'},{title:'克重(件/g)',
-                                    name:'weight'},{title:'总计件数',name:'num'},{title:'总计克重(g)',name:'weight_all'}]}
+                                    name:'weight'},{title:'总计件数',name:'num'},{title:'总计克重(g)',name:'weight_all'},{title:'操作',name:'删除'}]}
                             CONTENT={_this.state.data}
+                            deleteFlag={_this.state.deleteFlag}
                         />
+                        <PageFooter />
                     </div>
                 </div>
             </div>

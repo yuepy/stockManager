@@ -1,12 +1,34 @@
 import React, {Component} from 'react';
-import 'pageStyle/warehousing.less';
+import 'pageStyle/common/common.less';
 import CommonLeftMenu from 'component/commonLeftMenu.js';
+import CommonContent from 'component/commonContent';
 import NavHeader from 'component/header.js';
 import PageFooter from 'component/footer.js';
-import * as AJAX from 'component/AJAX.js'
-import * as utils from 'component/utils.js'
+import * as AJAX from 'component/AJAX.js';
+import * as utils from 'component/utils.js';
 export default class Warehousing extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+           data : ''
+        }
+    }
+    componentDidMount=()=>{
+        var head = {head:'Authorization',value:'Bearer '+utils.token};
+        AJAX.AJAX('http://106.12.194.98/api/goods/add/history','GET',false,head,this.isLogin,this.error);
+    }
+    isLogin=(res)=>{
+        var _this = this;
+        res = JSON.parse(res);
+        if(res.msg == '身份失效'){
+            window.location.href = '/';
+        }
+        _this.setState({
+            data : res.data.data
+        })
+    }
     render(){
+        var _this = this;
         return(
             <div className='allStock'>
             	<NavHeader />
@@ -20,177 +42,12 @@ export default class Warehousing extends Component {
                 		<div className="optContent">
                 			<div className="enterBtn">商品录入</div>
                 		</div>
-                		<table>
-                            <thead>
-                			<tr>
-                				<th>日期</th>
-                				<th>供货商</th>
-                				<th>商品名称</th>
-                				<th>商品编号</th>
-                				<th>进货价格（1g）</th>
-                				<th>商品重量（件/g）</th>
-                				<th>总计件数</th>
-                				<th>总计克重</th>
-                				<th>总价（￥）</th>		
-                			</tr>
-                            </thead>
-                            <tbody>
-                			<tr>
-                				<td>2010-01-28</td>
-                				<td>虚拟供货商1</td>
-                				<td>银壶</td>
-                				<td>10_20200109</td>
-                				<td>8</td>
-                				<td>10g</td>
-                				<td>20</td>
-                				<td>200g</td>
-                				<td>1600元</td>
-                			</tr>
-                			<tr>
-                				<td>2010-01-28</td>
-                				<td>虚拟供货商1</td>
-                				<td>银壶</td>
-                				<td>10_20200109</td>
-                				<td>8</td>
-                				<td>10g</td>
-                				<td>20</td>
-                				<td>200g</td>
-                				<td>1600元</td>
-                			</tr>
-                			<tr>
-                				<td>2010-01-28</td>
-                				<td>虚拟供货商1</td>
-                				<td>银壶</td>
-                				<td>10_20200109</td>
-                				<td>8</td>
-                				<td>10g</td>
-                				<td>20</td>
-                				<td>200g</td>
-                				<td>1600元</td>
-                			</tr>
-                			<tr>
-                				<td>2010-01-28</td>
-                				<td>虚拟供货商1</td>
-                				<td>银壶</td>
-                				<td>10_20200109</td>
-                				<td>8</td>
-                				<td>10g</td>
-                				<td>20</td>
-                				<td>200g</td>
-                				<td>1600元</td>
-                			</tr>
-                			<tr>
-                				<td>2010-01-28</td>
-                				<td>虚拟供货商1</td>
-                				<td>银壶</td>
-                				<td>10_20200109</td>
-                				<td>8</td>
-                				<td>10g</td>
-                				<td>20</td>
-                				<td>200g</td>
-                				<td>1600元</td>
-                			</tr>
-                			<tr>
-                				<td>2010-01-28</td>
-                				<td>虚拟供货商1</td>
-                				<td>银壶</td>
-                				<td>10_20200109</td>
-                				<td>8</td>
-                				<td>10g</td>
-                				<td>20</td>
-                				<td>200g</td>
-                				<td>1600元</td>
-                			</tr>
-                			<tr>
-                				<td>2010-01-28</td>
-                				<td>虚拟供货商1</td>
-                				<td>银壶</td>
-                				<td>10_20200109</td>
-                				<td>8</td>
-                				<td>10g</td>
-                				<td>20</td>
-                				<td>200g</td>
-                				<td>1600元</td>
-                			</tr>
-                			<tr>
-                				<td>2010-01-28</td>
-                				<td>虚拟供货商1</td>
-                				<td>银壶</td>
-                				<td>10_20200109</td>
-                				<td>8</td>
-                				<td>10g</td>
-                				<td>20</td>
-                				<td>200g</td>
-                				<td>1600元</td>
-                			</tr>
-                			<tr>
-                				<td>2010-01-28</td>
-                				<td>虚拟供货商1</td>
-                				<td>银壶</td>
-                				<td>10_20200109</td>
-                				<td>8</td>
-                				<td>10g</td>
-                				<td>20</td>
-                				<td>200g</td>
-                				<td>1600元</td>
-                			</tr>
-                			<tr>
-                				<td>2010-01-28</td>
-                				<td>虚拟供货商1</td>
-                				<td>银壶</td>
-                				<td>10_20200109</td>
-                				<td>8</td>
-                				<td>10g</td>
-                				<td>20</td>
-                				<td>200g</td>
-                				<td>1600元</td>
-                			</tr>
-                			<tr>
-                				<td>2010-01-28</td>
-                				<td>虚拟供货商1</td>
-                				<td>银壶</td>
-                				<td>10_20200109</td>
-                				<td>8</td>
-                				<td>10g</td>
-                				<td>20</td>
-                				<td>200g</td>
-                				<td>1600元</td>
-                			</tr>
-                			<tr>
-                				<td>2010-01-28</td>
-                				<td>虚拟供货商1</td>
-                				<td>银壶</td>
-                				<td>10_20200109</td>
-                				<td>8</td>
-                				<td>10g</td>
-                				<td>20</td>
-                				<td>200g</td>
-                				<td>1600元</td>
-                			</tr>
-                			<tr>
-                				<td>2010-01-28</td>
-                				<td>虚拟供货商1</td>
-                				<td>银壶</td>
-                				<td>10_20200109</td>
-                				<td>8</td>
-                				<td>10g</td>
-                				<td>20</td>
-                				<td>200g</td>
-                				<td>1600元</td>
-                			</tr>
-                			<tr>
-                				<td>2010-01-28</td>
-                				<td>虚拟供货商1</td>
-                				<td>银壶</td>
-                				<td>10_20200109</td>
-                				<td>8</td>
-                				<td>10g</td>
-                				<td>20</td>
-                				<td>200g</td>
-                				<td>1600元</td>
-                			</tr>
-                            </tbody>
-                		</table>
+                		<CommonContent 
+                            HEAD={[{title:'日期',name:'create_time'},{title:'供应商',name:'customer'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},
+                            {title:'进货价格(1g)',name:'price'},{title:'商品重量(件/g)',name:'weight'},{title:'总计件数',name:'num'},
+                            {title:'总计克重(g)',name:'weight_all'},{title:'总价($)',name:'price_all'}]}
+                            CONTENT={_this.state.data}
+                        />
                 		<PageFooter />
                 	</div>
                 </div>
