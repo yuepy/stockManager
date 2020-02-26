@@ -52,7 +52,7 @@ export default class Index extends Component {
                 <CommonLeftMenu />
                 <div className='rightContent'>
                 <header className="rightHeader">
-                		<span>商品库存入库</span>
+                		<span>全部商品库存</span>
                 	</header>
                 	<div className="dataContent">
                 		<div className="optContent">

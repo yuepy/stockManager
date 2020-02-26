@@ -6,7 +6,7 @@ import * as utils from 'component/utils.js';
 import PageFooter from 'component/footer.js';
 import CommonContent from 'component/commonContent.js';
 import 'pageStyle/common/common.less'
-export default class Warehousing extends Component {
+export default class StockHistory extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -61,7 +61,8 @@ export default class Warehousing extends Component {
                 		</div>
                         <CommonContent 
                             HEAD={[{title:'日期',name:'create_time'},{title:'客户名称',name:'customer'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},{title:'单价(1g)',
-                                    name:'weight'},{title:'当前银价(1g)',name:'current_price'},{title:'商品重量',name:'weight'},{title:'总计件数',name:'num'},{title:'总计克重(g)',name:'weight_all'},{title:'总价($)',name:'price_all'},{title:'经办人',name:'operator'}]}
+                                    name:'weight'},{title:'当前银价(1g)',name:'current_price'},{title:'商品重量',name:'weight'},{title:'总计件数',name:'num'},{title:'总计克重(g)',name:'weight_all'},
+                                    {title:'总价($)',name:'price_all'},{title:'经办人',name:'operator'}]}
                             CONTENT={_this.state.data}
                         />
                         <PageFooter />
