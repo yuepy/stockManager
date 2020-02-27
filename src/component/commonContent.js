@@ -8,12 +8,8 @@ export default class CommonContent extends Component{
             deleteFlag:this.props.deleteFlag?this.props.deleteFlag:false
         })
     }
-    componentWillReceiveProps(nextProps){
-        debugger;
-    }
     render(){
         var _this = this;
-        debugger;
         return(
             <table className='data'>
                 <thead>
