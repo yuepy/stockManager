@@ -177,7 +177,6 @@ table {
   border: 1px #807575 solid;
 }
 .rightContent .dataContent .optContent .dateValue {
-  margin-left: auto;
   width: 120px;
   height: 25px;
   font-size: 8px;
@@ -185,6 +184,9 @@ table {
   border-radius: 5px;
   color: #000000;
   text-indent: 3px;
+}
+.rightContent .dataContent .optContent .lastBtn {
+  margin-left: auto;
 }
 .rightContent .dataContent table {
   width: 95%;
@@ -206,4 +208,13 @@ table {
   height: 35px;
   line-height: 35px;
   text-indent: 25px;
+}
+.rightContent .dataContent table tr .deleteFlag {
+  color: #e4393c;
+}
+.rightContent .dataContent table tr .showInput {
+  display: block;
+}
+.rightContent .dataContent table tr .hideInput {
+  display: none;
 }

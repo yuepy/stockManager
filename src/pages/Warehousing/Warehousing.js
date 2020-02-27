@@ -12,7 +12,8 @@ export default class Warehousing extends Component {
         super(props);
         this.state = {
            data : '',
-           isentry:false
+           isentry:false,
+           allData:''
         }
     }
     componentDidMount=()=>{
@@ -26,7 +27,8 @@ export default class Warehousing extends Component {
             window.location.href = '/';
         }
         _this.setState({
-            data : res.data.data
+            data : res.data.data,
+            allData : res.data
         })
     }
     showEntry=()=>{
@@ -55,13 +57,13 @@ export default class Warehousing extends Component {
                             {title:'总计克重(g)',name:'weight_all'},{title:'总价($)',name:'price_all'}]}
                             CONTENT={_this.state.data}
                         />
-                		<PageFooter />
                         {_this.state.isentry && <Entry 
                             close={()=>{_this.setState({isentry:false})}}
                             HEAD={[{title:'序列号',name:''},{title:'日期',name:'create_time'},{title:'供应商',name:'customer'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},
                             {title:'进货价格(1g)',name:'price'},{title:'商品重量(件/g)',name:'weight'},{title:'总计件数',name:'num'},
                             {title:'总计克重(g)',name:'weight_all'},{title:'总价($)',name:'price_all'}]}
                         />}
+                		<PageFooter CONTENT={_this.state.allData} isLogin={this.isLogin}/>
                 	</div>
                 </div>
             </div>

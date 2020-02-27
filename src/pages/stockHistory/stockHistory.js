@@ -57,7 +57,7 @@ export default class StockHistory extends Component {
             				<input className="searchValue"/>
                 			<div className="enterBtn">搜索</div>
                 			<div className="enterBtn clear">清空</div>
-                			<input className="dateValue" type="month"/>
+                			<input className="dateValue lastBtn" type="month"/>
                 		</div>
                         <CommonContent 
                             HEAD={[{title:'日期',name:'create_time'},{title:'客户名称',name:'customer'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},{title:'单价(1g)',
@@ -65,7 +65,7 @@ export default class StockHistory extends Component {
                                     {title:'总价($)',name:'price_all'},{title:'经办人',name:'operator'}]}
                             CONTENT={_this.state.data}
                         />
-                        <PageFooter />
+                        <PageFooter/>
                     </div>
                 </div>
             </div>
