@@ -56,7 +56,15 @@ export default class Index extends Component {
                 	</header>
                 	<div className="dataContent">
                 		<div className="optContent">
-                			<div className="enterBtn" onClick={_this.selectDelete.bind(_this)}>批量删除</div>
+                            <select className="searchSelect">
+                                <option>供货商</option>
+                                <option>商品名称</option>
+                                <option>商品编号</option>
+                            </select>
+                            <input className="searchValue"/>
+                            <div className="enterBtn">搜索</div>
+                            <div className="enterBtn clear">清空</div>
+                			<div className="enterBtn lastBtn" onClick={_this.selectDelete.bind(_this)}>批量删除</div>
                 		</div>
                         <CommonContent 
                             HEAD={[{title:'供货商',name:'supplier'},{title:'商品种类',name:'goods_name'},{title:'商品编号',name:'goods_number'},{title:'克重(件/g)',
@@ -64,7 +72,7 @@ export default class Index extends Component {
                             CONTENT={_this.state.data}
                             deleteFlag={_this.state.deleteFlag}
                         />
-                        <PageFooter />
+                        
                     </div>
                 </div>
             </div>
