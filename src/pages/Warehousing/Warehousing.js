@@ -10,7 +10,8 @@ export default class Warehousing extends Component {
     constructor(props) {
         super(props);
         this.state = {
-           data : ''
+           data : '',
+           allData:''
         }
     }
     componentDidMount=()=>{
@@ -24,7 +25,8 @@ export default class Warehousing extends Component {
             window.location.href = '/';
         }
         _this.setState({
-            data : res.data.data
+            data : res.data.data,
+            allData : res.data
         })
     }
     render(){
@@ -48,7 +50,7 @@ export default class Warehousing extends Component {
                             {title:'总计克重(g)',name:'weight_all'},{title:'总价($)',name:'price_all'}]}
                             CONTENT={_this.state.data}
                         />
-                		<PageFooter />
+                		<PageFooter CONTENT={_this.state.allData} isLogin={this.isLogin}/>
                 	</div>
                 </div>
             </div>
