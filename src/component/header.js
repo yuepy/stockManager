@@ -8,10 +8,20 @@ export default class navHeader extends Component {
             userMask:false
         }
     }
+    setCookie(cname, cvalue, exdays,win) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        var expires = "expires="+d.toUTCString();
+        win.cookie = cname + "=" + cvalue + "; " + expires;
+    }
     showHide(){
         this.setState({
                 userMask:!this.state.userMask
             })
+    }
+    logout(e){
+        this.setCookie("JSESSION","",-1,e.target.ownerDocument);
+        window.location.href = '/';
     }
     render() {
         var _this = this;
@@ -26,7 +36,7 @@ export default class navHeader extends Component {
                     <i onClick={_this.showHide.bind(_this)}></i>
                 </div>
                 <div className="userMask" style={{display:_this.state.userMask?'block':'none'}}>
-                    <li>登出</li>
+                    <li onClick={_this.logout.bind(_this)}>登出</li>
                 </div>
                 
             </header>

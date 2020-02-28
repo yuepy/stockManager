@@ -41,7 +41,7 @@ export default class pageFooter extends Component {
     goPage(num){
         debugger
         var groupCount = this.state.groupCount;
-        if(num % groupCount === 1){
+        if(num % groupCount === 1 && (this.props.CONTENT.last_page - num)>this.state.groupCount){
             this.setState({
                 startPage:num
             })
@@ -64,6 +64,7 @@ export default class pageFooter extends Component {
     }
 
     goPrev(){
+        
         var groupCount = this.state.groupCount;
         if(this.props.CONTENT.current_page==1){
             return;
@@ -74,6 +75,11 @@ export default class pageFooter extends Component {
             this.setState({
                 startPage:this.state.currentPage - groupCount
             });
+        }
+        if(this.props.CONTENT.last_page-this.state.currentPage==this.state.groupCount){
+            this.setState({
+                startPage:Math.floor(num / this.state.groupCount) *this.state.groupCount + 1
+            })
         } 
         this.setState({
             currentPage:num
@@ -82,16 +88,22 @@ export default class pageFooter extends Component {
         AJAX.AJAX(this.props.CONTENT.path+'?page='+num,'GET',false,head,this.props.isLogin,this.error);
     }
     goNext(){
-        debugger
+        debugger;
         var groupCount = this.state.groupCount;
         if(this.props.CONTENT.current_page==this.props.CONTENT.last_page){
             return;
         }
-        var num = this.state.currentPage+1; 
+        var num = this.props.CONTENT.current_page+1; 
         if( !( this.state.currentPage % groupCount ) && this.props.CONTENT.last_page - this.state.currentPage > 1 ){
-            this.setState({
-                startPage:num
-            });
+            if(this.props.CONTENT.last_page-this.state.currentPage<this.state.groupCount){
+                this.setState({
+                    startPage:this.props.CONTENT.last_page-this.state.groupCount
+                });
+            }else{
+                this.setState({
+                    startPage:num
+                });
+            } 
         }
         this.setState({
             currentPage:num
@@ -109,9 +121,16 @@ export default class pageFooter extends Component {
             alert('当前页码数不能超过总页码数！');
             return;
         }
+        if(this.props.CONTENT.last_page-num<=7){
             this.setState({
-                startPage:Math.floor(num / this.state.groupCount) *this.state.groupCount + 1,
+                startPage:this.props.CONTENT.last_page-this.state.groupCount
             })
+        }else{
+            this.setState({
+                startPage:Math.floor(num / this.state.groupCount) *this.state.groupCount + 1
+            })  
+        }
+            
         this.goPage(num)
     }
     render() {
