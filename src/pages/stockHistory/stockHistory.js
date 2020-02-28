@@ -53,6 +53,12 @@ export default class StockHistory extends Component {
         var head = {head:'Authorization',value:'Bearer '+utils.token};
         AJAX.AJAX(url,'GET',false,head,this.isLogin,this.error);
     }
+    dateChange(e){
+
+    }
+    clear(e){
+        e.target.ownerDocument.querySelector('.searchValue').value = '';
+    }
     render(){
         var _this = this;
         return(
@@ -72,8 +78,8 @@ export default class StockHistory extends Component {
             				</select>
             				<input className="searchValue"/>
                 			<div className="enterBtn" onClick={_this.searchBtn.bind(_this)}>搜索</div>
-                			<div className="enterBtn clear">清空</div>
-                			<input className="dateValue lastBtn" type="month"/>
+                			<div className="enterBtn clear" onClick={_this.clear.bind(_this)}>清空</div>
+                			<input className="dateValue lastBtn" onClick={_this.dateChange.bind(_this)} type="month"/>
                 		</div>
                         <CommonContent 
                             HEAD={[{title:'日期',name:'create_time'},{title:'客户名称',name:'customer'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},{title:'单价(1g)',
