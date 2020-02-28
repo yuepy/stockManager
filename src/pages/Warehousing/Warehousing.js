@@ -63,6 +63,7 @@ export default class Warehousing extends Component {
                         />
                         {_this.state.isentry && <Entry 
                             close={()=>{_this.setState({isentry:false}); _this.getData()}}
+                            isOutStock={false}
                             HEAD={[{title:'状态',name:'未录入'},{title:'日期',name:'create_time'},{title:'供应商',name:'supplier'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},
                             {title:'进货价格(1g)',name:'price'},{title:'商品重量(件/g)',name:'weight'},{title:'总计件数',name:'num'},
                             {title:'总计克重(g)',name:'weight_all'},{title:'总价($)',name:'price_all'}]}

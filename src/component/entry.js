@@ -79,6 +79,7 @@ export default class Entry extends Component{
     entryChange(e){
         //表格录入数据逻辑
         var _this = this;
+        debugger;
         if(e.target.nodeName != 'INPUT'){
             return;
         }
@@ -86,10 +87,12 @@ export default class Entry extends Component{
             rownum:e.target.parentNode.parentNode.rowIndex
         })
         _this.isShowSave(e.target); // 判断当前数据是否填满 满足提交条件
-        switch(e.target.id){
-            case 'price':_this.autoMerge(e.target,'price');break;
-            case 'weight':_this.autoMerge(e.target,'weight');break;
-            case 'num':_this.autoMerge(e.target,'num');break;
+        if(!_this.props.isOutStock){
+            switch(e.target.id){
+                case 'price':_this.autoMerge(e.target,'price');break;
+                case 'weight':_this.autoMerge(e.target,'weight');break;
+                case 'num':_this.autoMerge(e.target,'num');break;
+            }
         }
         
     }
@@ -177,22 +180,25 @@ export default class Entry extends Component{
             }
         }
         if(isDone){
-            var currentElem = tds[0].parentNode;
-            currentElem.classList.add('save');
-            _this.submit(tds[0]);
+            tds[0].parentNode.currentElem.classList.add('save');
+            setTimeout(() => {
+                if(_this.state.rownum == document.querySelector('.save').rowIndex){
+                    var timer1 = setTimeout(function(){
+                        _this.save(tds[0]);
+                    },3000)
+                }else{
+                    _this.save(tds[0]);
+                }
+            },5000);
         }
     }
-    submit(elem){
-        var _this = this;
-        setTimeout(() => {
-            if(_this.state.rownum == document.querySelector('.save').rowIndex){
-                var timer1 = setTimeout(function(){
-                    _this.save(elem);
-                },3000)
-            }else{
-                _this.save(elem);
-            }
-        },5000);
+    uploadClick(e){
+        //代理触发上传图片input
+        e.target.previousElementSibling.click();
+    }
+    upload(){
+        //图片上传 . 
+        debugger;
     }
     render(){
         var _this = this;
@@ -214,8 +220,9 @@ export default class Entry extends Component{
                                 return <tr data-index={k} onChange={_this.entryChange.bind(_this)}>{_this.props.HEAD.length>0 && _this.props.HEAD.map((item,index)=>{
                                 return item.title == '状态' ?<td style={{width:'60px',textAlign:'centent'}} id={item.name}>{item.name}</td>:
                                 (item.title == '日期' ? <td><input type='date' name={item.name} defaultValue={_this.state && _this.state.currentDate} id={item.name} /></td>:
-                                 (item.title == '总计克重(g)' || item.title == '总价($)'?<td><input type='text' className='disabled'  name={item.name}  id={item.name}/></td>:
-                                 <td><input type='text' name={item.name}  id={item.name}/></td>)) 
+                                 (item.title == '总计克重(g)' || (item.title == '总价($)' && !_this.props.isOutStock )?<td><input type='text' className='disabled'  name={item.name}  id={item.name}/></td>:
+                                 (item.title == '商品图片'?<td><input type='file' onChange={_this.upload.bind()} name={item.name}  id={item.name} style={{display:"none"}}/><span onClick={_this.uploadClick.bind(_this)}>上传图片</span></td>:
+                                 <td><input type='text' name={item.name}  id={item.name}/></td>))) 
                                 })}
                             </tr>})}
                         </tbody>

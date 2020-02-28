@@ -6,16 +6,22 @@ import * as AJAX from 'component/AJAX.js';
 import * as utils from 'component/utils.js';
 import CommonContent from 'component/commonContent.js';
 import PageFooter from 'component/footer.js';
+import Entry from 'component/entry.js';
 export default class OutStock extends Component {
     constructor(props) {
         super(props);
         this.state = {
            data : '',
            deleteFlag:false,
-           allData:''
+           allData:'',
+           isentry:false
         }
     }
     componentDidMount=()=>{
+        var _this = this;
+        _this.getData();
+    }
+    getData(){
         var head = {head:'Authorization',value:'Bearer '+utils.token};
         AJAX.AJAX('http://106.12.194.98/api/goods/reduce/history','GET',false,head,this.isLogin,this.error);
     }
@@ -30,6 +36,12 @@ export default class OutStock extends Component {
             allData:res.data
         })
     }
+    showEntry=()=>{
+        var _this = this;
+        _this.setState({
+            isentry:true
+        })
+    }
     render() {
         var _this = this;
         return (
@@ -42,7 +54,7 @@ export default class OutStock extends Component {
                 	</header>
                 	<div className="dataContent">
                 		<div className="optContent">
-                			<div className="enterBtn">批量删除</div>
+                			<div className="enterBtn" onClick={this.showEntry}>出库录入</div>
                 		</div>
                         <CommonContent 
                             HEAD={[{title:'日期',name:'create_time'},{title:'客户名称',name:'customer'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},{title:'单价(1g)',
@@ -51,6 +63,13 @@ export default class OutStock extends Component {
                             CONTENT={_this.state.data}
                             deleteFlag={_this.state.deleteFlag}
                         />
+                        {_this.state.isentry && <Entry 
+                            close={()=>{_this.setState({isentry:false}); _this.getData()}}
+                            isOutStock = {true}
+                            HEAD={[{title:'状态',name:'未录入'},{title:'日期',name:'create_time'},{title:'商品名称',name:'customer'},{title:'商品编号',name:'goods_number'},
+                            {title:'当前银价',name:'current_price'},
+                            {title:'总价($)',name:'price_all'},{title:'经办人',name:'operator'},{title:'商品图片',name:'goods_images'}]}
+                        />}
                         <PageFooter CONTENT={_this.state.allData} isLogin={this.isLogin}/>
                     </div>
                 </div>
