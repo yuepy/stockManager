@@ -17,6 +17,10 @@ export default class Warehousing extends Component {
         }
     }
     componentDidMount=()=>{
+        var _this = this;
+        _this.getData();
+    }
+    getData(){
         var head = {head:'Authorization',value:'Bearer '+utils.token};
         AJAX.AJAX('http://106.12.194.98/api/goods/add/history','GET',false,head,this.isLogin,this.error);
     }
@@ -52,14 +56,14 @@ export default class Warehousing extends Component {
                 			<div className="enterBtn" onClick={this.showEntry}>商品录入</div>
                 		</div>
                 		<CommonContent 
-                            HEAD={[{title:'日期',name:'create_time'},{title:'供应商',name:'customer'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},
+                            HEAD={[{title:'日期',name:'create_time'},{title:'供应商',name:'supplier'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},
                             {title:'进货价格(1g)',name:'price'},{title:'商品重量(件/g)',name:'weight'},{title:'总计件数',name:'num'},
                             {title:'总计克重(g)',name:'weight_all'},{title:'总价($)',name:'price_all'}]}
                             CONTENT={_this.state.data}
                         />
                         {_this.state.isentry && <Entry 
-                            close={()=>{_this.setState({isentry:false})}}
-                            HEAD={[{title:'序列号',name:''},{title:'日期',name:'create_time'},{title:'供应商',name:'customer'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},
+                            close={()=>{_this.setState({isentry:false}); _this.getData()}}
+                            HEAD={[{title:'状态',name:'未录入'},{title:'日期',name:'create_time'},{title:'供应商',name:'supplier'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},
                             {title:'进货价格(1g)',name:'price'},{title:'商品重量(件/g)',name:'weight'},{title:'总计件数',name:'num'},
                             {title:'总计克重(g)',name:'weight_all'},{title:'总价($)',name:'price_all'}]}
                         />}

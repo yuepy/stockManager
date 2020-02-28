@@ -24,8 +24,8 @@ export default class CommonContent extends Component{
                             <input type='checkbox'/>
                         </td>{_this.props.HEAD.map((v,i)=>{
                         if(v.name == 'create_time'){
-                            var date = new Date();
-                            var time = date.getFullYear(1582177466) +'-'+ (date.getMonth(1582177466)+1) +'-'+ date.getDate(1582177466);
+                            var date = new Date(item[v.name] * 1000);
+                            var time = date.getFullYear() +'-'+ (date.getMonth()+1) +'-'+ date.getDate();
                         }
                         return <td className={v.title == '操作'? 'deleteFlag':''}>{v.name == 'create_time' ?time : (v.title == '操作' && !this.props.deleteFlag ? v.name:item[v.name])}</td>
                     })}
