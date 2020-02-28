@@ -65,7 +65,7 @@ export default class pageFooter extends Component {
 
     goPrev(){
         var groupCount = this.state.groupCount;
-        if(this.state.currentPage==1){
+        if(this.props.CONTENT.current_page==1){
             return;
         }
 
@@ -82,8 +82,9 @@ export default class pageFooter extends Component {
         AJAX.AJAX(this.props.CONTENT.path+'?page='+num,'GET',false,head,this.props.isLogin,this.error);
     }
     goNext(){
+        debugger
         var groupCount = this.state.groupCount;
-        if(this.state.currentPage==this.props.CONTENT.last_page){
+        if(this.props.CONTENT.current_page==this.props.CONTENT.last_page){
             return;
         }
         var num = this.state.currentPage+1; 
@@ -104,6 +105,10 @@ export default class pageFooter extends Component {
             return;
         }
         var num = Number(target.value);
+        if(num>this.props.CONTENT.last_page){
+            alert('当前页码数不能超过总页码数！');
+            return;
+        }
             this.setState({
                 startPage:Math.floor(num / this.state.groupCount) *this.state.groupCount + 1,
             })
