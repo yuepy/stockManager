@@ -11,7 +11,8 @@ export default class OutStock extends Component {
         super(props);
         this.state = {
            data : '',
-           deleteFlag:false
+           deleteFlag:false,
+           allData:''
         }
     }
     componentDidMount=()=>{
@@ -25,7 +26,8 @@ export default class OutStock extends Component {
             window.location.href = '/';
         }
         _this.setState({
-            data : res.data.data
+            data : res.data.data,
+            allData:res.data
         })
     }
     render() {
@@ -49,7 +51,7 @@ export default class OutStock extends Component {
                             CONTENT={_this.state.data}
                             deleteFlag={_this.state.deleteFlag}
                         />
-                        <PageFooter />
+                        <PageFooter CONTENT={_this.state.allData} isLogin={this.isLogin}/>
                     </div>
                 </div>
             </div>

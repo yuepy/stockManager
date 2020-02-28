@@ -10,7 +10,8 @@ export default class StockHistory extends Component {
     constructor(props) {
         super(props);
         this.state = {
-           data : ''
+           data : '',
+           allData:''
         }
     }
     componentDidMount=()=>{
@@ -24,7 +25,8 @@ export default class StockHistory extends Component {
             window.location.href = '/';
         }
         _this.setState({
-            data : res.data.data
+            data : res.data.data,
+            allData : res.data
         })
     }
     loadData=(data)=>{
@@ -36,6 +38,20 @@ export default class StockHistory extends Component {
         _this.state.data.map(function(item,index){
             return<tr>123</tr>
             })
+    }
+    searchBtn(e){
+        debugger
+        var _this = this;
+        var target = e.target;
+        var select = target.ownerDocument.querySelector('.searchSelect');
+        var id = select.options[select.selectedIndex].getAttribute('id');
+        var searchValue = target.ownerDocument.querySelector('.searchValue').value;
+        if(searchValue==''){
+            return;
+        }
+        var url = 'http://106.12.194.98/api/goods/history?'+id+'='+searchValue;
+        var head = {head:'Authorization',value:'Bearer '+utils.token};
+        AJAX.AJAX(url,'GET',false,head,this.isLogin,this.error);
     }
     render(){
         var _this = this;
@@ -50,12 +66,12 @@ export default class StockHistory extends Component {
                 	<div className="dataContent">
                 		<div className="optContent">
                 			<select className="searchSelect">
-            					<option>客户名称</option>
-            					<option>商品名称</option>
-            					<option>商品编号</option>
+            					<option id="customer">客户名称</option>
+            					<option id="goods_name">商品名称</option>
+            					<option id="goods_number">商品编号</option>
             				</select>
             				<input className="searchValue"/>
-                			<div className="enterBtn">搜索</div>
+                			<div className="enterBtn" onClick={_this.searchBtn.bind(_this)}>搜索</div>
                 			<div className="enterBtn clear">清空</div>
                 			<input className="dateValue lastBtn" type="month"/>
                 		</div>
@@ -65,7 +81,7 @@ export default class StockHistory extends Component {
                                     {title:'总价($)',name:'price_all'},{title:'经办人',name:'operator'}]}
                             CONTENT={_this.state.data}
                         />
-                        <PageFooter/>
+                        <PageFooter CONTENT={_this.state.allData} isLogin={this.isLogin}/>
                     </div>
                 </div>
             </div>
