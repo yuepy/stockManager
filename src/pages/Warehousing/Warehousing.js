@@ -6,11 +6,13 @@ import NavHeader from 'component/header.js';
 import PageFooter from 'component/footer.js';
 import * as AJAX from 'component/AJAX.js';
 import * as utils from 'component/utils.js';
+import Entry from 'component/entry.js';
 export default class Warehousing extends Component {
     constructor(props) {
         super(props);
         this.state = {
            data : '',
+           isentry:false,
            allData:''
         }
     }
@@ -29,6 +31,12 @@ export default class Warehousing extends Component {
             allData : res.data
         })
     }
+    showEntry=()=>{
+        var _this = this;
+        _this.setState({
+            isentry:true
+        })
+    }
     render(){
         var _this = this;
         return(
@@ -39,10 +47,9 @@ export default class Warehousing extends Component {
                 	<header className="rightHeader">
                 		<span>商品库存入库</span>
                 	</header>
-                	
                 	<div className="dataContent">
                 		<div className="optContent">
-                			<div className="enterBtn">商品录入</div>
+                			<div className="enterBtn" onClick={this.showEntry}>商品录入</div>
                 		</div>
                 		<CommonContent 
                             HEAD={[{title:'日期',name:'create_time'},{title:'供应商',name:'customer'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},
@@ -50,6 +57,12 @@ export default class Warehousing extends Component {
                             {title:'总计克重(g)',name:'weight_all'},{title:'总价($)',name:'price_all'}]}
                             CONTENT={_this.state.data}
                         />
+                        {_this.state.isentry && <Entry 
+                            close={()=>{_this.setState({isentry:false})}}
+                            HEAD={[{title:'序列号',name:''},{title:'日期',name:'create_time'},{title:'供应商',name:'customer'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},
+                            {title:'进货价格(1g)',name:'price'},{title:'商品重量(件/g)',name:'weight'},{title:'总计件数',name:'num'},
+                            {title:'总计克重(g)',name:'weight_all'},{title:'总价($)',name:'price_all'}]}
+                        />}
                 		<PageFooter CONTENT={_this.state.allData} isLogin={this.isLogin}/>
                 	</div>
                 </div>

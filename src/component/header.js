@@ -8,7 +8,13 @@ export default class navHeader extends Component {
             userMask:false
         }
     }
+    showHide(){
+        this.setState({
+                userMask:!this.state.userMask
+            })
+    }
     render() {
+        var _this = this;
         return (
             <header className="navHeader">
                 <div className="navLeft">
@@ -17,9 +23,9 @@ export default class navHeader extends Component {
                 </div>
                 <div className="navRight">
                     <span>虚拟用户</span>
-                    <i></i>
+                    <i onClick={_this.showHide.bind(_this)}></i>
                 </div>
-                <div className="userMask">
+                <div className="userMask" style={{display:_this.state.userMask?'block':'none'}}>
                     <li>登出</li>
                 </div>
                 
