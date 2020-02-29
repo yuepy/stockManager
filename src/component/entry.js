@@ -14,32 +14,32 @@ export default class Entry extends Component{
          //保存提交数据
         var _this = this;
         var tr = elem.parentNode;
+        var fromData = new FormData();
         if(!_this.props.isOutStock){
-            var fromData = new FormData();
-            fromData.append('supplier' ,tr.querySelector('#supplier').value)
-            fromData.append('goods_name' , tr.querySelector('#goods_name').value)
-            fromData.append('goods_number' , tr.querySelector('#goods_number').value)
-            fromData.append('price' , tr.querySelector('#price').value)
-            fromData.append('weight' , tr.querySelector('#weight').value)
-            fromData.append('num' ,tr.querySelector('#num').value)
-            fromData.append('weight_all' , tr.querySelector('#weight_all').value)
-            fromData.append('price_all' , tr.querySelector('#price_all').value)
+            fromData.append('supplier' ,tr.querySelector('#supplier').value);
+            fromData.append('goods_name' , tr.querySelector('#goods_name').value);
+            fromData.append('goods_number' , tr.querySelector('#goods_number').value);
+            fromData.append('price' , tr.querySelector('#price').value);
+            fromData.append('weight' , tr.querySelector('#weight').value);
+            fromData.append('num' ,tr.querySelector('#num').value);
+            fromData.append('weight_all' , tr.querySelector('#weight_all').value);
+            fromData.append('price_all' , tr.querySelector('#price_all').value);
             //var params = 'supplier='+supplier+'&goods_name='+goods_name+'&goods_number='+goods_number+'&price='+price+'&weight='+weight+'&num='+num+'&weight_all='+weight_all+'&price_all='+price_all;
             var header = {head:'Authorization',value:'Bearer '+utils.token};
             AJAX.AJAX('http://106.12.194.98/api/goods/add','POST',fromData,header,this.success,this.error);
             return;
         }
         if(_this.props.isOutStock){
-            var customer = tr.querySelector('#customer').value,
-                num = tr.querySelector('#num').value,
-                goods_number = tr.querySelector('#goods_number').value,
-                current_price = tr.querySelector('#current_price').value,
-                price_all = tr.querySelector('#price_all').value,
-                operator = tr.querySelector('#operator').value,
-                goods_images = tr.querySelector('#goods_images').value;
-            var params = 'customer='+customer+'&num='+num+'&goods_number='+goods_number+'&current_price='+current_price+'&price_all='+price_all+'&operator='+operator+'&goods_images='+goods_images;
+                fromData.append('customer' ,tr.querySelector('#customer').value);
+                fromData.append('goods_number' , tr.querySelector('#goods_number').value);
+                fromData.append('current_price' , tr.querySelector('#current_price').value);
+                fromData.append('num' ,tr.querySelector('#num').value);
+                fromData.append('price_all' , tr.querySelector('#price_all').value);
+                fromData.append('operator' , tr.querySelector('#operator').value);
+                fromData.append('goods_images' , tr.querySelector('#goods_images').value);
+            //var params = 'customer='+customer+'&num='+num+'&goods_number='+goods_number+'&current_price='+current_price+'&price_all='+price_all+'&operator='+operator+'&goods_images='+goods_images;
             var header = {head:'Authorization',value:'Bearer '+utils.token};
-            AJAX.AJAX('http://106.12.194.98/api/goods/reduce','POST',params,header,this.success,this.error);
+            AJAX.AJAX('http://106.12.194.98/api/goods/reduce','POST',fromData,header,this.success,this.error);
         }
         
     }
@@ -50,7 +50,7 @@ export default class Entry extends Component{
         if(res.msg == '身份失效'){
             window.location.href = '/';
         }
-        if(res.msg == '成功'){
+        if(res.msg == '入库成功'){
             var elem = document.querySelector('.save');
             var tds = elem.querySelectorAll('td');
             [].forEach.call(tds,function(item,index){
@@ -93,6 +93,9 @@ export default class Entry extends Component{
             }
             alert('第'+document.querySelector('.save').rowIndex+'条数据'+res.msg);
         }
+    }
+    error(res){
+        alert(res.msg);
     }
     componentDidMount(){
         //页面初始化需要渲染的数据
