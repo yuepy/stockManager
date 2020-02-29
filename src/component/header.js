@@ -32,7 +32,7 @@ export default class navHeader extends Component {
                     <span>在线库存管理系统</span>
                 </div>
                 <div className="navRight">
-                    <span>虚拟用户</span>
+                    <span>库存管理员</span>
                     <i onClick={_this.showHide.bind(_this)}></i>
                 </div>
                 <div className="userMask" style={{display:_this.state.userMask?'block':'none'}}>

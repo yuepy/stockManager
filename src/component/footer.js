@@ -9,7 +9,7 @@ export default class pageFooter extends Component {
         this.state = {
             currentPage:this.props.CONTENT.current_page,
             groupCount:7,
-            startPage:1,
+            startPage:1
         }
     }
 
@@ -17,13 +17,13 @@ export default class pageFooter extends Component {
         var last_page = this.props.CONTENT.last_page;
         var pages = [];
         if( last_page <= this.state.groupCount){
-            pages.push(<li onClick = {this.goPrev.bind(this)} key={0}>{'<'}</li>)
+            pages.push(<li className="prev" onClick = {this.goPrev.bind(this)} key={0}></li>)
             for(var i = 1;i <= last_page; i++){
                 pages.push(<li onClick = {this.goPage.bind(this,i)} className = {this.props.CONTENT.current_page == i ? "active" : ""} key={i}>{i}</li>)
             }
-            pages.push(<li onClick = {this.goNext.bind(this)}  key={last_page + 1}>{'>'}</li>) 
+            pages.push(<li className="next" onClick = {this.goNext.bind(this)}  key={last_page + 1}></li>) 
         }else{
-            pages.push(<li onClick = {this.goPrev.bind(this)} key={0}>{'<'}</li>)
+            pages.push(<li className="prev" onClick = {this.goPrev.bind(this)} key={0}></li>)
             for(var i = this.state.startPage;i < this.state.startPage+this.state.groupCount;i ++){
                 pages.push(<li onClick = {this.goPage.bind(this,i)} className = {this.props.CONTENT.current_page == i ? "active" : ""} key={i}>{i}</li>)
             }
@@ -31,7 +31,7 @@ export default class pageFooter extends Component {
                pages.push(<li key={ -1 }>···</li>) 
             }
             pages.push(<li className = {this.state.currentPage == i ? "active" : ""} key={last_page} onClick = {this.goPage.bind(this,last_page)}>{last_page}</li>)
-            pages.push(<li onClick = {this.goNext.bind(this)}  key={last_page + 1}>{'>'}</li>) 
+            pages.push(<li className="next" onClick = {this.goNext.bind(this)}  key={last_page + 1}></li>) 
         }
         
 
@@ -59,8 +59,9 @@ export default class pageFooter extends Component {
         this.setState({
             currentPage:num
         })
+        var url = this.props.CONTENT.last_page_url.match(/(\S*)page=/)[1];
         var head = {head:'Authorization',value:'Bearer '+utils.token};
-        AJAX.AJAX(this.props.CONTENT.path+'?page='+num,'GET',false,head,this.props.isLogin,this.error);
+        AJAX.AJAX(url+'?page='+num,'GET',false,head,this.props.isLogin,this.error);
     }
 
     goPrev(){
@@ -84,8 +85,9 @@ export default class pageFooter extends Component {
         this.setState({
             currentPage:num
         })
+        var url = this.props.CONTENT.last_page_url.match(/(\S*)page=/)[1];
         var head = {head:'Authorization',value:'Bearer '+utils.token};
-        AJAX.AJAX(this.props.CONTENT.path+'?page='+num,'GET',false,head,this.props.isLogin,this.error);
+        AJAX.AJAX(url+'?page='+num,'GET',false,head,this.props.isLogin,this.error);
     }
     goNext(){
         debugger;
@@ -108,6 +110,7 @@ export default class pageFooter extends Component {
         this.setState({
             currentPage:num
         })
+        var url = this.props.CONTENT.last_page_url.match(/(\S*)page=/)[1];
         var head = {head:'Authorization',value:'Bearer '+utils.token};
         AJAX.AJAX(this.props.CONTENT.path+'?page='+num,'GET',false,head,this.props.isLogin,this.error);
     }
