@@ -14,17 +14,34 @@ export default class Entry extends Component{
          //保存提交数据
         var _this = this;
         var tr = elem.parentNode;
-        var supplier = tr.querySelector('#supplier').value,
-            goods_name = tr.querySelector('#goods_name').value,
-            goods_number = tr.querySelector('#goods_number').value,
-            price = tr.querySelector('#price').value,
-            weight = tr.querySelector('#weight').value,
-            num = tr.querySelector('#num').value,
-            weight_all = tr.querySelector('#weight_all').value,
-            price_all = tr.querySelector('#price_all').value;
-        var params = 'supplier='+supplier+'&goods_name='+goods_name+'&goods_number='+goods_number+'&price='+price+'&weight='+weight+'&num='+num+'&weight_all='+weight_all+'&price_all='+price_all;
-        var header = [{head:'Content-Type',value:'application/x-www-form-urlencoded'},{head:'Authorization',value:'Bearer '+utils.token}];
-        AJAX.AJAX('http://106.12.194.98/api/goods/add','POST',params,header,this.success,this.error);
+        if(!_this.props.isOutStock){
+            var fromData = new FormData();
+            fromData.append('supplier' ,tr.querySelector('#supplier').value)
+            fromData.append('goods_name' , tr.querySelector('#goods_name').value)
+            fromData.append('goods_number' , tr.querySelector('#goods_number').value)
+            fromData.append('price' , tr.querySelector('#price').value)
+            fromData.append('weight' , tr.querySelector('#weight').value)
+            fromData.append('num' ,tr.querySelector('#num').value)
+            fromData.append('weight_all' , tr.querySelector('#weight_all').value)
+            fromData.append('price_all' , tr.querySelector('#price_all').value)
+            //var params = 'supplier='+supplier+'&goods_name='+goods_name+'&goods_number='+goods_number+'&price='+price+'&weight='+weight+'&num='+num+'&weight_all='+weight_all+'&price_all='+price_all;
+            var header = {head:'Authorization',value:'Bearer '+utils.token};
+            AJAX.AJAX('http://106.12.194.98/api/goods/add','POST',fromData,header,this.success,this.error);
+            return;
+        }
+        if(_this.props.isOutStock){
+            var customer = tr.querySelector('#customer').value,
+                num = tr.querySelector('#num').value,
+                goods_number = tr.querySelector('#goods_number').value,
+                current_price = tr.querySelector('#current_price').value,
+                price_all = tr.querySelector('#price_all').value,
+                operator = tr.querySelector('#operator').value,
+                goods_images = tr.querySelector('#goods_images').value;
+            var params = 'customer='+customer+'&num='+num+'&goods_number='+goods_number+'&current_price='+current_price+'&price_all='+price_all+'&operator='+operator+'&goods_images='+goods_images;
+            var header = {head:'Authorization',value:'Bearer '+utils.token};
+            AJAX.AJAX('http://106.12.194.98/api/goods/reduce','POST',params,header,this.success,this.error);
+        }
+        
     }
     success(res){
         //保存成功
@@ -33,7 +50,7 @@ export default class Entry extends Component{
         if(res.msg == '身份失效'){
             window.location.href = '/';
         }
-        if(res.msg == '入库成功'){
+        if(res.msg == '成功'){
             var elem = document.querySelector('.save');
             var tds = elem.querySelectorAll('td');
             [].forEach.call(tds,function(item,index){
@@ -49,7 +66,31 @@ export default class Entry extends Component{
                     }
                 }
             })
-        }else{
+            return ; 
+        }
+        if(res.msg == '出库成功'){
+            var elem = document.querySelector('.save');
+            var tds = elem.querySelectorAll('td');
+            [].forEach.call(tds,function(item,index){
+                if(item){
+                    if( index == 0 ){
+                        item.textContent = '已录入';
+                        item.style.backgroundColor = '#005ae0';
+                        item.style.color = '#fff';
+                        item.parentNode.classList.remove('save');
+                        item.parentNode.classList.add('fixed');
+                    }else{
+                        item.querySelector('input').disabled = true;
+                    }
+                }
+            })
+            return;
+        }
+        if(res.msg.indexOf('成功') == -1){
+            if(res.msg.indexOf('查询不到') !=-1){
+                alert(res.msg);
+                return;
+            }
             alert('第'+document.querySelector('.save').rowIndex+'条数据'+res.msg);
         }
     }
@@ -79,8 +120,7 @@ export default class Entry extends Component{
     entryChange(e){
         //表格录入数据逻辑
         var _this = this;
-        debugger;
-        if(e.target.nodeName != 'INPUT'){
+        if(e.target.nodeName != 'INPUT' && e.target.className !='upload_file'){
             return;
         }
         _this.setState({
@@ -180,7 +220,7 @@ export default class Entry extends Component{
             }
         }
         if(isDone){
-            tds[0].parentNode.currentElem.classList.add('save');
+            tds[0].parentNode.classList.add('save');
             setTimeout(() => {
                 if(_this.state.rownum == document.querySelector('.save').rowIndex){
                     var timer1 = setTimeout(function(){
@@ -194,11 +234,33 @@ export default class Entry extends Component{
     }
     uploadClick(e){
         //代理触发上传图片input
-        e.target.previousElementSibling.click();
+        e.target.parentNode.querySelector('.upload_file').click();
     }
-    upload(){
+    upload(e){
         //图片上传 . 
+        var _this = this;
         debugger;
+        var fromData = new FormData();
+        fromData.append('image',e.target.files[0]);
+        var head = {head:'Authorization',value:'Bearer '+utils.token};
+        document.querySelector('#file_name').textContent = e.target.files[0].name;
+        AJAX.AJAX('http://106.12.194.98/api/upload/image',"POST",fromData,head,this.successUpload,this.errorUpload);
+    }
+    successUpload(res){
+        var _this = this;
+        res = JSON.parse(res);
+        if(res.msg == '身份失效'){
+            window.location.href = '/';
+        }
+        if(res.msg == '成功'){
+            document.querySelector('#goods_images').value = utils.host+res.data;
+            //_this.isShowSave(document.querySelector('#goods_images'));
+        }else{
+            document.querySelector('#file_name').textContent = '上传图片';
+        }
+    }
+    errorUpload(){
+        alert('上传失败!');
     }
     render(){
         var _this = this;
@@ -221,7 +283,7 @@ export default class Entry extends Component{
                                 return item.title == '状态' ?<td style={{width:'60px',textAlign:'centent'}} id={item.name}>{item.name}</td>:
                                 (item.title == '日期' ? <td><input type='date' name={item.name} defaultValue={_this.state && _this.state.currentDate} id={item.name} /></td>:
                                  (item.title == '总计克重(g)' || (item.title == '总价($)' && !_this.props.isOutStock )?<td><input type='text' className='disabled'  name={item.name}  id={item.name}/></td>:
-                                 (item.title == '商品图片'?<td><input type='file' onChange={_this.upload.bind()} name={item.name}  id={item.name} style={{display:"none"}}/><span onClick={_this.uploadClick.bind(_this)}>上传图片</span></td>:
+                                 (item.title == '商品图片'?<td><input type='file' onChange={_this.upload.bind(_this)}  style={{display:"none"}} className='upload_file'/><input type='text' name={item.name}  id={item.name} style={{display:"none"}}/><span onClick={_this.uploadClick.bind(_this)} id='file_name'>上传图片</span></td>:
                                  <td><input type='text' name={item.name}  id={item.name}/></td>))) 
                                 })}
                             </tr>})}

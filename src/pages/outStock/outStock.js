@@ -59,14 +59,14 @@ export default class OutStock extends Component {
                         <CommonContent 
                             HEAD={[{title:'日期',name:'create_time'},{title:'客户名称',name:'customer'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},{title:'单价(1g)',
                             name:'weight'},{title:'当前银价(1g)',name:'current_price'},{title:'商品重量',name:'weight'},{title:'总计件数',name:'num'},{title:'总计克重(g)',name:'weight_all'},
-                            {title:'总价($)',name:'price_all'},{title:'经办人',name:'operator'},{title:'商品图片',name:'goods_images'}]}
+                            {title:'总价($)',name:'price_all'},{title:'经办人',name:'operator'},{title:'商品图片',name:'images'}]}
                             CONTENT={_this.state.data}
                             deleteFlag={_this.state.deleteFlag}
                         />
                         {_this.state.isentry && <Entry 
                             close={()=>{_this.setState({isentry:false}); _this.getData()}}
                             isOutStock = {true}
-                            HEAD={[{title:'状态',name:'未录入'},{title:'日期',name:'create_time'},{title:'商品名称',name:'customer'},{title:'商品编号',name:'goods_number'},
+                            HEAD={[{title:'状态',name:'未录入'},{title:'日期',name:'create_time'},{title:'客户名称',name:'customer'},{title:'商品编号',name:'goods_number'},{title:'出货件数',name:'num'},
                             {title:'当前银价',name:'current_price'},
                             {title:'总价($)',name:'price_all'},{title:'经办人',name:'operator'},{title:'商品图片',name:'goods_images'}]}
                         />}
