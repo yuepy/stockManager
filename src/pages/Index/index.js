@@ -11,7 +11,8 @@ export default class Index extends Component {
         super(props);
         this.state = {
            data : '',
-           deleteFlag:false
+           deleteFlag:false,
+           allData: ''
         }
     }
     componentDidMount=()=>{
@@ -25,7 +26,8 @@ export default class Index extends Component {
             window.location.href = '/';
         }
         _this.setState({
-            data : res.data.data
+            data : res.data.data,
+            allData: res.data
         })
     }
     loadData=(data)=>{
@@ -72,7 +74,7 @@ export default class Index extends Component {
                             CONTENT={_this.state.data}
                             deleteFlag={_this.state.deleteFlag}
                         />
-                        
+                        <PageFooter CONTENT={_this.state.allData} isLogin={_this.isLogin}/>
                     </div>
                 </div>
             </div>
