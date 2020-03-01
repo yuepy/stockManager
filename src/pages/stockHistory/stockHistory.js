@@ -49,7 +49,7 @@ export default class StockHistory extends Component {
         if(searchValue==''){
             return;
         }
-        var url = 'http://106.12.194.98/api/goods/history?'+id+'='+searchValue;
+        var url = this.state.allData.path+'?'+id+'='+searchValue;
         var head = {head:'Authorization',value:'Bearer '+utils.token};
         AJAX.AJAX(url,'GET',false,head,this.isLogin,this.error);
     }
@@ -60,7 +60,7 @@ export default class StockHistory extends Component {
         }
         var date_start = new Date(new Date(month).setDate(1)).toLocaleDateString();
         var date_end =  new Date(new Date(new Date(month).getFullYear(),new Date(month).getMonth()+1,1)-1000*60*60*24).toLocaleDateString()
-        var url = 'http://106.12.194.98/api/goods/history?'+'date_start='+date_start+'&date_end='+date_end;
+        var url = this.state.allData.path+'?'+'date_start='+date_start+'&date_end='+date_end;
         var head = {head:'Authorization',value:'Bearer '+utils.token};
         AJAX.AJAX(url,'GET',false,head,this.isLogin,this.error);
     }
@@ -68,7 +68,7 @@ export default class StockHistory extends Component {
         e.target.ownerDocument.querySelector('.searchValue').value = '';
         e.target.ownerDocument.querySelector('.dateValue').value = '';
         var head = {head:'Authorization',value:'Bearer '+utils.token};
-        AJAX.AJAX('http://106.12.194.98/api/goods/history','GET',false,head,this.isLogin,this.error);
+        AJAX.AJAX(this.state.allData.path,'GET',false,head,this.isLogin,this.error);
     }
     render(){
         var _this = this;
