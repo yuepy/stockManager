@@ -54,10 +54,21 @@ export default class StockHistory extends Component {
         AJAX.AJAX(url,'GET',false,head,this.isLogin,this.error);
     }
     dateChange(e){
-
+        var month = e.target.value;
+        if(month==''){
+            return;
+        }
+        var date_start = new Date(new Date(month).setDate(1)).toLocaleDateString();
+        var date_end =  new Date(new Date(new Date(month).getFullYear(),new Date(month).getMonth()+1,1)-1000*60*60*24).toLocaleDateString()
+        var url = 'http://106.12.194.98/api/goods/history?'+'date_start='+date_start+'&date_end='+date_end;
+        var head = {head:'Authorization',value:'Bearer '+utils.token};
+        AJAX.AJAX(url,'GET',false,head,this.isLogin,this.error);
     }
     clear(e){
         e.target.ownerDocument.querySelector('.searchValue').value = '';
+        e.target.ownerDocument.querySelector('.dateValue').value = '';
+        var head = {head:'Authorization',value:'Bearer '+utils.token};
+        AJAX.AJAX('http://106.12.194.98/api/goods/history','GET',false,head,this.isLogin,this.error);
     }
     render(){
         var _this = this;
@@ -78,8 +89,8 @@ export default class StockHistory extends Component {
             				</select>
             				<input className="searchValue"/>
                 			<div className="enterBtn" onClick={_this.searchBtn.bind(_this)}>搜索</div>
-                			<div className="enterBtn clear" onClick={_this.clear.bind(_this)}>清空</div>
-                			<input className="dateValue lastBtn" onClick={_this.dateChange.bind(_this)} type="month"/>
+                			<div className="enterBtn clear" onClick={_this.clear.bind(_this)}>重置</div>
+                			<input className="dateValue lastBtn" onChange={_this.dateChange.bind(_this)} type="month"/>
                 		</div>
                         <CommonContent 
                             HEAD={[{title:'日期',name:'create_time'},{title:'客户名称',name:'customer'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},{title:'单价(1g)',
