@@ -30,7 +30,41 @@ export default class Index extends Component {
             allData: res.data
         })
     }
-
+    loadData=(data)=>{
+        var _this = this;
+        if(!_this.state.data){
+            return (<div>暂无数据</div>)
+        }
+        debugger;
+        _this.state.data.map(function(item,index){
+            return<tr>123</tr>
+            })
+    }
+    selectDelete(){
+        var _this = this;
+        _this.setState({
+            deleteFlag:!_this.state.deleteFlag
+        })
+    }
+    searchBtn(e){
+        debugger
+        var _this = this;
+        var target = e.target;
+        var select = target.ownerDocument.querySelector('.searchSelect');
+        var id = select.options[select.selectedIndex].getAttribute('id');
+        var searchValue = target.ownerDocument.querySelector('.searchValue').value;
+        if(searchValue==''){
+            return;
+        }
+        var url = this.state.allData.path+'?'+id+'='+searchValue;
+        var head = {head:'Authorization',value:'Bearer '+utils.token};
+        AJAX.AJAX(url,'GET',false,head,this.isLogin,this.error);
+    }
+    clear(e){
+        e.target.ownerDocument.querySelector('.searchValue').value = '';
+        var head = {head:'Authorization',value:'Bearer '+utils.token};
+        AJAX.AJAX(this.state.allData.path,'GET',false,head,this.isLogin,this.error);
+    }
     render() {
         var _this = this;
         return (
@@ -44,18 +78,20 @@ export default class Index extends Component {
                 	<div className="dataContent">
                 		<div className="optContent">
                             <select className="searchSelect">
-                                <option>供货商</option>
-                                <option>商品名称</option>
-                                <option>商品编号</option>
+                                <option id="supplier">供货商</option>
+                                <option id="goods_name">商品种类</option>
+                                <option id="goods_number">商品编号</option>
                             </select>
                             <input className="searchValue"/>
-                            <div className="enterBtn">搜索</div>
-                            <div className="enterBtn clear">清空</div>
+                            <div className="enterBtn" onClick={_this.searchBtn.bind(_this)}>搜索</div>
+                            <div className="enterBtn clear" onClick={_this.clear.bind(_this)}>重置</div>
+                			<div className="enterBtn lastBtn" onClick={_this.selectDelete.bind(_this)}>批量删除</div>
                 		</div>
                         <CommonContent 
                             HEAD={[{title:'供货商',name:'supplier'},{title:'商品种类',name:'goods_name'},{title:'商品编号',name:'goods_number'},{title:'克重(件/g)',
-                                    name:'weight'},{title:'总计件数',name:'num'},{title:'总计克重(g)',name:'weight_all'}]}
+                                    name:'weight'},{title:'总计件数',name:'num'},{title:'总计克重(g)',name:'weight_all'},{title:'操作',name:'删除'}]}
                             CONTENT={_this.state.data}
+                            deleteFlag={_this.state.deleteFlag}
                         />
                         <PageFooter CONTENT={_this.state.allData} isLogin={_this.isLogin}/>
                     </div>
