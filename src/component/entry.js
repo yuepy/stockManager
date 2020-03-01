@@ -229,7 +229,7 @@ export default class Entry extends Component{
         if(isDone){
             tds[0].parentNode.classList.add('save');
             setTimeout(() => {
-                if(document.querySelector('.save').querySelector('#goods_images').value == ''){
+                if(document.querySelector('.save')&& document.querySelector('.save').querySelector('#goods_images')&&document.querySelector('.save').querySelector('#goods_images').value == ''){
                     var isImages = confirm('第'+document.querySelector('.save').rowIndex+'数据未上传商品图片,是否继续提交');
                     if(!isImages){
                         return;
