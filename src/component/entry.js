@@ -88,7 +88,7 @@ export default class Entry extends Component{
         }
         if(res.msg.indexOf('成功') == -1){
             if(res.msg.indexOf('查询不到') !=-1){
-                alert(res.msg);
+                alert('第'+document.querySelector('.save').rowIndex+'条数据 [ 商品编号 ]'+res.msg);
                 return;
             }
             alert('第'+document.querySelector('.save').rowIndex+'条数据'+res.msg);
@@ -123,7 +123,10 @@ export default class Entry extends Component{
     entryChange(e){
         //表格录入数据逻辑
         var _this = this;
-        if(e.target.nodeName != 'INPUT' && e.target.className !='upload_file'){
+        if(e.target == undefined){
+            e.target = e;
+        }
+        if(e.target.nodeName != 'INPUT' || e.target.className =='upload_file'){
             return;
         }
         _this.setState({
@@ -214,7 +217,8 @@ export default class Entry extends Component{
         }
         var isDone = false;
         for(let i=1;i<tds.length;i++){
-            if(tds[i].querySelector('input').value == ''){
+            debugger;
+            if(tds[i].querySelector('input').value == '' && tds[i].querySelector('input').id != 'goods_images' &&  tds[i].querySelector('input').className != 'upload_file'){
                 isDone = false;
                 tds[0].style.backgroundColor = '#fff';
                 return;
@@ -225,6 +229,12 @@ export default class Entry extends Component{
         if(isDone){
             tds[0].parentNode.classList.add('save');
             setTimeout(() => {
+                if(document.querySelector('.save').querySelector('#goods_images').value == ''){
+                    var isImages = confirm('第'+document.querySelector('.save').rowIndex+'数据未上传商品图片,是否继续提交');
+                    if(!isImages){
+                        return;
+                    }
+                }
                 if(_this.state.rownum == document.querySelector('.save').rowIndex){
                     var timer1 = setTimeout(function(){
                         _this.save(tds[0]);
@@ -232,7 +242,7 @@ export default class Entry extends Component{
                 }else{
                     _this.save(tds[0]);
                 }
-            },5000);
+            },3000);
         }
     }
     uploadClick(e){
@@ -242,22 +252,21 @@ export default class Entry extends Component{
     upload(e){
         //图片上传 . 
         var _this = this;
-        debugger;
         var fromData = new FormData();
         fromData.append('image',e.target.files[0]);
         var head = {head:'Authorization',value:'Bearer '+utils.token};
         document.querySelector('#file_name').textContent = e.target.files[0].name;
         AJAX.AJAX('http://106.12.194.98/api/upload/image',"POST",fromData,head,this.successUpload,this.errorUpload);
     }
-    successUpload(res){
+    successUpload=(res)=>{
         var _this = this;
         res = JSON.parse(res);
         if(res.msg == '身份失效'){
             window.location.href = '/';
         }
         if(res.msg == '成功'){
-            document.querySelector('#goods_images').value = utils.host+res.data;
-            //_this.isShowSave(document.querySelector('#goods_images'));
+            document.querySelector('#goods_images').value = res.data;
+            _this.entryChange(document.querySelector('#goods_images'));
         }else{
             document.querySelector('#file_name').textContent = '上传图片';
         }
@@ -267,12 +276,12 @@ export default class Entry extends Component{
     }
     render(){
         var _this = this;
-        var arr = [1,2,3,4,5,6,7,8,9,10,11,12]; // 表示第一次渲染多少行空表格 (待录入数据)
+        var arr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]; // 表示第一次渲染多少行空表格 (待录入数据)
         return(
             <div className='entryContent'>
                 <div className='content'>
-                    <div className='close' onClick={this.props.close}>X</div>
-                    <div className='pageTitle'><h1>商品库存 - 录入界面</h1></div>
+                    <div className='close' onClick={this.props.close}></div>
+                    <div className='pageTitle'><h1>{_this.props.isOutStock?'商品库存 - 出库录入界面':'商品库存 - 入库录入界面'}</h1></div>
                     <table>
                         <thead>
                             <tr>{_this.props.HEAD.length>0 && _this.props.HEAD.map((item,index)=>{
@@ -292,7 +301,7 @@ export default class Entry extends Component{
                             </tr>})}
                         </tbody>
                     </table>
-                    <div className='footer_bth'><button className='save' onClick={_this.save}>保存</button><button className='save_close'>保存并关闭</button></div>
+                    {/* <div className='footer_bth'><button className='save' onClick={_this.save}>保存</button><button className='save_close'>保存并关闭</button></div> */}
                 </div>
             </div>
         )

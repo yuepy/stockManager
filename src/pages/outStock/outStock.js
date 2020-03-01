@@ -66,7 +66,7 @@ export default class OutStock extends Component {
                         {_this.state.isentry && <Entry 
                             close={()=>{_this.setState({isentry:false}); _this.getData()}}
                             isOutStock = {true}
-                            HEAD={[{title:'状态',name:'未录入'},{title:'日期',name:'create_time'},{title:'客户名称',name:'customer'},{title:'商品编号',name:'goods_number'},{title:'出货件数',name:'num'},
+                            HEAD={[{title:'状态',name:'未录入'},{title:'客户名称',name:'customer'},{title:'商品编号',name:'goods_number'},{title:'出货件数',name:'num'},
                             {title:'当前银价',name:'current_price'},
                             {title:'总价($)',name:'price_all'},{title:'经办人',name:'operator'},{title:'商品图片',name:'goods_images'}]}
                         />}

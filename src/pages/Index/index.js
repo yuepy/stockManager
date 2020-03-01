@@ -30,22 +30,7 @@ export default class Index extends Component {
             allData: res.data
         })
     }
-    loadData=(data)=>{
-        var _this = this;
-        if(!_this.state.data){
-            return (<div>暂无数据</div>)
-        }
-        debugger;
-        _this.state.data.map(function(item,index){
-            return<tr>123</tr>
-            })
-    }
-    selectDelete(){
-        var _this = this;
-        _this.setState({
-            deleteFlag:!_this.state.deleteFlag
-        })
-    }
+
     render() {
         var _this = this;
         return (
@@ -66,13 +51,11 @@ export default class Index extends Component {
                             <input className="searchValue"/>
                             <div className="enterBtn">搜索</div>
                             <div className="enterBtn clear">清空</div>
-                			<div className="enterBtn lastBtn" onClick={_this.selectDelete.bind(_this)}>批量删除</div>
                 		</div>
                         <CommonContent 
                             HEAD={[{title:'供货商',name:'supplier'},{title:'商品种类',name:'goods_name'},{title:'商品编号',name:'goods_number'},{title:'克重(件/g)',
-                                    name:'weight'},{title:'总计件数',name:'num'},{title:'总计克重(g)',name:'weight_all'},{title:'操作',name:'删除'}]}
+                                    name:'weight'},{title:'总计件数',name:'num'},{title:'总计克重(g)',name:'weight_all'}]}
                             CONTENT={_this.state.data}
-                            deleteFlag={_this.state.deleteFlag}
                         />
                         <PageFooter CONTENT={_this.state.allData} isLogin={_this.isLogin}/>
                     </div>
