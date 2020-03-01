@@ -125,10 +125,10 @@ export default class Warehousing extends Component {
                             <input className="searchValue"/>
                             <div className="enterBtn" onClick={_this.searchBtn.bind(_this)}>搜索</div>
                             <div className="enterBtn clear" onClick={_this.clear.bind(_this)}>重置</div>
-                			<div className="enterBtn" onClick={this.showEntry}>商品录入</div>
                             <input className="dateValue lastBtn" onChange={_this.dateChange.bind(_this)} type="month"/>
                 		</div>
                         <div className="optContent twoLine">
+                            <div className="enterBtn2" onClick={this.showEntry}>商品录入</div>
                             {_this.state.deleteFlag && <div className='enterBtn2 isDelete' onClick={_this.isConfirm.bind(_this)}>确认删除</div>}
                             <div className="enterBtn2" onClick={_this.selectDelete.bind(_this)}>{this.state.deleteFlag?'取消':'批量删除'}</div>
                         </div>      

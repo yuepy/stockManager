@@ -1,6 +1,6 @@
-webpackJsonp([3],{
+webpackJsonp([2],{
 
-/***/ 53:
+/***/ 56:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16,15 +16,13 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(62);
+var _header = __webpack_require__(66);
+
+var _header2 = _interopRequireDefault(_header);
 
 var _commonLeftMenu = __webpack_require__(64);
 
 var _commonLeftMenu2 = _interopRequireDefault(_commonLeftMenu);
-
-var _header = __webpack_require__(66);
-
-var _header2 = _interopRequireDefault(_header);
 
 var _AJAX = __webpack_require__(59);
 
@@ -34,13 +32,15 @@ var _utils = __webpack_require__(60);
 
 var utils = _interopRequireWildcard(_utils);
 
+var _footer = __webpack_require__(68);
+
+var _footer2 = _interopRequireDefault(_footer);
+
 var _commonContent = __webpack_require__(67);
 
 var _commonContent2 = _interopRequireDefault(_commonContent);
 
-var _footer = __webpack_require__(68);
-
-var _footer2 = _interopRequireDefault(_footer);
+__webpack_require__(62);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -58,17 +58,17 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Index = function (_Component) {
-    _inherits(Index, _Component);
+var StockHistory = function (_Component) {
+    _inherits(StockHistory, _Component);
 
-    function Index(props) {
-        _classCallCheck(this, Index);
+    function StockHistory(props) {
+        _classCallCheck(this, StockHistory);
 
-        var _this2 = _possibleConstructorReturn(this, (Index.__proto__ || Object.getPrototypeOf(Index)).call(this, props));
+        var _this2 = _possibleConstructorReturn(this, (StockHistory.__proto__ || Object.getPrototypeOf(StockHistory)).call(this, props));
 
         _this2.componentDidMount = function () {
             var head = { head: 'Authorization', value: 'Bearer ' + utils.token };
-            AJAX.AJAX('http://106.12.194.98/api/goods/all', 'GET', false, head, _this2.isLogin, _this2.error);
+            AJAX.AJAX('http://106.12.194.98/api/goods/history', 'GET', false, head, _this2.isLogin, _this2.error);
         };
 
         _this2.isLogin = function (res) {
@@ -83,15 +83,33 @@ var Index = function (_Component) {
             });
         };
 
+        _this2.loadData = function (data) {
+            var _this = _this2;
+            if (!_this.state.data) {
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    '\u6682\u65E0\u6570\u636E'
+                );
+            }
+            debugger;
+            _this.state.data.map(function (item, index) {
+                return _react2.default.createElement(
+                    'tr',
+                    null,
+                    '123'
+                );
+            });
+        };
+
         _this2.state = {
             data: '',
-            deleteFlag: false,
             allData: ''
         };
         return _this2;
     }
 
-    _createClass(Index, [{
+    _createClass(StockHistory, [{
         key: 'searchBtn',
         value: function searchBtn(e) {
             debugger;
@@ -108,9 +126,23 @@ var Index = function (_Component) {
             AJAX.AJAX(url, 'GET', false, head, this.isLogin, this.error);
         }
     }, {
+        key: 'dateChange',
+        value: function dateChange(e) {
+            var month = e.target.value;
+            if (month == '') {
+                return;
+            }
+            var date_start = new Date(new Date(month).setDate(1)).toLocaleDateString();
+            var date_end = new Date(new Date(new Date(month).getFullYear(), new Date(month).getMonth() + 1, 1) - 1000 * 60 * 60 * 24).toLocaleDateString();
+            var url = this.state.allData.path + '?' + 'date_start=' + date_start + '&date_end=' + date_end;
+            var head = { head: 'Authorization', value: 'Bearer ' + utils.token };
+            AJAX.AJAX(url, 'GET', false, head, this.isLogin, this.error);
+        }
+    }, {
         key: 'clear',
         value: function clear(e) {
             e.target.ownerDocument.querySelector('.searchValue').value = '';
+            e.target.ownerDocument.querySelector('.dateValue').value = '';
             var head = { head: 'Authorization', value: 'Bearer ' + utils.token };
             AJAX.AJAX(this.state.allData.path, 'GET', false, head, this.isLogin, this.error);
         }
@@ -132,7 +164,7 @@ var Index = function (_Component) {
                         _react2.default.createElement(
                             'span',
                             null,
-                            '\u5168\u90E8\u5546\u54C1\u5E93\u5B58'
+                            '\u5546\u54C1\u51FA\u5E93\u8BB0\u5F55'
                         )
                     ),
                     _react2.default.createElement(
@@ -146,13 +178,13 @@ var Index = function (_Component) {
                                 { className: 'searchSelect' },
                                 _react2.default.createElement(
                                     'option',
-                                    { id: 'supplier' },
-                                    '\u4F9B\u8D27\u5546'
+                                    { id: 'customer' },
+                                    '\u5BA2\u6237\u540D\u79F0'
                                 ),
                                 _react2.default.createElement(
                                     'option',
                                     { id: 'goods_name' },
-                                    '\u5546\u54C1\u79CD\u7C7B'
+                                    '\u5546\u54C1\u540D\u79F0'
                                 ),
                                 _react2.default.createElement(
                                     'option',
@@ -170,15 +202,15 @@ var Index = function (_Component) {
                                 'div',
                                 { className: 'enterBtn clear', onClick: _this.clear.bind(_this) },
                                 '\u91CD\u7F6E'
-                            )
+                            ),
+                            _react2.default.createElement('input', { className: 'dateValue lastBtn', onChange: _this.dateChange.bind(_this), type: 'month' })
                         ),
                         _react2.default.createElement(_commonContent2.default, {
-                            HEAD: [{ title: '供货商', name: 'supplier' }, { title: '商品种类', name: 'goods_name' }, { title: '商品编号', name: 'goods_number' }, { title: '克重(件/g)',
-                                name: 'weight' }, { title: '总计件数', name: 'num' }, { title: '总计克重(g)', name: 'weight_all' }],
-                            CONTENT: _this.state.data,
-                            deleteFlag: _this.state.deleteFlag
+                            HEAD: [{ title: '日期', name: 'create_time' }, { title: '客户名称', name: 'customer' }, { title: '商品名称', name: 'goods_name' }, { title: '商品编号', name: 'goods_number' }, { title: '单价(1g)',
+                                name: 'weight' }, { title: '当前银价(1g)', name: 'current_price' }, { title: '商品重量', name: 'weight' }, { title: '总计件数', name: 'num' }, { title: '总计克重(g)', name: 'weight_all' }, { title: '总价($)', name: 'price_all' }, { title: '经办人', name: 'operator' }],
+                            CONTENT: _this.state.data
                         }),
-                        _react2.default.createElement(_footer2.default, { CONTENT: _this.state.allData, isLogin: _this.isLogin })
+                        _react2.default.createElement(_footer2.default, { CONTENT: _this.state.allData, isLogin: this.isLogin })
                     )
                 )
             );
@@ -192,10 +224,10 @@ var Index = function (_Component) {
         }
     }]);
 
-    return Index;
+    return StockHistory;
 }(_react.Component);
 
-var _default = Index;
+var _default = StockHistory;
 exports.default = _default;
 ;
 
@@ -208,8 +240,8 @@ exports.default = _default;
         return;
     }
 
-    reactHotLoader.register(Index, 'Index', '/Users/yuhao/Documents/project_code/code/react-code/src/pages/Index/index.js');
-    reactHotLoader.register(_default, 'default', '/Users/yuhao/Documents/project_code/code/react-code/src/pages/Index/index.js');
+    reactHotLoader.register(StockHistory, 'StockHistory', '/Users/yuhao/Documents/project_code/code/react-code/src/pages/stockHistory/stockHistory.js');
+    reactHotLoader.register(_default, 'default', '/Users/yuhao/Documents/project_code/code/react-code/src/pages/stockHistory/stockHistory.js');
     leaveModule(module);
 })();
 

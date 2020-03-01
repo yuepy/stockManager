@@ -1,6 +1,6 @@
-webpackJsonp([3],{
+webpackJsonp([1],{
 
-/***/ 53:
+/***/ 55:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42,6 +42,10 @@ var _footer = __webpack_require__(68);
 
 var _footer2 = _interopRequireDefault(_footer);
 
+var _entry = __webpack_require__(71);
+
+var _entry2 = _interopRequireDefault(_entry);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -58,17 +62,17 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Index = function (_Component) {
-    _inherits(Index, _Component);
+var OutStock = function (_Component) {
+    _inherits(OutStock, _Component);
 
-    function Index(props) {
-        _classCallCheck(this, Index);
+    function OutStock(props) {
+        _classCallCheck(this, OutStock);
 
-        var _this2 = _possibleConstructorReturn(this, (Index.__proto__ || Object.getPrototypeOf(Index)).call(this, props));
+        var _this2 = _possibleConstructorReturn(this, (OutStock.__proto__ || Object.getPrototypeOf(OutStock)).call(this, props));
 
         _this2.componentDidMount = function () {
-            var head = { head: 'Authorization', value: 'Bearer ' + utils.token };
-            AJAX.AJAX('http://106.12.194.98/api/goods/all', 'GET', false, head, _this2.isLogin, _this2.error);
+            var _this = _this2;
+            _this.getData();
         };
 
         _this2.isLogin = function (res) {
@@ -83,15 +87,29 @@ var Index = function (_Component) {
             });
         };
 
+        _this2.showEntry = function () {
+            var _this = _this2;
+            _this.setState({
+                isentry: true
+            });
+        };
+
         _this2.state = {
             data: '',
             deleteFlag: false,
-            allData: ''
+            allData: '',
+            isentry: false
         };
         return _this2;
     }
 
-    _createClass(Index, [{
+    _createClass(OutStock, [{
+        key: 'getData',
+        value: function getData() {
+            var head = { head: 'Authorization', value: 'Bearer ' + utils.token };
+            AJAX.AJAX('http://106.12.194.98/api/goods/reduce/history', 'GET', false, head, this.isLogin, this.error);
+        }
+    }, {
         key: 'searchBtn',
         value: function searchBtn(e) {
             debugger;
@@ -104,6 +122,19 @@ var Index = function (_Component) {
                 return;
             }
             var url = this.state.allData.path + '?' + id + '=' + searchValue;
+            var head = { head: 'Authorization', value: 'Bearer ' + utils.token };
+            AJAX.AJAX(url, 'GET', false, head, this.isLogin, this.error);
+        }
+    }, {
+        key: 'dateChange',
+        value: function dateChange(e) {
+            var month = e.target.value;
+            if (month == '') {
+                return;
+            }
+            var date_start = new Date(new Date(month).setDate(1)).toLocaleDateString();
+            var date_end = new Date(new Date(new Date(month).getFullYear(), new Date(month).getMonth() + 1, 1) - 1000 * 60 * 60 * 24).toLocaleDateString();
+            var url = this.state.allData.path + '?' + 'date_start=' + date_start + '&date_end=' + date_end;
             var head = { head: 'Authorization', value: 'Bearer ' + utils.token };
             AJAX.AJAX(url, 'GET', false, head, this.isLogin, this.error);
         }
@@ -132,7 +163,7 @@ var Index = function (_Component) {
                         _react2.default.createElement(
                             'span',
                             null,
-                            '\u5168\u90E8\u5546\u54C1\u5E93\u5B58'
+                            '\u5546\u54C1\u5E93\u5B58\u51FA\u5E93'
                         )
                     ),
                     _react2.default.createElement(
@@ -146,13 +177,8 @@ var Index = function (_Component) {
                                 { className: 'searchSelect' },
                                 _react2.default.createElement(
                                     'option',
-                                    { id: 'supplier' },
-                                    '\u4F9B\u8D27\u5546'
-                                ),
-                                _react2.default.createElement(
-                                    'option',
                                     { id: 'goods_name' },
-                                    '\u5546\u54C1\u79CD\u7C7B'
+                                    '\u5546\u54C1\u540D\u79F0'
                                 ),
                                 _react2.default.createElement(
                                     'option',
@@ -170,15 +196,28 @@ var Index = function (_Component) {
                                 'div',
                                 { className: 'enterBtn clear', onClick: _this.clear.bind(_this) },
                                 '\u91CD\u7F6E'
-                            )
+                            ),
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'enterBtn', onClick: this.showEntry },
+                                '\u51FA\u5E93\u5F55\u5165'
+                            ),
+                            _react2.default.createElement('input', { className: 'dateValue lastBtn', onChange: _this.dateChange.bind(_this), type: 'month' })
                         ),
                         _react2.default.createElement(_commonContent2.default, {
-                            HEAD: [{ title: '供货商', name: 'supplier' }, { title: '商品种类', name: 'goods_name' }, { title: '商品编号', name: 'goods_number' }, { title: '克重(件/g)',
-                                name: 'weight' }, { title: '总计件数', name: 'num' }, { title: '总计克重(g)', name: 'weight_all' }],
+                            HEAD: [{ title: '日期', name: 'create_time' }, { title: '客户名称', name: 'customer' }, { title: '商品名称', name: 'goods_name' }, { title: '商品编号', name: 'goods_number' }, { title: '单价(1g)',
+                                name: 'weight' }, { title: '当前银价(1g)', name: 'current_price' }, { title: '商品重量', name: 'weight' }, { title: '总计件数', name: 'num' }, { title: '总计克重(g)', name: 'weight_all' }, { title: '总价($)', name: 'price_all' }, { title: '经办人', name: 'operator' }, { title: '商品图片', name: 'images' }],
                             CONTENT: _this.state.data,
                             deleteFlag: _this.state.deleteFlag
                         }),
-                        _react2.default.createElement(_footer2.default, { CONTENT: _this.state.allData, isLogin: _this.isLogin })
+                        _this.state.isentry && _react2.default.createElement(_entry2.default, {
+                            close: function close() {
+                                _this.setState({ isentry: false });_this.getData();
+                            },
+                            isOutStock: true,
+                            HEAD: [{ title: '状态', name: '未录入' }, { title: '客户名称', name: 'customer' }, { title: '商品编号', name: 'goods_number' }, { title: '出货件数', name: 'num' }, { title: '当前银价', name: 'current_price' }, { title: '总价($)', name: 'price_all' }, { title: '经办人', name: 'operator' }, { title: '商品图片', name: 'goods_images' }]
+                        }),
+                        _react2.default.createElement(_footer2.default, { CONTENT: _this.state.allData, isLogin: this.isLogin })
                     )
                 )
             );
@@ -192,10 +231,10 @@ var Index = function (_Component) {
         }
     }]);
 
-    return Index;
+    return OutStock;
 }(_react.Component);
 
-var _default = Index;
+var _default = OutStock;
 exports.default = _default;
 ;
 
@@ -208,8 +247,8 @@ exports.default = _default;
         return;
     }
 
-    reactHotLoader.register(Index, 'Index', '/Users/yuhao/Documents/project_code/code/react-code/src/pages/Index/index.js');
-    reactHotLoader.register(_default, 'default', '/Users/yuhao/Documents/project_code/code/react-code/src/pages/Index/index.js');
+    reactHotLoader.register(OutStock, 'OutStock', '/Users/yuhao/Documents/project_code/code/react-code/src/pages/outStock/outStock.js');
+    reactHotLoader.register(_default, 'default', '/Users/yuhao/Documents/project_code/code/react-code/src/pages/outStock/outStock.js');
     leaveModule(module);
 })();
 
@@ -1625,6 +1664,509 @@ var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(58);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, ".pageFooter {\n  -moz-user-select: none;\n  -o-user-select: none;\n  -khtml-user-select: none;\n  -webkit-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  width: 100%;\n  height: 50px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 20px;\n  font-size: 12px;\n  color: #A6A6A6;\n}\n.pageFooter ul li {\n  float: left;\n  width: 25px;\n  height: 25px;\n  border: 2px solid #F3F3F3;\n  border-radius: 5px;\n  font-size: 12px;\n  text-align: center;\n  line-height: 25px;\n  margin-left: 5px;\n  color: #A6A6A6;\n  cursor: pointer;\n}\n.pageFooter ul .active {\n  background: #2A79D8 !important;\n  color: #FFFFFF !important;\n}\n.pageFooter ul .prev {\n  background: url('/dist/images/prev.png') center;\n  background-size: 20px 20px;\n}\n.pageFooter ul .next {\n  background: url('/dist/images/next.png') center;\n  background-size: 20px 20px;\n}\n.pageFooter span {\n  margin-left: 15px;\n  margin-right: 15px;\n}\n.pageFooter input {\n  width: 25px;\n  height: 25px;\n  border: 2px solid #F3F3F3;\n  border-radius: 5px;\n  color: #A6A6A6;\n}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ 71:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(module) {
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+__webpack_require__(72);
+
+var _AJAX = __webpack_require__(59);
+
+var AJAX = _interopRequireWildcard(_AJAX);
+
+var _utils = __webpack_require__(60);
+
+var utils = _interopRequireWildcard(_utils);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+(function () {
+    var enterModule = __webpack_require__(1).enterModule;
+
+    enterModule && enterModule(module);
+})();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Entry = function (_Component) {
+    _inherits(Entry, _Component);
+
+    function Entry() {
+        _classCallCheck(this, Entry);
+
+        var _this2 = _possibleConstructorReturn(this, (Entry.__proto__ || Object.getPrototypeOf(Entry)).call(this));
+
+        _this2.successUpload = function (res) {
+            var _this = _this2;
+            res = JSON.parse(res);
+            if (res.msg == '身份失效') {
+                window.location.href = '/';
+            }
+            if (res.msg == '成功') {
+                document.querySelector('#goods_images').value = res.data;
+                _this.entryChange(document.querySelector('#goods_images'));
+            } else {
+                document.querySelector('#file_name').textContent = '上传图片';
+            }
+        };
+
+        _this2.state = {
+            currentDate: '',
+            rownum: ''
+        };
+        return _this2;
+    }
+
+    _createClass(Entry, [{
+        key: 'save',
+        value: function save(elem) {
+            //保存提交数据
+            var _this = this;
+            var tr = elem.parentNode;
+            var fromData = new FormData();
+            if (!_this.props.isOutStock) {
+                fromData.append('supplier', tr.querySelector('#supplier').value);
+                fromData.append('goods_name', tr.querySelector('#goods_name').value);
+                fromData.append('goods_number', tr.querySelector('#goods_number').value);
+                fromData.append('price', tr.querySelector('#price').value);
+                fromData.append('weight', tr.querySelector('#weight').value);
+                fromData.append('num', tr.querySelector('#num').value);
+                fromData.append('weight_all', tr.querySelector('#weight_all').value);
+                fromData.append('price_all', tr.querySelector('#price_all').value);
+                //var params = 'supplier='+supplier+'&goods_name='+goods_name+'&goods_number='+goods_number+'&price='+price+'&weight='+weight+'&num='+num+'&weight_all='+weight_all+'&price_all='+price_all;
+                var header = { head: 'Authorization', value: 'Bearer ' + utils.token };
+                AJAX.AJAX('http://106.12.194.98/api/goods/add', 'POST', fromData, header, this.success, this.error);
+                return;
+            }
+            if (_this.props.isOutStock) {
+                fromData.append('customer', tr.querySelector('#customer').value);
+                fromData.append('goods_number', tr.querySelector('#goods_number').value);
+                fromData.append('current_price', tr.querySelector('#current_price').value);
+                fromData.append('num', tr.querySelector('#num').value);
+                fromData.append('price_all', tr.querySelector('#price_all').value);
+                fromData.append('operator', tr.querySelector('#operator').value);
+                fromData.append('goods_images', tr.querySelector('#goods_images').value);
+                //var params = 'customer='+customer+'&num='+num+'&goods_number='+goods_number+'&current_price='+current_price+'&price_all='+price_all+'&operator='+operator+'&goods_images='+goods_images;
+                var header = { head: 'Authorization', value: 'Bearer ' + utils.token };
+                AJAX.AJAX('http://106.12.194.98/api/goods/reduce', 'POST', fromData, header, this.success, this.error);
+            }
+        }
+    }, {
+        key: 'success',
+        value: function success(res) {
+            //保存成功
+            var _this = this;
+            res = JSON.parse(res);
+            if (res.msg == '身份失效') {
+                window.location.href = '/';
+            }
+            if (res.msg == '入库成功') {
+                var elem = document.querySelector('.save');
+                var tds = elem.querySelectorAll('td');
+                [].forEach.call(tds, function (item, index) {
+                    if (item) {
+                        if (index == 0) {
+                            item.textContent = '已录入';
+                            item.style.backgroundColor = '#005ae0';
+                            item.style.color = '#fff';
+                            item.parentNode.classList.remove('save');
+                            item.parentNode.classList.add('fixed');
+                        } else {
+                            item.querySelector('input').disabled = true;
+                        }
+                    }
+                });
+                return;
+            }
+            if (res.msg == '出库成功') {
+                var elem = document.querySelector('.save');
+                var tds = elem.querySelectorAll('td');
+                [].forEach.call(tds, function (item, index) {
+                    if (item) {
+                        if (index == 0) {
+                            item.textContent = '已录入';
+                            item.style.backgroundColor = '#005ae0';
+                            item.style.color = '#fff';
+                            item.parentNode.classList.remove('save');
+                            item.parentNode.classList.add('fixed');
+                        } else {
+                            item.querySelector('input').disabled = true;
+                        }
+                    }
+                });
+                return;
+            }
+            if (res.msg.indexOf('成功') == -1) {
+                if (res.msg.indexOf('查询不到') != -1) {
+                    alert('第' + document.querySelector('.save').rowIndex + '条数据 [ 商品编号 ]' + res.msg);
+                    return;
+                }
+                alert('第' + document.querySelector('.save').rowIndex + '条数据' + res.msg);
+            }
+        }
+    }, {
+        key: 'error',
+        value: function error(res) {
+            alert(res.msg);
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            //页面初始化需要渲染的数据
+            var _this = this;
+            _this.getCurrentDate();
+            if (document && document.querySelectorAll('.disabled')) {
+                var elem = document.querySelectorAll('.disabled');
+                for (var i = 0; i < elem.length; i++) {
+                    elem[i].disabled = true;
+                }
+            }
+        }
+    }, {
+        key: 'getCurrentDate',
+        value: function getCurrentDate() {
+            //获取当前时间
+            var _this = this;
+            var date = new Date();
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            _this.setState({
+                currentDate: year + '-' + month + '-' + day
+            });
+            return year + '-' + month + '-' + day;
+        }
+    }, {
+        key: 'entryChange',
+        value: function entryChange(e) {
+            //表格录入数据逻辑
+            var _this = this;
+            if (e.target == undefined) {
+                e.target = e;
+            }
+            if (e.target.nodeName != 'INPUT' || e.target.className == 'upload_file') {
+                return;
+            }
+            _this.setState({
+                rownum: e.target.parentNode.parentNode.rowIndex
+            });
+            _this.isShowSave(e.target); // 判断当前数据是否填满 满足提交条件
+            if (!_this.props.isOutStock) {
+                switch (e.target.id) {
+                    case 'price':
+                        _this.autoMerge(e.target, 'price');break;
+                    case 'weight':
+                        _this.autoMerge(e.target, 'weight');break;
+                    case 'num':
+                        _this.autoMerge(e.target, 'num');break;
+                }
+            }
+        }
+    }, {
+        key: 'autoMerge',
+        value: function autoMerge(elem, name) {
+            //自动计算表格结果
+            if (!elem || !name) {
+                return;
+            }
+            var _this = this;
+            var tr = elem.parentNode.parentNode;
+            if (name == 'price') {
+                if (tr.querySelector('#price').value == '') {
+                    tr.querySelector('#price_all').value = '';
+                    return;
+                }
+                if (tr.querySelector('#num').value == '') {
+                    return;
+                }
+                var price = parseInt(tr.querySelector('#price').value);
+                var weight_all = parseInt(tr.querySelector('#weight_all').value);
+                var total = weight_all * price;
+                tr.querySelector('#price_all').value = total;
+                _this.isShowSave(tr.querySelector('#price_all'));
+            }
+            if (name == 'weight') {
+                if (tr.querySelector('#weight').value == '') {
+                    tr.querySelector('#weight_all').value = '';
+                    tr.querySelector('#price_all').value = '';
+                    return;
+                }
+                if (tr.querySelector('#num').value == '') {
+                    return;
+                }
+                var weight = parseInt(tr.querySelector('#weight').value);
+                var num = parseInt(tr.querySelector('#num').value);
+                var total = weight * num;
+                tr.querySelector('#weight_all').value = total;
+                _this.isShowSave(tr.querySelector('#weight_all'));
+                if (tr.querySelector('#price').value == '') {
+                    return;
+                }
+                var price = parseInt(tr.querySelector('#price').value);
+                var money = price * total;
+                tr.querySelector('#price_all').value = money;
+                _this.isShowSave(tr.querySelector('#weight_all'));
+            }
+            if (name == 'num') {
+                if (tr.querySelector('#num').value == '') {
+                    tr.querySelector('#weight_all').value = '';
+                    tr.querySelector('#price_all').value = '';
+                    return;
+                }
+                if (tr.querySelector('#weight').value == '') {
+                    return;
+                }
+                var weight = parseInt(tr.querySelector('#weight').value);
+                var num = parseInt(tr.querySelector('#num').value);
+                var total = weight * num;
+                tr.querySelector('#weight_all').value = total;
+                if (tr.querySelector('#price').value == '') {
+                    return;
+                }
+                var price = parseInt(tr.querySelector('#price').value);
+                var money = price * total;
+                tr.querySelector('#price_all').value = money;
+                _this.isShowSave(tr.querySelector('#weight_all'));
+            }
+        }
+    }, {
+        key: 'isShowSave',
+        value: function isShowSave(elem) {
+            //效验当前行时候满足提交条件
+            var _this = this;
+            var tr = elem.parentNode.parentNode;
+            var tds = tr.querySelectorAll('td');
+            if (tr.classList.contains('save')) {
+                return;
+            }
+            var isDone = false;
+            for (var i = 1; i < tds.length; i++) {
+                debugger;
+                if (tds[i].querySelector('input').value == '' && tds[i].querySelector('input').id != 'goods_images' && tds[i].querySelector('input').className != 'upload_file') {
+                    isDone = false;
+                    tds[0].style.backgroundColor = '#fff';
+                    return;
+                } else {
+                    isDone = true;
+                }
+            }
+            if (isDone) {
+                tds[0].parentNode.classList.add('save');
+                setTimeout(function () {
+                    if (document.querySelector('.save') && document.querySelector('.save').querySelector('#goods_images') && document.querySelector('.save').querySelector('#goods_images').value == '') {
+                        var isImages = confirm('第' + document.querySelector('.save').rowIndex + '数据未上传商品图片,是否继续提交');
+                        if (!isImages) {
+                            return;
+                        }
+                    }
+                    if (_this.state.rownum == document.querySelector('.save').rowIndex) {
+                        var timer1 = setTimeout(function () {
+                            _this.save(tds[0]);
+                        }, 3000);
+                    } else {
+                        _this.save(tds[0]);
+                    }
+                }, 3000);
+            }
+        }
+    }, {
+        key: 'uploadClick',
+        value: function uploadClick(e) {
+            //代理触发上传图片input
+            e.target.parentNode.querySelector('.upload_file').click();
+        }
+    }, {
+        key: 'upload',
+        value: function upload(e) {
+            //图片上传 . 
+            var _this = this;
+            var fromData = new FormData();
+            fromData.append('image', e.target.files[0]);
+            var head = { head: 'Authorization', value: 'Bearer ' + utils.token };
+            document.querySelector('#file_name').textContent = e.target.files[0].name;
+            AJAX.AJAX('http://106.12.194.98/api/upload/image', "POST", fromData, head, this.successUpload, this.errorUpload);
+        }
+    }, {
+        key: 'errorUpload',
+        value: function errorUpload() {
+            alert('上传失败!');
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this = this;
+            var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]; // 表示第一次渲染多少行空表格 (待录入数据)
+            return _react2.default.createElement(
+                'div',
+                { className: 'entryContent' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'content' },
+                    _react2.default.createElement('div', { className: 'close', onClick: this.props.close }),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'pageTitle' },
+                        _react2.default.createElement(
+                            'h1',
+                            null,
+                            _this.props.isOutStock ? '商品库存 - 出库录入界面' : '商品库存 - 入库录入界面'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'table',
+                        null,
+                        _react2.default.createElement(
+                            'thead',
+                            null,
+                            _react2.default.createElement(
+                                'tr',
+                                null,
+                                _this.props.HEAD.length > 0 && _this.props.HEAD.map(function (item, index) {
+                                    return _react2.default.createElement(
+                                        'th',
+                                        null,
+                                        item.title
+                                    );
+                                })
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'tbody',
+                            null,
+                            arr.map(function (k, i) {
+                                return _react2.default.createElement(
+                                    'tr',
+                                    { 'data-index': k, onChange: _this.entryChange.bind(_this) },
+                                    _this.props.HEAD.length > 0 && _this.props.HEAD.map(function (item, index) {
+                                        return item.title == '状态' ? _react2.default.createElement(
+                                            'td',
+                                            { style: { width: '60px', textAlign: 'centent' }, id: item.name },
+                                            item.name
+                                        ) : item.title == '日期' ? _react2.default.createElement(
+                                            'td',
+                                            null,
+                                            _react2.default.createElement('input', { type: 'date', name: item.name, defaultValue: _this.state && _this.state.currentDate, id: item.name })
+                                        ) : item.title == '总计克重(g)' || item.title == '总价($)' && !_this.props.isOutStock ? _react2.default.createElement(
+                                            'td',
+                                            null,
+                                            _react2.default.createElement('input', { type: 'text', className: 'disabled', name: item.name, id: item.name })
+                                        ) : item.title == '商品图片' ? _react2.default.createElement(
+                                            'td',
+                                            null,
+                                            _react2.default.createElement('input', { type: 'file', onChange: _this.upload.bind(_this), style: { display: "none" }, className: 'upload_file' }),
+                                            _react2.default.createElement('input', { type: 'text', name: item.name, id: item.name, style: { display: "none" } }),
+                                            _react2.default.createElement(
+                                                'span',
+                                                { onClick: _this.uploadClick.bind(_this), id: 'file_name' },
+                                                '\u4E0A\u4F20\u56FE\u7247'
+                                            )
+                                        ) : _react2.default.createElement(
+                                            'td',
+                                            null,
+                                            _react2.default.createElement('input', { type: 'text', name: item.name, id: item.name })
+                                        );
+                                    })
+                                );
+                            })
+                        )
+                    )
+                )
+            );
+        }
+    }, {
+        key: '__reactstandin__regenerateByEval',
+        // @ts-ignore
+        value: function __reactstandin__regenerateByEval(key, code) {
+            // @ts-ignore
+            this[key] = eval(code);
+        }
+    }]);
+
+    return Entry;
+}(_react.Component);
+
+var _default = Entry;
+exports.default = _default;
+;
+
+(function () {
+    var reactHotLoader = __webpack_require__(1).default;
+
+    var leaveModule = __webpack_require__(1).leaveModule;
+
+    if (!reactHotLoader) {
+        return;
+    }
+
+    reactHotLoader.register(Entry, 'Entry', '/Users/yuhao/Documents/project_code/code/react-code/src/component/entry.js');
+    reactHotLoader.register(_default, 'default', '/Users/yuhao/Documents/project_code/code/react-code/src/component/entry.js');
+    leaveModule(module);
+})();
+
+;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)(module)))
+
+/***/ }),
+
+/***/ 72:
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(57);
+            var content = __webpack_require__(73);
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+var exported = content.locals ? content.locals : {};
+
+
+
+module.exports = exported;
+
+/***/ }),
+
+/***/ 73:
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(58);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, ".entryContent {\n  position: fixed;\n  top: 10%;\n  background-color: rgba(0, 0, 0, 0.7);\n  padding: 20px;\n  width: 83%;\n  height: 83%;\n}\n.entryContent .content {\n  width: 100%;\n  height: 100%;\n  background-color: #fff;\n}\n.entryContent .pageTitle {\n  text-align: center;\n  padding: 20px;\n  font-size: 18px;\n  color: #005ae0;\n}\n.entryContent .close {\n  background: url('/dist/images/close.png') no-repeat center center;\n  width: 25px;\n  height: 25px;\n  color: #e4393c;\n  padding: 8px;\n  padding-left: 2px;\n  text-align: center;\n  padding: 2px;\n  line-height: 20px;\n  position: fixed;\n  right: 35px;\n  background-size: 120%;\n}\n.entryContent input {\n  width: 100%;\n  border: none;\n  height: 30px;\n  font-size: 14px;\n}\n.entryContent span {\n  width: 100px;\n  overflow: hidden;\n  display: block;\n  border: 1px solid #eee;\n  border-radius: 4px;\n  background-color: #eee;\n}\n.entryContent td {\n  font-size: 14px;\n  height: 30px!important;\n  line-height: initial!important;\n  text-indent: initial!important;\n  padding: 5px 10px;\n  text-align: center;\n  height: 60px;\n}\n.entryContent th {\n  text-align: center;\n  font-size: 14px;\n}\n.entryContent .footer_bth {\n  text-align: center;\n}\n.entryContent button {\n  margin: 5px 10px;\n  background-color: #005ae0;\n  color: #fff;\n  border: none;\n  padding: 5px 20px;\n  border-radius: 5px;\n  font-size: 14px;\n}\n", ""]);
 // Exports
 module.exports = exports;
 

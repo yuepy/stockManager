@@ -1,4 +1,7 @@
 {
+  "warehousing.js": "warehousing.js",
+  "outStock.js": "outStock.js",
+  "stockHistory.js": "stockHistory.js",
   "index.js": "index.js",
   "login.js": "login.js",
   "main.js": "bundle.js"

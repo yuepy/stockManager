@@ -3,7 +3,7 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const uglify = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');  //为less css单独打包插件
 module.exports = {
-    devtool:'eval-source-map',
+    //devtool:'eval-source-map',
     //要压缩文件入口
     entry:[
         'react-hot-loader/patch',
@@ -35,15 +35,14 @@ module.exports = {
             },
             {
                 test: /\.less$/,
-                loader: ['style-loader', 'css-loader','less-loader']
-                // loader:ExtractTextPlugin.extract({
-                //     fallback:"style-loader",
-                //     use:[{
-                //         loader:"css-loader"
-                //     },{
-                //         loader:"less-loader"
-                //     }]
-                // })
+                loader:ExtractTextPlugin.extract({
+                    fallback:"style-loader",
+                    use:[{
+                        loader:"css-loader"
+                    },{
+                        loader:"less-loader"
+                    }]
+                })
             },
             {
                 test: /\.(png|gif|jpg|jpeg|bmp|svg)/,
@@ -82,7 +81,8 @@ module.exports = {
             router: path.join(__dirname, 'src/router'),
             pageStyle:path.join(__dirname,'src/css/'),
             commonStyle:path.join(__dirname,'src/css/common'),
-            image:path.join(__dirname,'src/images/')
+            image:path.join(__dirname,'src/images/'),
+            build:path.join(__dirname,'/dist')
         }
     }
     //--color 控制台输出彩色信息 --progress 编译进度输出 --hot 模块热替换只更新自己修改部分  
