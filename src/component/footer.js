@@ -8,54 +8,70 @@ export default class pageFooter extends Component {
         super(props);
         this.state = {
             currentPage:this.props.CONTENT.current_page,
-            groupCount:7,
-            startPage:1
+            groupCount:5,
+            pages:this.props.CONTENT.last_page
         }
     }
-
+    componentWillReceiveProps(nextProps){
+        if(this.props.CONTENT.current_page!==nextProps.CONTENT.current_page||this.props.CONTENT.last_page!==nextProps.CONTENT.last_page){
+            this.setState({
+                currentPage:nextProps.CONTENT.current_page,
+                pages:nextProps.CONTENT.last_page
+            })
+        }
+    }
     create(){
-        var last_page = this.props.CONTENT.last_page;
+        var last_page = this.state.pages;
+        var currentPage = this.state.currentPage;
+        var groupCount = this.state.groupCount;
         var pages = [];
-        if( last_page <= this.state.groupCount){
+        if( last_page <= this.state.groupCount+2){
             pages.push(<li className="prev" onClick = {this.goPrev.bind(this)} key={0}></li>)
             for(var i = 1;i <= last_page; i++){
-                pages.push(<li onClick = {this.goPage.bind(this,i)} className = {this.props.CONTENT.current_page == i ? "active" : ""} key={i}>{i}</li>)
+                pages.push(<li onClick = {this.goPage.bind(this,i)} className = {this.state.currentPage == i ? "active" : ""} key={i}>{i}</li>)
             }
             pages.push(<li className="next" onClick = {this.goNext.bind(this)}  key={last_page + 1}></li>) 
         }else{
-            pages.push(<li className="prev" onClick = {this.goPrev.bind(this)} key={0}></li>)
-            for(var i = this.state.startPage;i < this.state.startPage+this.state.groupCount;i ++){
-                pages.push(<li onClick = {this.goPage.bind(this,i)} className = {this.props.CONTENT.current_page == i ? "active" : ""} key={i}>{i}</li>)
+            if(currentPage<=groupCount){
+                debugger;
+                pages.push(<li className="prev" onClick = {this.goPrev.bind(this)} key={0}></li>)
+                for(var i=1; i<=groupCount;i++){
+                    pages.push(<li onClick = {this.goPage.bind(this,i)} className = {this.state.currentPage == i ? "active ab" : ""} key={i}>{i}</li>)
+                }
+                if(currentPage==groupCount){
+                    pages.push(<li onClick = {this.goPage.bind(this,groupCount+1)} className = {this.state.currentPage == groupCount+1 ? "active" : ""} key={groupCount+1}>{groupCount+1}</li>)
+                }
+                pages.push(<li key={ -2 }>···</li>)
+                pages.push(<li key={last_page} onClick = {this.goPage.bind(this,last_page)}>{last_page}</li>)
+                pages.push(<li className="next" onClick = {this.goNext.bind(this)}  key={last_page + 1}></li>)
+            }else if(currentPage>groupCount&&currentPage<=this.state.pages-groupCount){
+                pages.push(<li className="prev" onClick = {this.goPrev.bind(this)} key={0}></li>)
+                pages.push(<li  key={1} onClick = {this.goPage.bind(this,1)}>{1}</li>)
+                pages.push(<li key={ -1 }>···</li>)
+                for(var i= currentPage-2;i<=currentPage+2;i++){
+                    pages.push(<li onClick = {this.goPage.bind(this,i)} className = {this.state.currentPage == i ? "active" : ""} key={i}>{i}</li>)
+                }
+                pages.push(<li key={ -2 }>···</li>)
+                pages.push(<li key={last_page} onClick = {this.goPage.bind(this,last_page)}>{last_page}</li>)
+                pages.push(<li className="next" onClick = {this.goNext.bind(this)}  key={last_page + 1}></li>)
+            }else if(currentPage>this.state.pages-groupCount){
+                pages.push(<li className="prev" onClick = {this.goPrev.bind(this)} key={0}></li>)
+                pages.push(<li  key={1} onClick = {this.goPage.bind(this,1)}>{1}</li>)
+                pages.push(<li key={ -1 }>···</li>)
+                if(currentPage==this.state.pages-groupCount+1){
+                    pages.push(<li onClick = {this.goPage.bind(this,this.state.pages-groupCount)} key={this.state.pages-groupCount}>{this.state.pages-groupCount}</li>)
+                }
+                for(var i=this.state.pages-groupCount+1; i<=this.state.pages;i++){
+                    pages.push(<li onClick = {this.goPage.bind(this,i)} className = {this.state.currentPage == i ? "active" : ""} key={i}>{i}</li>)
+                }
+                pages.push(<li className="next" onClick = {this.goNext.bind(this)}  key={last_page + 1}></li>)
             }
-            if(last_page - this.state.startPage > 7){
-               pages.push(<li key={ -1 }>···</li>) 
-            }
-            pages.push(<li className = {this.state.currentPage == i ? "active" : ""} key={last_page} onClick = {this.goPage.bind(this,last_page)}>{last_page}</li>)
-            pages.push(<li className="next" onClick = {this.goNext.bind(this)}  key={last_page + 1}></li>) 
+            
         }
-        
-
         return pages;
     }
 
     goPage(num){
-        debugger
-        var groupCount = this.state.groupCount;
-        if(num % groupCount === 1 && (this.props.CONTENT.last_page - num)>this.state.groupCount){
-            this.setState({
-                startPage:num
-            })
-        }
-        if(num % groupCount === 0){
-            this.setState({
-                startPage:num - groupCount + 1
-            })
-        }
-        if(this.props.CONTENT.last_page - num <1){
-            this.setState({
-                startPage:this.props.CONTENT.last_page - groupCount,
-            })
-        }
         this.setState({
             currentPage:num
         })
@@ -65,54 +81,18 @@ export default class pageFooter extends Component {
     }
 
     goPrev(){
-        
-        var groupCount = this.state.groupCount;
-        if(this.props.CONTENT.current_page==1){
+        if(this.state.currentPage==1){
             return;
         }
-
         var num = this.state.currentPage-1;
-        if( !(num  % groupCount ) ){
-            this.setState({
-                startPage:this.state.currentPage - groupCount
-            });
-        }
-        if(this.props.CONTENT.last_page-this.state.currentPage==this.state.groupCount){
-            this.setState({
-                startPage:Math.floor(num / this.state.groupCount) *this.state.groupCount + 1
-            })
-        } 
-        this.setState({
-            currentPage:num
-        })
-        var url = this.props.CONTENT.last_page_url.match(/(\S*)page=/)[1];
-        var head = {head:'Authorization',value:'Bearer '+utils.token};
-        AJAX.AJAX(url+'?page='+num,'GET',false,head,this.props.isLogin,this.error);
+        this.goPage(num)
     }
     goNext(){
-        debugger;
-        var groupCount = this.state.groupCount;
-        if(this.props.CONTENT.current_page==this.props.CONTENT.last_page){
+        if(this.state.currentPage==this.state.pages){
             return;
         }
-        var num = this.props.CONTENT.current_page+1; 
-        if( !( this.state.currentPage % groupCount ) && this.props.CONTENT.last_page - this.state.currentPage > 1 ){
-            if(this.props.CONTENT.last_page-this.state.currentPage<this.state.groupCount){
-                this.setState({
-                    startPage:this.props.CONTENT.last_page-this.state.groupCount
-                });
-            }else{
-                this.setState({
-                    startPage:num
-                });
-            } 
-        }
-        this.setState({
-            currentPage:num
-        })
-        var url = this.props.CONTENT.last_page_url.match(/(\S*)page=/)[1];
-        var head = {head:'Authorization',value:'Bearer '+utils.token};
-        AJAX.AJAX(this.props.CONTENT.path+'?page='+num,'GET',false,head,this.props.isLogin,this.error);
+        var num = this.state.currentPage+1; 
+        this.goPage(num)
     }
     goText(e) {
         var target = e.target;
@@ -120,25 +100,16 @@ export default class pageFooter extends Component {
             return;
         }
         var num = Number(target.value);
-        if(num>this.props.CONTENT.last_page){
-            alert('当前页码数不能超过总页码数！');
-            return;
-        }
-        if(this.props.CONTENT.last_page-num<=7){
-            this.setState({
-                startPage:this.props.CONTENT.last_page-this.state.groupCount
-            })
-        }else{
-            this.setState({
-                startPage:Math.floor(num / this.state.groupCount) *this.state.groupCount + 1
-            })  
-        }
-            
+        if(num>this.state.pages){
+            num = this.state.pages;
+        }else if(num<1){
+            num = 1;
+        }    
         this.goPage(num)
     }
     render() {
         var _this = this;
-        var Pages = this.create.bind(this)();
+        var Pages = _this.create.bind(_this)();
         return (
             <footer className="pageFooter">
                 <ul>
