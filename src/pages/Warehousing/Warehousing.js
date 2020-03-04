@@ -106,6 +106,9 @@ export default class Warehousing extends Component {
         var head = {head:'Authorization',value:'Bearer '+utils.token};
         AJAX.AJAX(this.state.allData.path,'GET',false,head,this.isLogin,this.error);
     }
+    showSupplier(){
+        
+    }
     render(){
         var _this = this;
         return(
@@ -129,6 +132,7 @@ export default class Warehousing extends Component {
                 		</div>
                         <div className="optContent twoLine">
                             <div className="enterBtn2" onClick={this.showEntry}>商品录入</div>
+                            <div className="enterBtn2" onClick={this.showSupplier}>供应商录入</div>
                             {_this.state.deleteFlag && <div className='enterBtn2 isDelete' onClick={_this.isConfirm.bind(_this)}>确认删除</div>}
                             <div className="enterBtn2" onClick={_this.selectDelete.bind(_this)}>{this.state.deleteFlag?'取消':'批量删除'}</div>
                         </div>      
