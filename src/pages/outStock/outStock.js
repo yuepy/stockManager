@@ -72,6 +72,7 @@ export default class OutStock extends Component {
         var head = {head:'Authorization',value:'Bearer '+utils.token};
         AJAX.AJAX(this.state.allData.path,'GET',false,head,this.isLogin,this.error);
     }
+    showCustomer(){}
     render() {
         var _this = this;
         return (
@@ -92,6 +93,7 @@ export default class OutStock extends Component {
                             <div className="enterBtn" onClick={_this.searchBtn.bind(_this)}>搜索</div>
                             <div className="enterBtn clear" onClick={_this.clear.bind(_this)}>重置</div>
                 			<div className="enterBtn" onClick={this.showEntry}>出库录入</div>
+                            <div className="enterBtn" onClick={this.showCustomer}>客户录入</div>
                             <input className="dateValue lastBtn" onChange={_this.dateChange.bind(_this)} type="month"/>
                 		</div>
                         <CommonContent 
