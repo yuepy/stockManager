@@ -85,14 +85,25 @@
             font-size: 14px;
         }
         i{
-            display: inline-block;
-            position:absolute;
-            right: 22px;
-            top: 15px;
-            width: 22px;
-            height: 22px;
-            background:url('/dist/images/arrow.png') center;
-            background-size:22px 22px;
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid dashed dashed;
+            border-color: #fff transparent transparent;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all .2s;
+            -webkit-transition: all .2s;
+            position: absolute;
+            top: 23px;
+            right: 28px;
+            border-width: 6px;
+            border-top-color: rgba(255,255,255,.7)
+        }
+        i:hover{
+            margin-top: -9px;
+            border-style: dashed dashed solid;
+            border-color: transparent transparent #fff
         }
     }
     .userMask{
