@@ -145,6 +145,7 @@ export default class Warehousing extends Component {
                             onRefFn = {_this.onRefFn}
                             getData={_this.getData}
                             selectDelete={_this.selectDelete}
+                            AllData = {_this.state.allData}
                         />
                         {_this.state.isentry && <Entry 
                             close={()=>{_this.setState({isentry:false}); _this.getData()}}

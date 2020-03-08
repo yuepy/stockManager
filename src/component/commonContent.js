@@ -88,6 +88,26 @@ export default class CommonContent extends Component{
                     })}
                     </tr>
                 })}</tbody>
+                <tbody className="total">
+                    <tr>
+                        <td className={_this.props.deleteFlag?'showInput':'hideInput'}>
+                        </td>
+                        {_this.props.HEAD.map((d,i)=>{
+                            if(i==0){
+                                var output = '合计：';
+                            }else if(d.title=='总计件数'){
+                                var output = _this.props.AllData.stat_num_total;
+                            }else if(d.title=='总价($)'){
+                                var output = _this.props.AllData.stat_price_total;
+                            }else if(d.title=='总计克重(g)'){
+                                var output = _this.props.AllData.stat_weight_total;
+                            }else{
+                                var output = '';
+                            }
+                            return <td>{output}</td>
+                        })}
+                    </tr>
+                </tbody>
             </table>
         )
     }
