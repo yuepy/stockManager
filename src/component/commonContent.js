@@ -84,7 +84,9 @@ export default class CommonContent extends Component{
                         if(v.title == '商品图片' ){
                             var imgURL = item[v.name] && item[v.name].length > 0 ? item[v.name][0] : false;
                         }
-                    return <td className={v.title == '操作'? 'deleteFlag':''} onClick={_this.isConfirm.bind(_this)}>{v.name == 'create_time' ?time : (v.title == '操作' && !this.props.deleteFlag ? v.name:(v.title=='商品图片'?<a target='_blank' href={imgURL?imgURL:''}>{imgURL?item.goods_name+'图片':'无商品图片'}</a>:item[v.name]))}</td>
+                    return <td className={v.title == '操作'? 'deleteFlag':''} onClick={_this.isConfirm.bind(_this)}>{v.name == 'create_time' ?time : 
+                    (v.title == '操作' && !this.props.deleteFlag ? v.name:(v.title=='商品图片'?<a target='_blank' href={imgURL?imgURL:''}>{imgURL?item.goods_name+'图片':'无商品图片'}</a>:
+                    (v.title == '工费类型'?(item[v.name] == '1'?'件工费':'克工费'):item[v.name])))}</td>
                     })}
                     </tr>
                 })}</tbody>
