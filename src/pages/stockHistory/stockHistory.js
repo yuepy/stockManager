@@ -11,7 +11,8 @@ export default class StockHistory extends Component {
         super(props);
         this.state = {
            data : '',
-           allData:''
+           allData:'',
+           searchType:'commodity'
         }
     }
     componentDidMount=()=>{
@@ -54,12 +55,8 @@ export default class StockHistory extends Component {
         AJAX.AJAX(url,'GET',false,head,this.isLogin,this.error);
     }
     dateChange(e){
-        var month = e.target.value;
-        if(month==''){
-            return;
-        }
-        var date_start = new Date(new Date(month).setDate(1)).toLocaleDateString();
-        var date_end =  new Date(new Date(new Date(month).getFullYear(),new Date(month).getMonth()+1,1)-1000*60*60*24).toLocaleDateString()
+        var date_start = e.target.ownerDocument.querySelector('.startDate').value;
+        var date_end =  e.target.ownerDocument.querySelector('.endDate').value;
         var url = this.state.allData.path+'?'+'date_start='+date_start+'&date_end='+date_end;
         var head = {head:'Authorization',value:'Bearer '+utils.token};
         AJAX.AJAX(url,'GET',false,head,this.isLogin,this.error);
@@ -69,6 +66,13 @@ export default class StockHistory extends Component {
         e.target.ownerDocument.querySelector('.dateValue').value = '';
         var head = {head:'Authorization',value:'Bearer '+utils.token};
         AJAX.AJAX(this.state.allData.path,'GET',false,head,this.isLogin,this.error);
+    }
+    searchType(e){
+        var _this = this;
+        var type = e.target.querySelectorAll('option')[e.target.selectedIndex].id;
+        _this.setState({
+            searchType:type
+        })
     }
     render(){
         var _this = this;
@@ -81,22 +85,35 @@ export default class StockHistory extends Component {
                 		<span>商品出库记录</span>
                 	</header>
                 	<div className="dataContent">
-                		<div className="optContent">
-                			<select className="searchSelect">
-            					<option id="customer">客户名称</option>
-            					<option id="goods_name">商品名称</option>
-            					<option id="goods_number">商品编号</option>
-            				</select>
-            				<input className="searchValue"/>
-                			<div className="enterBtn" onClick={_this.searchBtn.bind(_this)}>搜索</div>
-                			<div className="enterBtn clear" onClick={_this.clear.bind(_this)}>重置</div>
-                			<input className="dateValue lastBtn" onChange={_this.dateChange.bind(_this)} type="month"/>
-                		</div>
+                        <div className="optContent">
+                            <select className="search" onChange={_this.searchType.bind(_this)}>
+                                <option id="commodity">商品查询</option>
+                                <option id="date">日期查询</option>
+                            </select>
+                            <div className="DateOpt opt" style={{display:_this.state.searchType=='date'?'flex':'none'}}>
+                                <input className="startDate DateInput" type="date"/>
+                                &nbsp;-&nbsp;
+                                <input className="endDate DateInput" type="date"/>
+                                <div className="enterBtn" onClick={_this.dateChange.bind(_this)}>确定</div>
+                            </div>
+                            <div className="searchOpt opt" style={{display:_this.state.searchType=='commodity'?'flex':'none'}}>
+                                <select className="searchSelect">
+                                    <option id="customer">客户名称</option>
+                                    <option id="goods_name">商品名称</option>
+                                    <option id="goods_number">商品编号</option>
+                                </select>
+                                <input className="searchValue"/>
+                                <div className="enterBtn" onClick={_this.searchBtn.bind(_this)}>搜索</div>
+                                <div className="enterBtn clear" onClick={_this.clear.bind(_this)}>重置</div>
+                            </div>
+                        </div>
+                        
                         <CommonContent 
                             HEAD={[{title:'日期',name:'create_time'},{title:'客户名称',name:'customer'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},{title:'单价(1g)',
                                     name:'weight'},{title:'当前银价(1g)',name:'current_price'},{title:'商品重量',name:'weight'},{title:'总计件数',name:'num'},{title:'总计克重(g)',name:'weight_all'},
                                     {title:'总价($)',name:'price_all'},{title:'经办人',name:'operator'}]}
                             CONTENT={_this.state.data}
+                            AllData = {_this.state.allData}
                         />
                         <PageFooter CONTENT={_this.state.allData} isLogin={this.isLogin}/>
                     </div>
