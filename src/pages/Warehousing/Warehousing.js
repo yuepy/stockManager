@@ -7,6 +7,7 @@ import PageFooter from 'component/footer.js';
 import * as AJAX from 'component/AJAX.js';
 import * as utils from 'component/utils.js';
 import Entry from 'component/entry.js';
+import { Link } from 'react-router';
 export default class Warehousing extends Component {
     constructor(props) {
         super(props);
@@ -14,7 +15,8 @@ export default class Warehousing extends Component {
            data : '',
            isentry:false,
            allData:'',
-           deleteFlag:false
+           deleteFlag:false,
+           searchType:'commodity'
         }
     }
     componentDidMount=()=>{
@@ -109,6 +111,13 @@ export default class Warehousing extends Component {
     showSupplier(){
 
     }
+    searchType(e){
+        var _this = this;
+        var type = e.target.querySelectorAll('option')[e.target.selectedIndex].id;
+        _this.setState({
+            searchType:type
+        })
+    }
     render(){
         var _this = this;
         return(
@@ -120,17 +129,29 @@ export default class Warehousing extends Component {
                 		<span>商品库存入库</span>
                 	</header>
                 	<div className="dataContent">
-                		<div className="optContent">
-                            <select className="searchSelect">
-                                <option id="goods_name">商品名称</option>
-                                <option id="goods_number">商品编号</option>
+                        <div className="optContent">
+                            <select className="search" onChange={_this.searchType.bind(_this)}>
+                                <option id="commodity">商品查询</option>
+                                <option id="date">日期查询</option>
                             </select>
-                            <input className="searchValue"/>
-                            <div className="enterBtn" onClick={_this.searchBtn.bind(_this)}>搜索</div>
-                            <div className="enterBtn clear" onClick={_this.clear.bind(_this)}>重置</div>
-                            <input className="dateValue lastBtn" onChange={_this.dateChange.bind(_this)} type="month"/>
-                		</div>
+                            <div className="DateOpt opt" style={{display:_this.state.searchType=='date'?'flex':'none'}}>
+                                <input className="startDate DateInput" type="date"/>
+                                &nbsp;-&nbsp;
+                                <input className="endDate DateInput" type="date"/>
+                                <div className="enterBtn" onClick={_this.dateChange.bind(_this)}>确定</div>
+                            </div>
+                            <div className="searchOpt opt" style={{display:_this.state.searchType=='commodity'?'flex':'none'}}>
+                                <select className="searchSelect">
+                                    <option id="goods_name">商品名称</option>
+                                    <option id="goods_number">商品编号</option>
+                                </select>
+                                <input className="searchValue"/>
+                                <div className="enterBtn" onClick={_this.searchBtn.bind(_this)}>搜索</div>
+                                <div className="enterBtn clear" onClick={_this.clear.bind(_this)}>重置</div>
+                            </div>
+                        </div>
                         <div className="optContent twoLine">
+                            
                             <div className="enterBtn2" onClick={this.showEntry}>商品录入</div>
                             <div className="enterBtn2" onClick={this.showSupplier}>供应商录入</div>
                             {_this.state.deleteFlag && <div className='enterBtn2 isDelete' onClick={_this.isConfirm.bind(_this)}>确认删除</div>}

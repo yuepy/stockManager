@@ -1,7 +1,14 @@
 import React, {Component} from 'react';
 import * as AJAX from 'component/AJAX.js';
 import * as utils from 'component/utils.js';
+import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 export default class CommonContent extends Component{
+    constructor(){
+        super();
+        this.state={
+            indexFlag:false
+        }
+    }
     componentDidMount(){
         var _this = this;
         _this.setState({
@@ -9,6 +16,11 @@ export default class CommonContent extends Component{
         })
         if(location.pathname == '/warehousing'){
             _this.props.onRefFn(_this);
+        }
+        if(location.pathname == '/index'){
+            _this.setState({
+                indexFlag:true
+            })
         }
     }
     deleteClick(e){
@@ -86,7 +98,9 @@ export default class CommonContent extends Component{
                         }
                     return <td className={v.title == '操作'? 'deleteFlag':''} onClick={_this.isConfirm.bind(_this)}>{v.name == 'create_time' ?time : 
                     (v.title == '操作' && !this.props.deleteFlag ? v.name:(v.title=='商品图片'?<a target='_blank' href={imgURL?imgURL:''}>{imgURL?item.goods_name+'图片':'无商品图片'}</a>:
-                    (v.title == '工费类型'?(item[v.name] == '1'?'件工费':'克工费'):item[v.name])))}</td>
+                    (v.title == '工费类型'?(item[v.name] == '1'?'件工费':'克工费'):
+                    (v.title == '商品种类' && _this.state.indexFlag ?<Link to={{pathname:'/goodsDetail',query:"123"}}>{item[v.name]}</Link>:
+                    item[v.name]))))}</td>
                     })}
                     </tr>
                 })}</tbody>
