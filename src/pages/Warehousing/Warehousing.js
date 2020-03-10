@@ -18,7 +18,7 @@ export default class Warehousing extends Component {
            allData:'',
            deleteFlag:false,
            searchType:'commodity',
-           alertBox:'block'
+           alertBox:'none'
         }
     }
     componentDidMount=()=>{
@@ -95,12 +95,8 @@ export default class Warehousing extends Component {
         AJAX.AJAX(url,'GET',false,head,this.isLogin,this.error);
     }
     dateChange(e){
-        var month = e.target.value;
-        if(month==''){
-            return;
-        }
-        var date_start = new Date(new Date(month).setDate(1)).toLocaleDateString();
-        var date_end =  new Date(new Date(new Date(month).getFullYear(),new Date(month).getMonth()+1,1)-1000*60*60*24).toLocaleDateString()
+        var date_start = e.target.ownerDocument.querySelector('.startDate').value;
+        var date_end =  e.target.ownerDocument.querySelector('.endDate').value;
         var url = this.state.allData.path+'?'+'date_start='+date_start+'&date_end='+date_end;
         var head = {head:'Authorization',value:'Bearer '+utils.token};
         AJAX.AJAX(url,'GET',false,head,this.isLogin,this.error);

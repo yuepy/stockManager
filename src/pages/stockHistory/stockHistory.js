@@ -63,7 +63,6 @@ export default class StockHistory extends Component {
     }
     clear(e){
         e.target.ownerDocument.querySelector('.searchValue').value = '';
-        e.target.ownerDocument.querySelector('.dateValue').value = '';
         var head = {head:'Authorization',value:'Bearer '+utils.token};
         AJAX.AJAX(this.state.allData.path,'GET',false,head,this.isLogin,this.error);
     }
