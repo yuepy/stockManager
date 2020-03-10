@@ -4,7 +4,7 @@ import 'pageStyle/common/commonLeftMenu.less';
 export default class CommonLeftMenu extends Component {
     componentDidMount(){
         if(document.querySelector('.Allmenu')){
-            var num = location.pathname == '/index'?0:(location.pathname == '/warehousing'?1:(location.pathname == '/outStock'?2:location.pathname == '/stockHistory'?3:''));
+            var num = location.pathname == '/index' || location.pathname == '/goodsDetail'?0:(location.pathname == '/warehousing'?1:(location.pathname == '/outStock'?2:location.pathname == '/stockHistory'?3:''));
             if(!document.querySelector('.Allmenu').querySelectorAll('li')[num].classList.contains('active')) document.querySelector('.Allmenu').querySelectorAll('li')[num].classList.add('active');
         }
     }

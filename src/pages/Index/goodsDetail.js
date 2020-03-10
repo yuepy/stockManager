@@ -6,6 +6,7 @@ import * as AJAX from 'component/AJAX.js';
 import * as utils from 'component/utils.js';
 import CommonContent from 'component/commonContent.js';
 import PageFooter from 'component/footer.js';
+import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 export default class Index extends Component {
     constructor(props) {
         super(props);
@@ -17,8 +18,16 @@ export default class Index extends Component {
         }
     }
     componentDidMount=()=>{
+        var _this = this;
+        _this.getData();
+        
+    }
+    componentWillMount(props){
+        debugger;
+    }
+    getData(){
         var head = {head:'Authorization',value:'Bearer '+utils.token};
-        AJAX.AJAX('http://106.12.194.98/api/goods/category/list','GET',false,head,this.isLogin,this.error);
+        AJAX.AJAX('http://106.12.194.98/api/goods/all?goods_category=','GET',false,head,this.isLogin,this.error);
     }
     isLogin=(res)=>{
         var _this = this;
@@ -70,18 +79,18 @@ export default class Index extends Component {
         var head = {head:'Authorization',value:'Bearer '+utils.token};
         AJAX.AJAX(url,'GET',false,head,this.isLogin,this.error);
     }
-    render(){
+    render() {
         var _this = this;
-        return(
+        return (
             <div className='allStock'>
                 <NavHeader />
-                <CommonLeftMenu />
+                <CommonLeftMenu/>
                 <div className='rightContent'>
                 <header className="rightHeader">
-                		<span>商品库存详情</span>
+                		<span>全部商品库存</span>
                 	</header>
                 	<div className="dataContent">
-                    <div className="optContent">
+                        <div className="optContent">
                             <div className="DateOpt opt" style={{display:_this.state.searchType=='date'?'flex':'none'}}>
                                 <input className="startDate DateInput" type="date"/>
                                 &nbsp;-&nbsp;
@@ -98,9 +107,9 @@ export default class Index extends Component {
                                 <div className="enterBtn clear" onClick={_this.clear.bind(_this)}>重置</div>
                             </div>
                         </div>
-                        
                         <CommonContent 
-                            HEAD={[{title:'商品种类',name:'category'},{title:'工费类型',name:'goods_type'},{title:'总计件数',name:'stat_num_total'},{title:'总计克重(g)',name:'stat_weight_total'}]}
+                            HEAD={[{title:'供货商',name:'supplier'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},{title:'工费类型',name:'goods_type'},{title:'克重(件/g)',
+                                    name:'weight'},{title:'总计件数',name:'num'},{title:'总计克重(g)',name:'weight_all'}]}
                             CONTENT={_this.state.data}
                             deleteFlag={_this.state.deleteFlag}
                             AllData = {_this.state.allData}

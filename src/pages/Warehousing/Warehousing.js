@@ -4,9 +4,11 @@ import CommonLeftMenu from 'component/commonLeftMenu.js';
 import CommonContent from 'component/commonContent';
 import NavHeader from 'component/header.js';
 import PageFooter from 'component/footer.js';
+import AlertBox from 'component/alertBox.js';
 import * as AJAX from 'component/AJAX.js';
 import * as utils from 'component/utils.js';
 import Entry from 'component/entry.js';
+import { Link } from 'react-router';
 export default class Warehousing extends Component {
     constructor(props) {
         super(props);
@@ -14,7 +16,9 @@ export default class Warehousing extends Component {
            data : '',
            isentry:false,
            allData:'',
-           deleteFlag:false
+           deleteFlag:false,
+           searchType:'commodity',
+           alertBox:'block'
         }
     }
     componentDidMount=()=>{
@@ -107,7 +111,14 @@ export default class Warehousing extends Component {
         AJAX.AJAX(this.state.allData.path,'GET',false,head,this.isLogin,this.error);
     }
     showSupplier(){
-        
+
+    }
+    searchType(e){
+        var _this = this;
+        var type = e.target.querySelectorAll('option')[e.target.selectedIndex].id;
+        _this.setState({
+            searchType:type
+        })
     }
     render(){
         var _this = this;
@@ -120,26 +131,38 @@ export default class Warehousing extends Component {
                 		<span>商品库存入库</span>
                 	</header>
                 	<div className="dataContent">
-                		<div className="optContent">
-                            <select className="searchSelect">
-                                <option id="goods_name">商品名称</option>
-                                <option id="goods_number">商品编号</option>
+                        <div className="optContent">
+                            <select className="search" onChange={_this.searchType.bind(_this)}>
+                                <option id="commodity">商品查询</option>
+                                <option id="date">日期查询</option>
                             </select>
-                            <input className="searchValue"/>
-                            <div className="enterBtn" onClick={_this.searchBtn.bind(_this)}>搜索</div>
-                            <div className="enterBtn clear" onClick={_this.clear.bind(_this)}>重置</div>
-                            <input className="dateValue lastBtn" onChange={_this.dateChange.bind(_this)} type="month"/>
-                		</div>
-                        <div className="optContent twoLine">
+                            <div className="DateOpt opt" style={{display:_this.state.searchType=='date'?'flex':'none'}}>
+                                <input className="startDate DateInput" type="date"/>
+                                &nbsp;-&nbsp;
+                                <input className="endDate DateInput" type="date"/>
+                                <div className="enterBtn" onClick={_this.dateChange.bind(_this)}>确定</div>
+                            </div>
+                            <div className="searchOpt opt" style={{display:_this.state.searchType=='commodity'?'flex':'none'}}>
+                                <select className="searchSelect">
+                                    <option id="goods_name">商品名称</option>
+                                    <option id="goods_number">商品编号</option>
+                                </select>
+                                <input className="searchValue"/>
+                                <div className="enterBtn" onClick={_this.searchBtn.bind(_this)}>搜索</div>
+                                <div className="enterBtn clear" onClick={_this.clear.bind(_this)}>重置</div>
+                            </div>
+                        </div>
+                        <div className="optContent twoLine">                            
                             <div className="enterBtn2" onClick={this.showEntry}>商品录入</div>
                             <div className="enterBtn2" onClick={this.showSupplier}>供应商录入</div>
                             {_this.state.deleteFlag && <div className='enterBtn2 isDelete' onClick={_this.isConfirm.bind(_this)}>确认删除</div>}
                             <div className="enterBtn2" onClick={_this.selectDelete.bind(_this)}>{this.state.deleteFlag?'取消':'批量删除'}</div>
-                        </div>      
+                        </div>
+                        <AlertBox Show={_this.state.alertBox}/>      
                 		<CommonContent 
-                            HEAD={[{title:'日期',name:'create_time'},{title:'供应商',name:'supplier'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},
-                            {title:'进货价格(1g)',name:'price'},{title:'商品重量(件/g)',name:'weight'},{title:'总计件数',name:'num'},
-                            {title:'总计克重(g)',name:'weight_all'},{title:'总价($)',name:'price_all'},{title:'操作',name:'删除'}]}
+                            HEAD={[{title:'日期',name:'create_time'},{title:'供应商',name:'supplier'},{title:'商品种类',name:'category'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},
+                            {title:'进货价格(1g)',name:'price'},{title:'工费类型',name:'goods_type'},{title:'工费',name:'oprice'},{title:'商品重量(件/g)',name:'weight'},{title:'总计件数',name:'num'},
+                            {title:'总计克重(g)',name:'weight_all'},{title:'总价($)',name:'price_all'},{title:'经办人',name:'operator'},{title:'操作',name:'删除'}]}
                             CONTENT={_this.state.data}
                             deleteFlag={_this.state.deleteFlag}
                             onRefFn = {_this.onRefFn}
@@ -150,9 +173,10 @@ export default class Warehousing extends Component {
                         {_this.state.isentry && <Entry 
                             close={()=>{_this.setState({isentry:false}); _this.getData()}}
                             isOutStock={false}
-                            HEAD={[{title:'状态',name:'未录入'},{title:'供应商',name:'supplier'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},
-                            {title:'进货价格(1g)',name:'price'},{title:'商品重量(件/g)',name:'weight'},{title:'总计件数',name:'num'},
-                            {title:'总计克重(g)',name:'weight_all'},{title:'总价($)',name:'price_all'}]}
+                            HEAD={[{title:'状态',name:'未录入'},{title:'供应商',name:'supplier'},{title:'种类',name:'goods_category'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},
+                            {title:'进货价格(1g)',name:'price'},{title:'工费类型',name:'goods_type'},{title:'工费',name:'goods_laborcost'},{title:'商品重量(件/g)',name:'weight'},{title:'总计件数',name:'num'},
+                            {title:'总计克重(g)',name:'weight_all'},{title:'总价($)',name:'price_all'},
+                            {title:'经办人',name:'operator'}]}
                         />}
                 		<PageFooter CONTENT={_this.state.allData} isLogin={this.isLogin}/>
                 	</div>
