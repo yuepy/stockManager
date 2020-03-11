@@ -78,11 +78,11 @@ export default class Index extends Component {
                 <CommonLeftMenu />
                 <div className='rightContent'>
                 <header className="rightHeader">
-                		<span>商品库存详情</span>
+                		<span>商品全部库存</span>
                 	</header>
                 	<div className="dataContent">
                     <div className="optContent">
-                            <div className="DateOpt opt" style={{display:_this.state.searchType=='date'?'flex':'none'}}>
+                            {/* <div className="DateOpt opt" style={{display:_this.state.searchType=='date'?'flex':'none'}}>
                                 <input className="startDate DateInput" type="date"/>
                                 &nbsp;-&nbsp;
                                 <input className="endDate DateInput" type="date"/>
@@ -96,7 +96,7 @@ export default class Index extends Component {
                                 <input className="searchValue"/>
                                 <div className="enterBtn" onClick={_this.searchBtn.bind(_this)}>搜索</div>
                                 <div className="enterBtn clear" onClick={_this.clear.bind(_this)}>重置</div>
-                            </div>
+                            </div> */}
                         </div>
                         
                         <CommonContent 

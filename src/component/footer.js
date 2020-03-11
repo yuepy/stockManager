@@ -33,7 +33,6 @@ export default class pageFooter extends Component {
             pages.push(<li className="next" onClick = {this.goNext.bind(this)}  key={last_page + 1}></li>) 
         }else{
             if(currentPage<=groupCount){
-                debugger;
                 pages.push(<li className="prev" onClick = {this.goPrev.bind(this)} key={0}></li>)
                 for(var i=1; i<=groupCount;i++){
                     pages.push(<li onClick = {this.goPage.bind(this,i)} className = {this.state.currentPage == i ? "active ab" : ""} key={i}>{i}</li>)

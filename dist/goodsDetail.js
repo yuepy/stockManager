@@ -1,6 +1,6 @@
-webpackJsonp([3],{
+webpackJsonp([4],{
 
-/***/ 54:
+/***/ 58:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42,6 +42,8 @@ var _footer = __webpack_require__(70);
 
 var _footer2 = _interopRequireDefault(_footer);
 
+var _reactRouterDom = __webpack_require__(18);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -67,8 +69,9 @@ var Index = function (_Component) {
         var _this2 = _possibleConstructorReturn(this, (Index.__proto__ || Object.getPrototypeOf(Index)).call(this, props));
 
         _this2.componentDidMount = function () {
-            var head = { head: 'Authorization', value: 'Bearer ' + utils.token };
-            AJAX.AJAX('http://106.12.194.98/api/goods/category/list', 'GET', false, head, _this2.isLogin, _this2.error);
+            var _this = _this2;
+            var param = location.search.split('?')[1];
+            _this.getData(param);
         };
 
         _this2.isLogin = function (res) {
@@ -93,9 +96,18 @@ var Index = function (_Component) {
     }
 
     _createClass(Index, [{
+        key: 'getData',
+        value: function getData(param) {
+            if (!param) {
+                alert('缺少查询种类');
+                return;
+            }
+            var head = { head: 'Authorization', value: 'Bearer ' + utils.token };
+            AJAX.AJAX('http://106.12.194.98/api/goods/all?goods_category=' + param, 'GET', false, head, this.isLogin, this.error);
+        }
+    }, {
         key: 'searchBtn',
         value: function searchBtn(e) {
-            debugger;
             var _this = this;
             var target = e.target;
             var select = target.ownerDocument.querySelector('.searchSelect');
@@ -157,15 +169,60 @@ var Index = function (_Component) {
                         _react2.default.createElement(
                             'span',
                             null,
-                            '\u5546\u54C1\u5168\u90E8\u5E93\u5B58'
+                            '\u5546\u54C1\u5E93\u5B58\u8BE6\u60C5'
                         )
                     ),
                     _react2.default.createElement(
                         'div',
                         { className: 'dataContent' },
-                        _react2.default.createElement('div', { className: 'optContent' }),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'optContent' },
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'DateOpt opt', style: { display: _this.state.searchType == 'date' ? 'flex' : 'none' } },
+                                _react2.default.createElement('input', { className: 'startDate DateInput', type: 'date' }),
+                                '\xA0-\xA0',
+                                _react2.default.createElement('input', { className: 'endDate DateInput', type: 'date' }),
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'enterBtn', onClick: _this.dateChange.bind(_this) },
+                                    '\u786E\u5B9A'
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'searchOpt opt', style: { display: _this.state.searchType == 'commodity' ? 'flex' : 'none' } },
+                                _react2.default.createElement(
+                                    'select',
+                                    { className: 'searchSelect' },
+                                    _react2.default.createElement(
+                                        'option',
+                                        { id: 'goods_name' },
+                                        '\u5546\u54C1\u540D\u79F0'
+                                    ),
+                                    _react2.default.createElement(
+                                        'option',
+                                        { id: 'goods_number' },
+                                        '\u5546\u54C1\u7F16\u53F7'
+                                    )
+                                ),
+                                _react2.default.createElement('input', { className: 'searchValue' }),
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'enterBtn', onClick: _this.searchBtn.bind(_this) },
+                                    '\u641C\u7D22'
+                                ),
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'enterBtn clear', onClick: _this.clear.bind(_this) },
+                                    '\u91CD\u7F6E'
+                                )
+                            )
+                        ),
                         _react2.default.createElement(_commonContent2.default, {
-                            HEAD: [{ title: '商品种类', name: 'category' }, { title: '工费类型', name: 'goods_type' }, { title: '总计件数', name: 'stat_num_total' }, { title: '总计克重(g)', name: 'stat_weight_total' }],
+                            HEAD: [{ title: '供货商', name: 'supplier' }, { title: '商品名称', name: 'goods_name' }, { title: '商品编号', name: 'goods_number' }, { title: '工费类型', name: 'goods_type' }, { title: '工费', name: 'laborcost' }, { title: '克重(件/g)',
+                                name: 'weight' }, { title: '总计件数', name: 'num' }, { title: '总计克重(g)', name: 'weight_all' }],
                             CONTENT: _this.state.data,
                             deleteFlag: _this.state.deleteFlag,
                             AllData: _this.state.allData
@@ -200,8 +257,8 @@ exports.default = _default;
         return;
     }
 
-    reactHotLoader.register(Index, 'Index', '/Users/yuhao/Documents/\u5E93\u5B58\u7BA1\u7406\u7CFB\u7EDF/code/react-code/src/pages/Index/index.js');
-    reactHotLoader.register(_default, 'default', '/Users/yuhao/Documents/\u5E93\u5B58\u7BA1\u7406\u7CFB\u7EDF/code/react-code/src/pages/Index/index.js');
+    reactHotLoader.register(Index, 'Index', '/Users/yuhao/Documents/\u5E93\u5B58\u7BA1\u7406\u7CFB\u7EDF/code/react-code/src/pages/Index/goodsDetail.js');
+    reactHotLoader.register(_default, 'default', '/Users/yuhao/Documents/\u5E93\u5B58\u7BA1\u7406\u7CFB\u7EDF/code/react-code/src/pages/Index/goodsDetail.js');
     leaveModule(module);
 })();
 

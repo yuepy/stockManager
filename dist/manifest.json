@@ -3,6 +3,7 @@
   "outStock.js": "outStock.js",
   "stockHistory.js": "stockHistory.js",
   "index.js": "index.js",
+  "goodsDetail.js": "goodsDetail.js",
   "login.js": "login.js",
   "main.js": "bundle.js"
 }
