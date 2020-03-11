@@ -4,6 +4,7 @@ import CommonLeftMenu from 'component/commonLeftMenu.js';
 import CommonContent from 'component/commonContent';
 import NavHeader from 'component/header.js';
 import PageFooter from 'component/footer.js';
+import AlertBox from 'component/alertBox.js';
 import * as AJAX from 'component/AJAX.js';
 import * as utils from 'component/utils.js';
 import Entry from 'component/entry.js';
@@ -16,7 +17,8 @@ export default class Warehousing extends Component {
            isentry:false,
            allData:'',
            deleteFlag:false,
-           searchType:'commodity'
+           searchType:'commodity',
+           alertBox:'none'
         }
     }
     componentDidMount=()=>{
@@ -93,12 +95,8 @@ export default class Warehousing extends Component {
         AJAX.AJAX(url,'GET',false,head,this.isLogin,this.error);
     }
     dateChange(e){
-        var month = e.target.value;
-        if(month==''){
-            return;
-        }
-        var date_start = new Date(new Date(month).setDate(1)).toLocaleDateString();
-        var date_end =  new Date(new Date(new Date(month).getFullYear(),new Date(month).getMonth()+1,1)-1000*60*60*24).toLocaleDateString()
+        var date_start = e.target.ownerDocument.querySelector('.startDate').value;
+        var date_end =  e.target.ownerDocument.querySelector('.endDate').value;
         var url = this.state.allData.path+'?'+'date_start='+date_start+'&date_end='+date_end;
         var head = {head:'Authorization',value:'Bearer '+utils.token};
         AJAX.AJAX(url,'GET',false,head,this.isLogin,this.error);
@@ -150,13 +148,13 @@ export default class Warehousing extends Component {
                                 <div className="enterBtn clear" onClick={_this.clear.bind(_this)}>重置</div>
                             </div>
                         </div>
-                        <div className="optContent twoLine">
-                            
+                        <div className="optContent twoLine">                            
                             <div className="enterBtn2" onClick={this.showEntry}>商品录入</div>
                             <div className="enterBtn2" onClick={this.showSupplier}>供应商录入</div>
                             {_this.state.deleteFlag && <div className='enterBtn2 isDelete' onClick={_this.isConfirm.bind(_this)}>确认删除</div>}
                             <div className="enterBtn2" onClick={_this.selectDelete.bind(_this)}>{this.state.deleteFlag?'取消':'批量删除'}</div>
-                        </div>      
+                        </div>
+                        <AlertBox Show={_this.state.alertBox}/>      
                 		<CommonContent 
                             HEAD={[{title:'日期',name:'create_time'},{title:'供应商',name:'supplier'},{title:'商品种类',name:'category'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},
                             {title:'工费类型',name:'goods_type'},{title:'工费',name:'laborcost'},{title:'商品重量(件/g)',name:'weight'},{title:'总计件数',name:'num'},

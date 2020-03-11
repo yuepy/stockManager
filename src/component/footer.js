@@ -75,8 +75,11 @@ export default class pageFooter extends Component {
             currentPage:num
         })
         var url = this.props.CONTENT.last_page_url.match(/(\S*)page=/)[1];
+        if(url.lastIndexOf('&') !== url.length-1){
+            url +='?';
+        }
         var head = {head:'Authorization',value:'Bearer '+utils.token};
-        AJAX.AJAX(url+'?page='+num,'GET',false,head,this.props.isLogin,this.error);
+        AJAX.AJAX(url+'page='+num,'GET',false,head,this.props.isLogin,this.error);
     }
 
     goPrev(){
