@@ -157,21 +157,22 @@ export default class Warehousing extends Component {
                         <AlertBox Show={_this.state.alertBox}/>      
                 		<CommonContent 
                             HEAD={[{title:'日期',name:'create_time'},{title:'供应商',name:'supplier'},{title:'商品种类',name:'category'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},
-                            {title:'进货价格(1g)',name:'price'},{title:'工费类型',name:'goods_type'},{title:'工费',name:'oprice'},{title:'商品重量(件/g)',name:'weight'},{title:'总计件数',name:'num'},
-                            {title:'总计克重(g)',name:'weight_all'},{title:'总价($)',name:'price_all'},{title:'经办人',name:'operator'},{title:'操作',name:'删除'}]}
+                            {title:'工费类型',name:'goods_type'},{title:'工费',name:'laborcost'},{title:'商品重量(件/g)',name:'weight'},{title:'总计件数',name:'num'},
+                            {title:'总计克重(g)',name:'weight_all'},{title:'工费总价($)',name:'price_all'},{title:'经办人',name:'operator'},{title:'操作',name:'删除'}]}
                             CONTENT={_this.state.data}
                             deleteFlag={_this.state.deleteFlag}
                             onRefFn = {_this.onRefFn}
                             getData={_this.getData}
                             selectDelete={_this.selectDelete}
                             AllData = {_this.state.allData}
+                            isOutStock={false}
                         />
                         {_this.state.isentry && <Entry 
                             close={()=>{_this.setState({isentry:false}); _this.getData()}}
                             isOutStock={false}
-                            HEAD={[{title:'状态',name:'未录入'},{title:'供应商',name:'supplier'},{title:'种类',name:'goods_category'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},
-                            {title:'进货价格(1g)',name:'price'},{title:'工费类型',name:'goods_type'},{title:'工费',name:'goods_laborcost'},{title:'商品重量(件/g)',name:'weight'},{title:'总计件数',name:'num'},
-                            {title:'总计克重(g)',name:'weight_all'},{title:'总价($)',name:'price_all'},
+                            HEAD={[{title:'状态',name:'未录入'},{title:'商品编号',name:'goods_number'},{title:'供应商',name:'supplier'},{title:'种类',name:'goods_category'},{title:'商品名称',name:'goods_name'},
+                            {title:'工费类型',name:'goods_type'},{title:'工费',name:'goods_laborcost'},{title:'商品重量(件/g)',name:'weight'},{title:'总计件数',name:'num'},
+                            {title:'总计克重(g)',name:'weight_all'},{title:'工费总价($)',name:'price_all'},
                             {title:'经办人',name:'operator'}]}
                         />}
                 		<PageFooter CONTENT={_this.state.allData} isLogin={this.isLogin}/>

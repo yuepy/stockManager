@@ -19,15 +19,17 @@ export default class Index extends Component {
     }
     componentDidMount=()=>{
         var _this = this;
-        _this.getData();
+        var param = location.search.split('?')[1];
+        _this.getData(param);
         
     }
-    componentWillMount(props){
-        debugger;
-    }
-    getData(){
+    getData(param){
+        if(!param){
+            alert('缺少查询种类');
+            return;
+        }
         var head = {head:'Authorization',value:'Bearer '+utils.token};
-        AJAX.AJAX('http://106.12.194.98/api/goods/all?goods_category=','GET',false,head,this.isLogin,this.error);
+        AJAX.AJAX('http://106.12.194.98/api/goods/all?goods_category='+param,'GET',false,head,this.isLogin,this.error);
     }
     isLogin=(res)=>{
         var _this = this;
@@ -41,7 +43,6 @@ export default class Index extends Component {
         })
     }
     searchBtn(e){
-        debugger
         var _this = this;
         var target = e.target;
         var select = target.ownerDocument.querySelector('.searchSelect');
@@ -87,7 +88,7 @@ export default class Index extends Component {
                 <CommonLeftMenu/>
                 <div className='rightContent'>
                 <header className="rightHeader">
-                		<span>全部商品库存</span>
+                		<span>商品库存详情</span>
                 	</header>
                 	<div className="dataContent">
                         <div className="optContent">
@@ -108,7 +109,7 @@ export default class Index extends Component {
                             </div>
                         </div>
                         <CommonContent 
-                            HEAD={[{title:'供货商',name:'supplier'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},{title:'工费类型',name:'goods_type'},{title:'克重(件/g)',
+                            HEAD={[{title:'供货商',name:'supplier'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},{title:'工费类型',name:'goods_type'},{title:'工费',name:'laborcost'},{title:'克重(件/g)',
                                     name:'weight'},{title:'总计件数',name:'num'},{title:'总计克重(g)',name:'weight_all'}]}
                             CONTENT={_this.state.data}
                             deleteFlag={_this.state.deleteFlag}

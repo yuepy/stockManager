@@ -7,7 +7,8 @@ export default class Entry extends Component{
         super();
         this.state={
             currentDate:'',
-            rownum:''
+            rownum:'',
+            trID:''
         }
     }
     save(elem){
@@ -20,7 +21,7 @@ export default class Entry extends Component{
             fromData.append('goods_category' , tr.querySelector('#goods_category').value);
             fromData.append('goods_name' , tr.querySelector('#goods_name').value);
             fromData.append('goods_number' , tr.querySelector('#goods_number').value);
-            fromData.append('price' , tr.querySelector('#price').value);
+            fromData.append('price' , '00');
             fromData.append('goods_type' , tr.querySelector('#goods_type').value);
             fromData.append('goods_laborcost' , tr.querySelector('#goods_laborcost').value);
             fromData.append('weight' , tr.querySelector('#weight').value);
@@ -40,7 +41,12 @@ export default class Entry extends Component{
                 fromData.append('num' ,tr.querySelector('#num').value);
                 fromData.append('price_all' , tr.querySelector('#price_all').value);
                 fromData.append('operator' , tr.querySelector('#operator').value);
-                fromData.append('goods_images' , tr.querySelector('#goods_images').value);
+                fromData.append('goods_type' , tr.querySelector('#goods_type').value);
+                fromData.append('weight' , tr.querySelector('#weight').value);
+                //fromData.append('category' , tr.querySelector('#category').value);
+                fromData.append('goods_laborcost' , tr.querySelector('#goods_laborcost').value);
+                fromData.append('weight_all' , tr.querySelector('#weight_all').value);
+                //fromData.append('goods_images' , tr.querySelector('#goods_images').value);
             //var params = 'customer='+customer+'&num='+num+'&goods_number='+goods_number+'&current_price='+current_price+'&price_all='+price_all+'&operator='+operator+'&goods_images='+goods_images;
             var header = {head:'Authorization',value:'Bearer '+utils.token};
             AJAX.AJAX('http://106.12.194.98/api/goods/reduce','POST',fromData,header,this.success,this.error);
@@ -137,16 +143,14 @@ export default class Entry extends Component{
             rownum:e.target.parentNode.parentNode.rowIndex
         })
         _this.isShowSave(e.target); // 判断当前数据是否填满 满足提交条件
-        if(!_this.props.isOutStock ){
             switch(e.target.id){
                 case 'price':_this.autoMerge(e.target,'price');break;
                 case 'weight':_this.autoMerge(e.target,'weight');break;
                 case 'weight_all':_this.autoMerge(e.target,'weight_all');break;
                 case 'num':_this.autoMerge(e.target,'num');break;
                 case 'goods_laborcost':_this.autoMerge(e.target,'goods_laborcost');break;
+                case 'current_price':_this.autoMerge(e.target,'price');break;
             }
-        }
-        
     }
     autoMerge(elem,name){
         //自动计算表格结果
@@ -155,27 +159,28 @@ export default class Entry extends Component{
         }
         var _this = this;
         var tr = elem.parentNode.parentNode;
-
-        var goods_laborcost = parseInt(tr.querySelector('#goods_laborcost').value);
-        var num = parseInt(tr.querySelector('#num').value);
-        var weight = parseInt(tr.querySelector('#weight').value);
-        var weight_all = parseInt(tr.querySelector('#weight_all').value);
-        var price = parseInt(tr.querySelector('#price').value);
-        var price_all = parseInt(tr.querySelector('#price_all').value);
+        var goods_laborcost = window.isNaN(parseFloat(tr.querySelector('#goods_laborcost').value))?'':parseFloat(tr.querySelector('#goods_laborcost').value);
+        var num = window.isNaN(parseFloat(tr.querySelector('#num').value))?'':parseFloat(tr.querySelector('#num').value);
+        var weight = window.isNaN(parseFloat(tr.querySelector('#weight').value))?'':parseFloat(tr.querySelector('#weight').value);
+        var weight_all = window.isNaN(parseFloat(tr.querySelector('#weight_all').value))?'':parseFloat(tr.querySelector('#weight_all').value);
+        var price = !tr.querySelector('#price') ?0:!this.props.isOutStock?parseFloat(tr.querySelector('#price').value):parseFloat(tr.querySelector('#current_price').value);
+        price = window.isNaN(price)?'' : price;
+        var price_all = window.isNaN(parseFloat(tr.querySelector('#price_all').value))?'':parseFloat(tr.querySelector('#price_all').value);
+        debugger;
         if(tr.querySelector('#goods_type').value == '1'){
-            if(name == 'price'){
-                if(tr.querySelector('#price').value == '' ){
+            if(name == 'price' ){
+                if(price == '' ){
                     tr.querySelector('#price_all').value = '';
                     return ;
                 }
-                if(tr.querySelector('#num').value == '' || tr.querySelector('#goods_laborcost').value == ''){
+                if(num == '' || goods_laborcost == ''){
                     return ;
                 }
                 tr.querySelector('#price_all').value = weight_all*price + num * goods_laborcost;
                 _this.isShowSave(tr.querySelector('#price_all'));
             }
             if(name == 'num' || name == 'weight'){
-                if(tr.querySelector('#num').value == '' || tr.querySelector('#weight').value == ''){
+                if(num == '' || weight == ''){
                     tr.querySelector('#weight_all').value = '';
                     tr.querySelector('#price_all').value = '';
                     return;
@@ -183,25 +188,26 @@ export default class Entry extends Component{
                 var total = weight*num;
                 tr.querySelector('#weight_all').value = total;
                 _this.isShowSave(tr.querySelector('#weight_all'))
-                if(tr.querySelector('#price').value == '' || tr.querySelector('#goods_laborcost').value == ''){
+                debugger;
+                if(price === '' || goods_laborcost == ''){
                     return ;
                 }
                 tr.querySelector('#price_all').value = price * total + num * goods_laborcost;
-                _this.isShowSave(tr.querySelector('#weight_all'));
+                _this.isShowSave(tr.querySelector('#price_all'));
             }
             if(name == 'goods_laborcost'){
                 // 工费 * 数量 + (数量 * 商品重量 = 总克重) * 单价 = 总价
-                if( tr.querySelector('#goods_laborcost').value == '' || tr.querySelector('#weight_all').value == ''){
+                if( goods_laborcost == '' || weight_all == ''){
                     tr.querySelector('#price_all').value = '';
                     return;
                 }
                 tr.querySelector('#price_all').value = (goods_laborcost*num) + (num * weight * price);
-                _this.isShowSave(tr.querySelector('#weight_all'))
+                _this.isShowSave(tr.querySelector('#price_all'))
             }
         }
         if(tr.querySelector('#goods_type').value == '2'){
             if(name == 'price' || name == 'weight_all' || name == 'goods_laborcost'){
-                if(tr.querySelector('#price').value == '' || tr.querySelector('#weight_all').value == '' || tr.querySelector('#goods_laborcost').value == ''){
+                if(price === ''  || weight_all == '' || goods_laborcost == ''){
                     tr.querySelector('#price_all').value = '';
                     return ;
                 }
@@ -226,7 +232,7 @@ export default class Entry extends Component{
             if(tds[i].querySelector('input').value == '' && tds[i].querySelector('input').id != 'goods_images' &&  tds[i].querySelector('input').className != 'upload_file') {
                 if(tds[i].querySelector('input').value == '' && tds[i].querySelector('input').id == 'weight' && type == '2'){
                     isDone = true;
-                    return ;
+                    continue;
                 }
                 isDone = false;
                 tds[0].style.backgroundColor = '#fff';
@@ -235,20 +241,19 @@ export default class Entry extends Component{
                 isDone = true;
             }
         }
-        debugger;
         if(isDone){
             tds[0].parentNode.classList.add('save');
             setTimeout(() => {
-                if(document.querySelector('.save')&& document.querySelector('.save').querySelector('#goods_images')&&document.querySelector('.save').querySelector('#goods_images').value == ''){
-                    var isImages = confirm('第'+document.querySelector('.save').rowIndex+'数据未上传商品图片,是否继续提交');
-                    if(!isImages){
-                        return;
-                    }
-                }
+                // if(document.querySelector('.save')&& document.querySelector('.save').querySelector('#goods_images')&&document.querySelector('.save').querySelector('#goods_images').value == ''){
+                //     var isImages = confirm('第'+document.querySelector('.save').rowIndex+'数据未上传商品图片,是否继续提交');
+                //     if(!isImages){
+                //         return;
+                //     }
+                // }
                 if(_this.state.rownum == document.querySelector('.save').rowIndex){
                     var timer1 = setTimeout(function(){
                         _this.save(tds[0]);
-                    },3000)
+                    },1000)
                 }else{
                     _this.save(tds[0]);
                 }
@@ -284,12 +289,19 @@ export default class Entry extends Component{
     errorUpload(){
         alert('上传失败!');
     }
-    selectType(e){
+    selectType(dom){
         //选择商品工费类型
         var _this = this;
-        e.target.parentNode.querySelector('input').value = e.target.value;
-        var tr = e.target.parentNode.parentNode;
-        if(e.target.value == '1'){
+        var dataDom = '';
+        if(!dom){
+            event.target.parentNode.querySelector('input').value = event.target.value;
+            var tr = event.target.parentNode.parentNode;
+            dataDom = event.taget;
+        }else{
+            dataDom = dom;
+            var tr = dom.parentNode.parentNode;
+        }
+        if(dataDom.value == '1'){
             tr.querySelector('#weight').disabled = false;
             tr.querySelector('#weight_all').disabled = true;
             if(tr.querySelector('#weight').classList.contains('disabled')){
@@ -309,8 +321,53 @@ export default class Entry extends Component{
                 tr.querySelector('#weight').classList.add('disabled');
             }
         }
-        _this.isShowSave(e.target.parentNode.querySelector('input'));
+        _this.isShowSave(dataDom.parentNode.querySelector('input'));
 
+    }
+    entryBlur(e){
+        //输入商品编号带出数据
+        var _this = this;
+        if(e.target.id != 'goods_number'){
+            return ;
+        }
+        var tr = event.target.parentNode.parentNode;
+        var goods_number  = tr.querySelector('#goods_number').value;
+        _this.setState({
+            trID:(parseInt(tr.dataset.index)-1)
+        })
+        var header = {head:'Authorization',value:'Bearer '+utils.token};
+        AJAX.AJAX('http://106.12.194.98/api/goods/all?goods_number='+goods_number,'GET',false,header,_this.getEntryData,_this.error);
+    }
+    getEntryData=(res)=>{
+        //获取对应编号库存并填充
+        var _this = this;
+        res = JSON.parse(res);
+        var data = res.data.data[0];
+        if(!data){
+            return;
+        }
+        var tr = document.querySelector('.entryContent').querySelector('tbody').querySelectorAll('tr')[this.state.trID];
+        if(!this.props.isOutStock){
+            tr.querySelector('#goods_type').value = data.goods_type;
+            tr.querySelector('#goods_type').nextElementSibling.value = data.goods_type;
+            if(data.goods_type == '1'){
+                tr.querySelector('#weight').value = data.weight;
+            }
+            tr.querySelector('#goods_category').value = data.category;
+            tr.querySelector('#goods_name').value = data.goods_name;
+            tr.querySelector('#goods_laborcost').value = data.laborcost;
+            tr.querySelector('#supplier').value = data.supplier;
+        }else{
+            tr.querySelector('#num').placeholder = data.num;
+            tr.querySelector('#goods_type').value = data.goods_type;
+            tr.querySelector('#goods_type').nextElementSibling.value = data.goods_type;
+            if(data.goods_type == '1'){
+                tr.querySelector('#weight').value = data.weight;
+            }
+            tr.querySelector('#weight_all').placeholder = data.weight_all;
+            tr.querySelector('#goods_laborcost').placeholder = data.laborcost;
+        }
+        _this.selectType(tr.querySelector('#goods_type'));
     }
     render(){
         var _this = this;
@@ -329,10 +386,10 @@ export default class Entry extends Component{
                         </thead>
                         <tbody>
                             {arr.map((k,i)=>{
-                                return <tr data-index={k} onChange={_this.entryChange.bind(_this)}>{_this.props.HEAD.length>0 && _this.props.HEAD.map((item,index)=>{
+                                return <tr data-index={k} onChange={_this.entryChange.bind(_this)} onBlur={_this.entryBlur.bind(_this)}>{_this.props.HEAD.length>0 && _this.props.HEAD.map((item,index)=>{
                                 return item.title == '状态' ?<td style={{width:'60px',textAlign:'centent'}} id={item.name}>{item.name}</td>:
                                 (item.title == '日期' ? <td><input type='date' name={item.name} defaultValue={_this.state && _this.state.currentDate} id={item.name} /></td>:
-                                 (item.title == '总计克重(g)' || (item.title == '总价($)' && !_this.props.isOutStock )?<td ><input type='text'  name={item.name}  id={item.name} className='disabled'/></td>:
+                                 (item.title == '总计克重(g)' || (item.title == '合计价钱($)')|| (item.title == '工费总价($)')|| (item.title == '合计克重(g)')?<td ><input type='text'  name={item.name}  id={item.name} className='disabled'/></td>:
                                  (item.title == '商品图片'?<td><input type='file' onChange={_this.upload.bind(_this)}  style={{display:"none"}} className='upload_file'/>
                                  <input type='text' name={item.name}  id={item.name} style={{display:"none"}}/><span onClick={_this.uploadClick.bind(_this)} id='file_name'>上传图片</span></td>:
                                  (item.title == '工费类型' ? <td><input type='text' style={{display:'none'}} id={item.name} name={item.name} defaultValue='1'/>

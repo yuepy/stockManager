@@ -108,9 +108,9 @@ export default class StockHistory extends Component {
                         </div>
                         
                         <CommonContent 
-                            HEAD={[{title:'日期',name:'create_time'},{title:'客户名称',name:'customer'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},{title:'单价(1g)',
-                                    name:'weight'},{title:'当前银价(1g)',name:'current_price'},{title:'商品重量',name:'weight'},{title:'总计件数',name:'num'},{title:'总计克重(g)',name:'weight_all'},
-                                    {title:'总价($)',name:'price_all'},{title:'经办人',name:'operator'}]}
+                            HEAD={[{title:'日期',name:'create_time'},{title:'供应商',name:'supplier'},{title:'种类',name:'category'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},
+                            {title:'工费类型',name:'goods_type'},{title:'工费',name:'laborcost'},{title:'单价(1g)',name:'price'},{title:'当前银价(1g)',name:'current_price'},{title:'商品重量',name:'weight'},{title:'总计件数',name:'num'},
+                            {title:'总计克重(g)',name:'weight_all'},{title:'总价($)',name:'price_all'},{title:'经办人',name:'operator'}]}
                             CONTENT={_this.state.data}
                             AllData = {_this.state.allData}
                         />

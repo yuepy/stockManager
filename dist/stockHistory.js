@@ -1,6 +1,6 @@
 webpackJsonp([2],{
 
-/***/ 56:
+/***/ 57:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16,31 +16,31 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _header = __webpack_require__(66);
+var _header = __webpack_require__(68);
 
 var _header2 = _interopRequireDefault(_header);
 
-var _commonLeftMenu = __webpack_require__(64);
+var _commonLeftMenu = __webpack_require__(66);
 
 var _commonLeftMenu2 = _interopRequireDefault(_commonLeftMenu);
 
-var _AJAX = __webpack_require__(59);
+var _AJAX = __webpack_require__(61);
 
 var AJAX = _interopRequireWildcard(_AJAX);
 
-var _utils = __webpack_require__(60);
+var _utils = __webpack_require__(62);
 
 var utils = _interopRequireWildcard(_utils);
 
-var _footer = __webpack_require__(68);
+var _footer = __webpack_require__(70);
 
 var _footer2 = _interopRequireDefault(_footer);
 
-var _commonContent = __webpack_require__(67);
+var _commonContent = __webpack_require__(69);
 
 var _commonContent2 = _interopRequireDefault(_commonContent);
 
-__webpack_require__(62);
+__webpack_require__(64);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -206,9 +206,9 @@ var StockHistory = function (_Component) {
                             _react2.default.createElement('input', { className: 'dateValue lastBtn', onChange: _this.dateChange.bind(_this), type: 'month' })
                         ),
                         _react2.default.createElement(_commonContent2.default, {
-                            HEAD: [{ title: '日期', name: 'create_time' }, { title: '客户名称', name: 'customer' }, { title: '商品名称', name: 'goods_name' }, { title: '商品编号', name: 'goods_number' }, { title: '单价(1g)',
-                                name: 'weight' }, { title: '当前银价(1g)', name: 'current_price' }, { title: '商品重量', name: 'weight' }, { title: '总计件数', name: 'num' }, { title: '总计克重(g)', name: 'weight_all' }, { title: '总价($)', name: 'price_all' }, { title: '经办人', name: 'operator' }],
-                            CONTENT: _this.state.data
+                            HEAD: [{ title: '日期', name: 'create_time' }, { title: '供应商', name: 'supplier' }, { title: '种类', name: 'category' }, { title: '商品名称', name: 'goods_name' }, { title: '商品编号', name: 'goods_number' }, { title: '工费类型', name: 'goods_type' }, { title: '工费', name: 'laborcost' }, { title: '单价(1g)', name: 'price' }, { title: '当前银价(1g)', name: 'current_price' }, { title: '商品重量', name: 'weight' }, { title: '总计件数', name: 'num' }, { title: '总计克重(g)', name: 'weight_all' }, { title: '总价($)', name: 'price_all' }, { title: '经办人', name: 'operator' }],
+                            CONTENT: _this.state.data,
+                            AllData: _this.state.allData
                         }),
                         _react2.default.createElement(_footer2.default, { CONTENT: _this.state.allData, isLogin: this.isLogin })
                     )
@@ -240,8 +240,8 @@ exports.default = _default;
         return;
     }
 
-    reactHotLoader.register(StockHistory, 'StockHistory', '/Users/yuhao/Documents/project_code/code/react-code/src/pages/stockHistory/stockHistory.js');
-    reactHotLoader.register(_default, 'default', '/Users/yuhao/Documents/project_code/code/react-code/src/pages/stockHistory/stockHistory.js');
+    reactHotLoader.register(StockHistory, 'StockHistory', '/Users/yuhao/Documents/\u5E93\u5B58\u7BA1\u7406\u7CFB\u7EDF/code/react-code/src/pages/stockHistory/stockHistory.js');
+    reactHotLoader.register(_default, 'default', '/Users/yuhao/Documents/\u5E93\u5B58\u7BA1\u7406\u7CFB\u7EDF/code/react-code/src/pages/stockHistory/stockHistory.js');
     leaveModule(module);
 })();
 
@@ -250,7 +250,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 57:
+/***/ 59:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -526,7 +526,7 @@ module.exports = function (list, options) {
 
 /***/ }),
 
-/***/ 58:
+/***/ 60:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -627,7 +627,7 @@ function toComment(sourceMap) {
 
 /***/ }),
 
-/***/ 59:
+/***/ 61:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -675,7 +675,7 @@ var AJAX = exports.AJAX = function AJAX(url, method, params, isHead, callback, e
         return;
     }
 
-    reactHotLoader.register(AJAX, 'AJAX', '/Users/yuhao/Documents/project_code/code/react-code/src/component/AJAX.js');
+    reactHotLoader.register(AJAX, 'AJAX', '/Users/yuhao/Documents/\u5E93\u5B58\u7BA1\u7406\u7CFB\u7EDF/code/react-code/src/component/AJAX.js');
     leaveModule(module);
 })();
 
@@ -684,7 +684,7 @@ var AJAX = exports.AJAX = function AJAX(url, method, params, isHead, callback, e
 
 /***/ }),
 
-/***/ 60:
+/***/ 62:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -716,10 +716,10 @@ var repassword = exports.repassword = host + 'api/repassword'; // 修改密码
     return;
   }
 
-  reactHotLoader.register(host, 'host', '/Users/yuhao/Documents/project_code/code/react-code/src/component/utils.js');
-  reactHotLoader.register(token, 'token', '/Users/yuhao/Documents/project_code/code/react-code/src/component/utils.js');
-  reactHotLoader.register(loginIn, 'loginIn', '/Users/yuhao/Documents/project_code/code/react-code/src/component/utils.js');
-  reactHotLoader.register(repassword, 'repassword', '/Users/yuhao/Documents/project_code/code/react-code/src/component/utils.js');
+  reactHotLoader.register(host, 'host', '/Users/yuhao/Documents/\u5E93\u5B58\u7BA1\u7406\u7CFB\u7EDF/code/react-code/src/component/utils.js');
+  reactHotLoader.register(token, 'token', '/Users/yuhao/Documents/\u5E93\u5B58\u7BA1\u7406\u7CFB\u7EDF/code/react-code/src/component/utils.js');
+  reactHotLoader.register(loginIn, 'loginIn', '/Users/yuhao/Documents/\u5E93\u5B58\u7BA1\u7406\u7CFB\u7EDF/code/react-code/src/component/utils.js');
+  reactHotLoader.register(repassword, 'repassword', '/Users/yuhao/Documents/\u5E93\u5B58\u7BA1\u7406\u7CFB\u7EDF/code/react-code/src/component/utils.js');
   leaveModule(module);
 })();
 
@@ -728,10 +728,37 @@ var repassword = exports.repassword = host + 'api/repassword'; // 修改密码
 
 /***/ }),
 
-/***/ 61:
+/***/ 63:
 /***/ (function(module, exports, __webpack_require__) {
 
-var api = __webpack_require__(57);
+var api = __webpack_require__(59);
+            var content = __webpack_require__(67);
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+var exported = content.locals ? content.locals : {};
+
+
+
+module.exports = exported;
+
+/***/ }),
+
+/***/ 64:
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(59);
             var content = __webpack_require__(65);
 
             content = content.__esModule ? content.default : content;
@@ -755,48 +782,21 @@ module.exports = exported;
 
 /***/ }),
 
-/***/ 62:
-/***/ (function(module, exports, __webpack_require__) {
-
-var api = __webpack_require__(57);
-            var content = __webpack_require__(63);
-
-            content = content.__esModule ? content.default : content;
-
-            if (typeof content === 'string') {
-              content = [[module.i, content, '']];
-            }
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = api(content, options);
-
-var exported = content.locals ? content.locals : {};
-
-
-
-module.exports = exported;
-
-/***/ }),
-
-/***/ 63:
+/***/ 65:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(58);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(60);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "body,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\np,\nblockquote,\ndl,\ndt,\ndd,\nul,\nol,\nli,\npre,\nform,\nfieldset,\nlegend,\nbutton,\ninput,\ntextarea,\nth,\ntd {\n  margin: 0;\n  padding: 0;\n}\nbody,\nbutton,\ninput,\nselect,\ntextarea {\n  font: 12px/1.5tahoma, arial, \\5b8b\\4f53;\n}\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: 100%;\n}\naddress,\ncite,\ndfn,\nem,\nvar {\n  font-style: normal;\n}\ncode,\nkbd,\npre,\nsamp {\n  font-family: couriernew, courier, monospace;\n}\nsmall {\n  font-size: 12px;\n}\nul,\nol {\n  list-style: none;\n}\na {\n  text-decoration: none;\n}\na:hover {\n  text-decoration: underline;\n}\nsup {\n  vertical-align: text-top;\n}\nsub {\n  vertical-align: text-bottom;\n}\nlegend {\n  color: #000;\n}\nfieldset,\nimg {\n  border: 0;\n}\nbutton,\ninput,\nselect,\ntextarea {\n  font-size: 100%;\n}\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n.allStock {\n  display: flex;\n}\n.rightContent {\n  display: flex;\n  flex-direction: column;\n}\n.rightContent {\n  position: absolute;\n  top: 50px;\n  bottom: 0;\n  left: 200px;\n  right: 0;\n  background: #f0f0f0;\n  display: flex;\n  flex-direction: column;\n}\n.rightContent .rightHeader {\n  width: 100%;\n  height: 60px;\n  background: #FFFFFF;\n  display: flex;\n  align-items: center;\n}\n.rightContent .rightHeader span {\n  display: block;\n  width: 100px;\n  height: 20px;\n  line-height: 20px;\n  border-left: 4px solid #0077fb;\n  margin-left: 15px;\n  padding-left: 5px;\n}\n.rightContent .dataContent {\n  width: 98%;\n  margin: 0 auto;\n  margin-top: 20px;\n  background: #FFFFFF;\n  overflow-y: auto;\n}\n.rightContent .dataContent .optContent {\n  width: 95%;\n  margin: 0 auto;\n  height: 50px;\n  margin-top: 20px;\n  display: flex;\n  align-items: center;\n}\n.rightContent .dataContent .optContent .searchSelect {\n  width: 120px;\n  height: 30px;\n  font-size: 12px;\n  border: 2px solid #F3F3F3;\n  border-radius: 5px;\n  color: #000000;\n  text-indent: 3px;\n  cursor: pointer;\n}\n.rightContent .dataContent .optContent .searchValue {\n  width: 150px;\n  height: 26px;\n  font-size: 12px;\n  border: 2px solid #F3F3F3;\n  border-radius: 5px;\n  color: #000000;\n  text-indent: 3px;\n  margin-left: 10px;\n}\n.rightContent .dataContent .optContent .enterBtn {\n  width: 60px;\n  height: 26px;\n  background: #2B79D9;\n  color: #FFFFFF;\n  border-radius: 3px;\n  text-align: center;\n  line-height: 28px;\n  font-size: 12px;\n  margin-left: 15px;\n  border: 1px #2B79D9 solid;\n  cursor: pointer;\n}\n.rightContent .dataContent .optContent .clear {\n  background: #FEFEFE !important;\n  color: #000000 !important;\n  border: 1px #807575 solid;\n}\n.rightContent .dataContent .optContent .dateValue {\n  width: 120px;\n  height: 25px;\n  font-size: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 5px;\n  color: #000000;\n  text-indent: 3px;\n}\n.rightContent .dataContent .optContent .lastBtn {\n  margin-left: auto;\n}\n.rightContent .dataContent .optContent .isDelete {\n  background-color: red!important;\n  border: 1px solid red!important;\n}\n.rightContent .dataContent .twoLine {\n  margin-top: 10px;\n}\n.rightContent .dataContent .twoLine .enterBtn2 {\n  width: 60px;\n  height: 26px;\n  background: #2B79D9;\n  color: #FFFFFF;\n  border-radius: 3px;\n  text-align: center;\n  line-height: 28px;\n  font-size: 12px;\n  margin-right: 15px;\n  border: 1px #2B79D9 solid;\n  cursor: pointer;\n}\n.rightContent .dataContent table {\n  width: 95%;\n  margin: 0 auto;\n  margin-top: 10px;\n  margin-bottom: 50px;\n  font-size: 12px;\n}\n.rightContent .dataContent table tr th {\n  background: #FAFAFA;\n  border: 0.5px solid #F0F0F0;\n  height: 40px;\n  line-height: 40px;\n  text-align: left;\n  text-indent: 25px;\n}\n.rightContent .dataContent table tr td {\n  border: 0.5px solid #F0F0F0;\n  height: 35px;\n  line-height: 35px;\n  text-indent: 25px;\n}\n.rightContent .dataContent table tr .deleteFlag {\n  color: #e4393c;\n}\n.rightContent .dataContent table tr .showInput {\n  display: block;\n}\n.rightContent .dataContent table tr .hideInput {\n  display: none;\n}\n", ""]);
+exports.push([module.i, "body,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\np,\nblockquote,\ndl,\ndt,\ndd,\nul,\nol,\nli,\npre,\nform,\nfieldset,\nlegend,\nbutton,\ninput,\ntextarea,\nth,\ntd {\n  margin: 0;\n  padding: 0;\n}\nbody,\nbutton,\ninput,\nselect,\ntextarea {\n  font: 12px/1.5tahoma, arial, \\5b8b\\4f53;\n}\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: 100%;\n}\naddress,\ncite,\ndfn,\nem,\nvar {\n  font-style: normal;\n}\ncode,\nkbd,\npre,\nsamp {\n  font-family: couriernew, courier, monospace;\n}\nsmall {\n  font-size: 12px;\n}\nul,\nol {\n  list-style: none;\n}\na {\n  text-decoration: none;\n}\na:hover {\n  text-decoration: underline;\n}\nsup {\n  vertical-align: text-top;\n}\nsub {\n  vertical-align: text-bottom;\n}\nlegend {\n  color: #000;\n}\nfieldset,\nimg {\n  border: 0;\n}\nbutton,\ninput,\nselect,\ntextarea {\n  font-size: 100%;\n}\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n.allStock {\n  display: flex;\n}\n.rightContent {\n  display: flex;\n  flex-direction: column;\n}\n.rightContent {\n  position: absolute;\n  top: 50px;\n  bottom: 0;\n  left: 200px;\n  right: 0;\n  background: #f0f0f0;\n  display: flex;\n  flex-direction: column;\n}\n.rightContent .rightHeader {\n  width: 100%;\n  height: 60px;\n  background: #FFFFFF;\n  display: flex;\n  align-items: center;\n}\n.rightContent .rightHeader span {\n  display: block;\n  width: 100px;\n  height: 20px;\n  line-height: 20px;\n  border-left: 4px solid #0077fb;\n  margin-left: 15px;\n  padding-left: 5px;\n}\n.rightContent .dataContent {\n  width: 98%;\n  margin: 0 auto;\n  margin-top: 20px;\n  background: #FFFFFF;\n  overflow-y: auto;\n}\n.rightContent .dataContent .optContent {\n  width: 95%;\n  margin: 0 auto;\n  height: 50px;\n  margin-top: 20px;\n  display: flex;\n  align-items: center;\n}\n.rightContent .dataContent .optContent .search {\n  width: 120px;\n  height: 30px;\n  font-size: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 5px;\n  color: #000000;\n  text-indent: 3px;\n  cursor: pointer;\n  outline: none;\n  margin-right: 15px;\n}\n.rightContent .dataContent .optContent .opt {\n  width: 95%;\n  display: flex;\n  align-items: center;\n}\n.rightContent .dataContent .optContent .opt .searchSelect {\n  width: 120px;\n  height: 30px;\n  font-size: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 5px;\n  color: #000000;\n  text-indent: 3px;\n  cursor: pointer;\n  outline: none;\n}\n.rightContent .dataContent .optContent .opt .searchValue {\n  width: 150px;\n  height: 26px;\n  font-size: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 5px;\n  color: #000000;\n  text-indent: 3px;\n  margin-left: 10px;\n  outline: none;\n}\n.rightContent .dataContent .optContent .opt .enterBtn {\n  width: 60px;\n  height: 24px;\n  background: #2B79D9;\n  color: #FFFFFF;\n  border-radius: 3px;\n  text-align: center;\n  line-height: 24px;\n  font-size: 12px;\n  margin-left: 15px;\n  border: 1px #2B79D9 solid;\n  cursor: pointer;\n}\n.rightContent .dataContent .optContent .opt .clear {\n  background: #FEFEFE !important;\n  color: #000000 !important;\n  border: 1px #807575 solid;\n}\n.rightContent .dataContent .optContent .opt .DateInput {\n  width: 120px;\n  height: 25px;\n  font-size: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 5px;\n  color: #000000;\n  text-indent: 3px;\n  outline: none;\n}\n.rightContent .dataContent .optContent .opt .lastBtn {\n  margin-left: auto;\n}\n.rightContent .dataContent .optContent .opt .isDelete {\n  background-color: red!important;\n  border: 1px solid red!important;\n}\n.rightContent .dataContent .twoLine {\n  margin-top: 5px;\n}\n.rightContent .dataContent .twoLine .enterBtn2 {\n  width: 60px;\n  height: 24px;\n  background: #2B79D9;\n  color: #FFFFFF;\n  border-radius: 3px;\n  text-align: center;\n  line-height: 24px;\n  font-size: 12px;\n  margin-right: 15px;\n  border: 1px #2B79D9 solid;\n  cursor: pointer;\n}\n.rightContent .dataContent table {\n  width: 95%;\n  margin: 0 auto;\n  margin-top: 10px;\n  margin-bottom: 50px;\n  font-size: 12px;\n  border-left: 1px solid #e6e6e6;\n  border-top: 1px solid #e6e6e6;\n}\n.rightContent .dataContent table tr th {\n  background: #FAFAFA;\n  border: 1px solid #ececec;\n  height: 40px;\n  line-height: 40px;\n  text-align: left;\n  text-indent: 15px;\n  border-top: none;\n  border-left: none;\n}\n.rightContent .dataContent table tr td {\n  border: 1px solid #e6e6e6;\n  height: 35px;\n  line-height: 35px;\n  text-indent: 15px;\n  border-top: none;\n  border-left: none;\n}\n.rightContent .dataContent table tr .deleteFlag {\n  color: #e4393c;\n}\n.rightContent .dataContent table tr .showInput {\n  display: block;\n}\n.rightContent .dataContent table tr .hideInput {\n  display: none;\n}\n.rightContent .dataContent table .total td {\n  border: 1px solid #e6e6e6;\n  border-top: none;\n  border-left: none;\n  background: #F2F2F2;\n  height: 35px;\n  line-height: 35px;\n  text-indent: 15px;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
 
 /***/ }),
 
-/***/ 64:
+/***/ 66:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -814,7 +814,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(18);
 
-__webpack_require__(61);
+__webpack_require__(63);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -869,7 +869,7 @@ var CommonLeftMenu = function (_Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             if (document.querySelector('.Allmenu')) {
-                var num = location.pathname == '/index' ? 0 : location.pathname == '/warehousing' ? 1 : location.pathname == '/outStock' ? 2 : location.pathname == '/stockHistory' ? 3 : '';
+                var num = location.pathname == '/index' || location.pathname == '/goodsDetail' ? 0 : location.pathname == '/warehousing' ? 1 : location.pathname == '/outStock' ? 2 : location.pathname == '/stockHistory' ? 3 : '';
                 if (!document.querySelector('.Allmenu').querySelectorAll('li')[num].classList.contains('active')) document.querySelector('.Allmenu').querySelectorAll('li')[num].classList.add('active');
             }
         }
@@ -959,8 +959,8 @@ exports.default = _default;
         return;
     }
 
-    reactHotLoader.register(CommonLeftMenu, 'CommonLeftMenu', '/Users/yuhao/Documents/project_code/code/react-code/src/component/commonLeftMenu.js');
-    reactHotLoader.register(_default, 'default', '/Users/yuhao/Documents/project_code/code/react-code/src/component/commonLeftMenu.js');
+    reactHotLoader.register(CommonLeftMenu, 'CommonLeftMenu', '/Users/yuhao/Documents/\u5E93\u5B58\u7BA1\u7406\u7CFB\u7EDF/code/react-code/src/component/commonLeftMenu.js');
+    reactHotLoader.register(_default, 'default', '/Users/yuhao/Documents/\u5E93\u5B58\u7BA1\u7406\u7CFB\u7EDF/code/react-code/src/component/commonLeftMenu.js');
     leaveModule(module);
 })();
 
@@ -969,21 +969,21 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 65:
+/***/ 67:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(58);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(60);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".commonLeftMenu {\n  position: absolute;\n  left: 0;\n  top: 50px;\n  bottom: 0;\n  width: 200px;\n  text-align: center;\n  background-color: #323340;\n}\n.commonLeftMenu .title {\n  padding: 20px 0;\n  color: #FFF;\n}\n.commonLeftMenu .Allmenu {\n  position: absolute;\n  top: 60px;\n  bottom: 0;\n  width: 100%;\n  background-color: #323340;\n  overflow-x: hidden;\n  overflow-y: auto;\n}\n.commonLeftMenu .Allmenu ul {\n  margin-top: 20px;\n}\n.commonLeftMenu .Allmenu ul li {\n  height: 40px;\n  font-size: 18px;\n  line-height: 40px;\n  margin-bottom: 15px;\n  padding: 5px 0;\n}\n.commonLeftMenu .Allmenu ul li a {\n  color: #87888f;\n  text-decoration: none;\n  display: block;\n  width: 100%;\n}\n.commonLeftMenu .active {\n  background-color: #0077fb !important;\n}\n.commonLeftMenu .active a {\n  color: #FFF !important;\n}\n.navHeader {\n  height: 50px;\n  width: 100%;\n  background-color: #0077fb;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  position: relative;\n}\n.navHeader .navLeft {\n  margin-left: 30px;\n  color: #FFFFFF;\n}\n.navHeader .navLeft span {\n  display: inline-block;\n}\n.navHeader .navLeft span:first-child {\n  width: 80px;\n  height: 30px;\n  line-height: 27px;\n  font-size: 20px;\n  margin-right: 5px;\n}\n.navHeader .navLeft span:last-child {\n  width: 120px;\n  height: 20px;\n  line-height: 25px;\n  font-size: 14px;\n  margin-left: 5px;\n  padding-left: 5px;\n  border-left: 1px solid #FFFFFF;\n}\n.navHeader .navRight {\n  margin-right: 40px;\n  color: #FFFFFF;\n}\n.navHeader .navRight span {\n  display: inline-block;\n  width: 80px;\n  height: 20px;\n  font-size: 14px;\n}\n.navHeader .navRight i {\n  display: inline-block;\n  position: absolute;\n  right: 22px;\n  top: 15px;\n  width: 22px;\n  height: 22px;\n  background: url('/dist/images/arrow.png') center;\n  background-size: 22px 22px;\n}\n.navHeader .userMask {\n  position: absolute;\n  right: 22px;\n  top: 40px;\n  width: 80px;\n  height: 30px;\n  background: #FFFFFF;\n  z-index: 999;\n  border: 1px solid #F3F3F3;\n  border-radius: 3px;\n}\n.navHeader .userMask li {\n  list-style: none;\n  text-align: center;\n  line-height: 30px;\n  color: #A6A6A6;\n}\n.navHeader .userMask:after {\n  border: 7px solid transparent;\n  border-bottom-color: #fff;\n  top: -14px;\n  right: 25px;\n  left: auto;\n  position: absolute;\n  content: \"\";\n}\n", ""]);
+exports.push([module.i, ".commonLeftMenu {\n  position: absolute;\n  left: 0;\n  top: 50px;\n  bottom: 0;\n  width: 200px;\n  text-align: center;\n  background-color: #323340;\n}\n.commonLeftMenu .title {\n  padding: 20px 0;\n  color: #FFF;\n}\n.commonLeftMenu .Allmenu {\n  position: absolute;\n  top: 60px;\n  bottom: 0;\n  width: 100%;\n  background-color: #323340;\n  overflow-x: hidden;\n  overflow-y: auto;\n}\n.commonLeftMenu .Allmenu ul {\n  margin-top: 20px;\n}\n.commonLeftMenu .Allmenu ul li {\n  height: 40px;\n  font-size: 18px;\n  line-height: 40px;\n  margin-bottom: 15px;\n  padding: 5px 0;\n}\n.commonLeftMenu .Allmenu ul li a {\n  color: #87888f;\n  text-decoration: none;\n  display: block;\n  width: 100%;\n}\n.commonLeftMenu .active {\n  background-color: #0077fb !important;\n}\n.commonLeftMenu .active a {\n  color: #FFF !important;\n}\n.navHeader {\n  height: 50px;\n  width: 100%;\n  background-color: #0077fb;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  position: relative;\n}\n.navHeader .navLeft {\n  margin-left: 30px;\n  color: #FFFFFF;\n}\n.navHeader .navLeft span {\n  display: inline-block;\n}\n.navHeader .navLeft span:first-child {\n  width: 80px;\n  height: 30px;\n  line-height: 27px;\n  font-size: 20px;\n  margin-right: 5px;\n}\n.navHeader .navLeft span:last-child {\n  width: 120px;\n  height: 20px;\n  line-height: 25px;\n  font-size: 14px;\n  margin-left: 5px;\n  padding-left: 5px;\n  border-left: 1px solid #FFFFFF;\n}\n.navHeader .navRight {\n  margin-right: 40px;\n  color: #FFFFFF;\n}\n.navHeader .navRight span {\n  display: inline-block;\n  width: 80px;\n  height: 20px;\n  font-size: 14px;\n}\n.navHeader .navRight i {\n  content: '';\n  width: 0;\n  height: 0;\n  border-style: solid dashed dashed;\n  border-color: #fff transparent transparent;\n  overflow: hidden;\n  cursor: pointer;\n  transition: all 0.2s;\n  -webkit-transition: all 0.2s;\n  position: absolute;\n  top: 23px;\n  right: 28px;\n  border-width: 6px;\n  border-top-color: rgba(255, 255, 255, 0.7);\n}\n.navHeader .navRight i:hover {\n  margin-top: -9px;\n  border-style: dashed dashed solid;\n  border-color: transparent transparent #fff;\n}\n.navHeader .userMask {\n  position: absolute;\n  right: 22px;\n  top: 40px;\n  width: 80px;\n  height: 30px;\n  background: #FFFFFF;\n  z-index: 999;\n  border: 1px solid #F3F3F3;\n  border-radius: 3px;\n}\n.navHeader .userMask li {\n  list-style: none;\n  text-align: center;\n  line-height: 30px;\n  color: #A6A6A6;\n}\n.navHeader .userMask:after {\n  border: 7px solid transparent;\n  border-bottom-color: #fff;\n  top: -14px;\n  right: 25px;\n  left: auto;\n  position: absolute;\n  content: \"\";\n}\n", ""]);
 // Exports
 module.exports = exports;
 
 
 /***/ }),
 
-/***/ 66:
+/***/ 68:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1001,7 +1001,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(18);
 
-__webpack_require__(61);
+__webpack_require__(63);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1119,8 +1119,8 @@ exports.default = _default;
         return;
     }
 
-    reactHotLoader.register(navHeader, 'navHeader', '/Users/yuhao/Documents/project_code/code/react-code/src/component/header.js');
-    reactHotLoader.register(_default, 'default', '/Users/yuhao/Documents/project_code/code/react-code/src/component/header.js');
+    reactHotLoader.register(navHeader, 'navHeader', '/Users/yuhao/Documents/\u5E93\u5B58\u7BA1\u7406\u7CFB\u7EDF/code/react-code/src/component/header.js');
+    reactHotLoader.register(_default, 'default', '/Users/yuhao/Documents/\u5E93\u5B58\u7BA1\u7406\u7CFB\u7EDF/code/react-code/src/component/header.js');
     leaveModule(module);
 })();
 
@@ -1129,7 +1129,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 67:
+/***/ 69:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1145,13 +1145,15 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _AJAX = __webpack_require__(59);
+var _AJAX = __webpack_require__(61);
 
 var AJAX = _interopRequireWildcard(_AJAX);
 
-var _utils = __webpack_require__(60);
+var _utils = __webpack_require__(62);
 
 var utils = _interopRequireWildcard(_utils);
+
+var _reactRouterDom = __webpack_require__(18);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -1172,18 +1174,73 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var CommonContent = function (_Component) {
     _inherits(CommonContent, _Component);
 
-    function CommonContent() {
-        var _ref;
-
-        var _temp, _this2, _ret;
-
+    function CommonContent(props) {
         _classCallCheck(this, CommonContent);
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
+        var _this2 = _possibleConstructorReturn(this, (CommonContent.__proto__ || Object.getPrototypeOf(CommonContent)).call(this, props));
 
-        return _ret = (_temp = (_this2 = _possibleConstructorReturn(this, (_ref = CommonContent.__proto__ || Object.getPrototypeOf(CommonContent)).call.apply(_ref, [this].concat(args))), _this2), _this2.success = function (res) {
+        _this2.refundsClick = function (res) {
+            debugger;
+            var _this = _this2;
+            res = JSON.parse(res);
+            var goods_laborcost = res.data.data[0].laborcost;
+            var weight = res.data.data[0].weight;
+            // var tr = event.target.parentNode;
+            var deleteId = _this.state.trID;
+            var tr = document.getElementById(deleteId);
+            var fromData = new FormData();
+            fromData.append('supplier', tr.querySelector('#supplier').textContent);
+            fromData.append('goods_category', tr.querySelector('#category').textContent);
+            fromData.append('goods_name', tr.querySelector('#goods_name').textContent);
+            fromData.append('goods_number', tr.querySelector('#goods_number').textContent);
+            fromData.append('price', tr.querySelector('#current_price').textContent);
+            var type = tr.querySelector('#goods_type').textContent.indexOf('件') != -1 ? 1 : 2;
+            fromData.append('goods_type', type);
+            fromData.append('goods_laborcost', goods_laborcost);
+            fromData.append('weight', weight);
+            fromData.append('num', tr.querySelector('#num').textContent);
+            fromData.append('weight_all', tr.querySelector('#weight_all').textContent);
+            fromData.append('price_all', tr.querySelector('#price_all').textContent);
+            fromData.append('operator', tr.querySelector('#operator').textContent);
+            //_this.delete(deleteId);
+            //var params = 'supplier='+supplier+'&goods_name='+goods_name+'&goods_number='+goods_number+'&price='+price+'&weight='+weight+'&num='+num+'&weight_all='+weight_all+'&price_all='+price_all;
+            setTimeout(function () {
+                var header = { head: 'Authorization', value: 'Bearer ' + utils.token };
+                AJAX.AJAX('http://106.12.194.98/api/goods/add', 'POST', fromData, header, _this.addSuccess, _this.error);
+            }, 1000);
+        };
+
+        _this2.addSuccess = function (res) {
+            var _this = _this2;
+            res = JSON.parse(res);
+            if (res.msg == '身份失效') {
+                window.location.href = '/';
+            }
+            if (res.msg == '入库成功') {
+                alert('退货商品已成功录入库存!');
+            } else {
+                alert(res.msg);
+            }
+        };
+
+        _this2.delete = function (param) {
+            debugger;
+            var deleteId = '';
+            var _this = _this2;
+            if (param instanceof Array) {
+                for (var i = 0; i < param.length; i++) {
+                    deleteId += i == 0 ? param[i] : ',' + param[i];
+                }
+            } else {
+                deleteId = param;
+            }
+            var fromData = new FormData();
+            fromData.append('ids', deleteId);
+            var header = { head: 'Authorization', value: 'Bearer ' + utils.token };
+            AJAX.AJAX('http://106.12.194.98/api/goods/store/delete', 'POST', fromData, header, _this.success, _this.error);
+        };
+
+        _this2.success = function (res) {
             var _this = _this2;
             res = JSON.parse(res);
             if (res.msg == '身份失效') {
@@ -1194,11 +1251,21 @@ var CommonContent = function (_Component) {
                     _this.props.selectDelete();
                 }
                 _this.props.getData();
-                alert('数据删除成功!');
+                if (_this.props.isOutStock) {
+                    alert('已退货成功,商品正在录入库存!');
+                } else {
+                    alert('数据删除成功!');
+                }
             } else {
                 alert(res.msg);
             }
-        }, _temp), _possibleConstructorReturn(_this2, _ret);
+        };
+
+        _this2.state = {
+            indexFlag: false,
+            trID: ''
+        };
+        return _this2;
     }
 
     _createClass(CommonContent, [{
@@ -1211,6 +1278,11 @@ var CommonContent = function (_Component) {
             if (location.pathname == '/warehousing') {
                 _this.props.onRefFn(_this);
             }
+            if (location.pathname == '/index') {
+                _this.setState({
+                    indexFlag: true
+                });
+            }
         }
     }, {
         key: 'deleteClick',
@@ -1220,32 +1292,35 @@ var CommonContent = function (_Component) {
             _this.delete(deleteId);
         }
     }, {
+        key: 'searchData',
+        value: function searchData() {
+            var _this = this;
+            var tr = event.target.parentNode;
+            _this.setState({
+                trID: tr.id
+            });
+            var goods_number = tr.querySelector('#goods_number').textContent;
+            var header = { head: 'Authorization', value: 'Bearer ' + utils.token };
+            AJAX.AJAX('http://106.12.194.98/api/goods/all?goods_number=' + goods_number, 'GET', false, header, _this.refundsClick, _this.error);
+        }
+    }, {
         key: 'isConfirm',
         value: function isConfirm(e) {
             var _this = this;
             if (event.target.className != 'deleteFlag') {
                 return;
             }
-            var isStatus = confirm('确认删除?');
-            if (isStatus) {
-                _this.deleteClick();
-            }
-        }
-    }, {
-        key: 'delete',
-        value: function _delete(param) {
-            var deleteId = '';
-            if (param instanceof Array) {
-                for (var i = 0; i < param.length; i++) {
-                    deleteId += i == 0 ? param[i] : ',' + param[i];
+            if (this.props.isOutStock) {
+                var isStatus = confirm('是否确认商品已退货?');
+                if (isStatus) {
+                    _this.searchData();
                 }
             } else {
-                deleteId = param;
+                var isStatus = confirm('确认删除?');
+                if (isStatus) {
+                    _this.deleteClick();
+                }
             }
-            var fromData = new FormData();
-            fromData.append('ids', deleteId);
-            var header = { head: 'Authorization', value: 'Bearer ' + utils.token };
-            AJAX.AJAX('http://106.12.194.98/api/goods/store/delete', 'POST', fromData, header, this.success, this.error);
         }
     }, {
         key: 'error',
@@ -1308,16 +1383,53 @@ var CommonContent = function (_Component) {
                                 }
                                 return _react2.default.createElement(
                                     'td',
-                                    { className: v.title == '操作' ? 'deleteFlag' : '', onClick: _this.isConfirm.bind(_this) },
+                                    { className: v.title == '操作' ? 'deleteFlag' : '', id: v.name, onClick: _this.isConfirm.bind(_this) },
                                     v.name == 'create_time' ? time : v.title == '操作' && !_this3.props.deleteFlag ? v.name : v.title == '商品图片' ? _react2.default.createElement(
                                         'a',
                                         { target: '_blank', href: imgURL ? imgURL : '' },
                                         imgURL ? item.goods_name + '图片' : '无商品图片'
+                                    ) : v.title == '工费类型' ? item[v.name] == '1' ? '件工费' : '克工费' : v.title == '商品种类' && _this.state.indexFlag ? _react2.default.createElement(
+                                        _reactRouterDom.Link,
+                                        { to: {
+                                                pathname: '/goodsDetail',
+                                                search: '?' + item[v.name],
+                                                state: { fromWechat: true }
+                                            } },
+                                        item[v.name]
                                     ) : item[v.name]
                                 );
                             })
                         );
                     })
+                ),
+                _react2.default.createElement(
+                    'tbody',
+                    { className: 'total' },
+                    _react2.default.createElement(
+                        'tr',
+                        null,
+                        _react2.default.createElement('td', { className: _this.props.deleteFlag ? 'showInput' : 'hideInput' }),
+                        _this.props.HEAD.map(function (d, i) {
+                            if (i == 0) {
+                                var output = '合计：';
+                            } else if (d.title == '总计件数') {
+                                var output = _this.props.AllData.stat_num_total;
+                            } else if (d.title == '工费总价($)') {
+                                var output = _this.props.AllData.stat_price_total;
+                            } else if (d.title == '总价($)') {
+                                var output = _this.props.AllData.stat_price_total;
+                            } else if (d.title == '总计克重(g)') {
+                                var output = _this.props.AllData.stat_weight_total;
+                            } else {
+                                var output = '';
+                            }
+                            return _react2.default.createElement(
+                                'td',
+                                null,
+                                output
+                            );
+                        })
+                    )
                 )
             );
         }
@@ -1346,8 +1458,8 @@ exports.default = _default;
         return;
     }
 
-    reactHotLoader.register(CommonContent, 'CommonContent', '/Users/yuhao/Documents/project_code/code/react-code/src/component/commonContent.js');
-    reactHotLoader.register(_default, 'default', '/Users/yuhao/Documents/project_code/code/react-code/src/component/commonContent.js');
+    reactHotLoader.register(CommonContent, 'CommonContent', '/Users/yuhao/Documents/\u5E93\u5B58\u7BA1\u7406\u7CFB\u7EDF/code/react-code/src/component/commonContent.js');
+    reactHotLoader.register(_default, 'default', '/Users/yuhao/Documents/\u5E93\u5B58\u7BA1\u7406\u7CFB\u7EDF/code/react-code/src/component/commonContent.js');
     leaveModule(module);
 })();
 
@@ -1356,7 +1468,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 68:
+/***/ 70:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1374,13 +1486,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(18);
 
-__webpack_require__(69);
+__webpack_require__(71);
 
-var _AJAX = __webpack_require__(59);
+var _AJAX = __webpack_require__(61);
 
 var AJAX = _interopRequireWildcard(_AJAX);
 
-var _utils = __webpack_require__(60);
+var _utils = __webpack_require__(62);
 
 var utils = _interopRequireWildcard(_utils);
 
@@ -1410,73 +1522,131 @@ var pageFooter = function (_Component) {
 
         _this2.state = {
             currentPage: _this2.props.CONTENT.current_page,
-            groupCount: 7,
-            startPage: 1
+            groupCount: 5,
+            pages: _this2.props.CONTENT.last_page
         };
         return _this2;
     }
 
     _createClass(pageFooter, [{
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(nextProps) {
+            if (this.props.CONTENT.current_page !== nextProps.CONTENT.current_page || this.props.CONTENT.last_page !== nextProps.CONTENT.last_page) {
+                this.setState({
+                    currentPage: nextProps.CONTENT.current_page,
+                    pages: nextProps.CONTENT.last_page
+                });
+            }
+        }
+    }, {
         key: 'create',
         value: function create() {
-            var last_page = this.props.CONTENT.last_page;
+            var last_page = this.state.pages;
+            var currentPage = this.state.currentPage;
+            var groupCount = this.state.groupCount;
             var pages = [];
-            if (last_page <= this.state.groupCount) {
+            if (last_page <= this.state.groupCount + 2) {
                 pages.push(_react2.default.createElement('li', { className: 'prev', onClick: this.goPrev.bind(this), key: 0 }));
                 for (var i = 1; i <= last_page; i++) {
                     pages.push(_react2.default.createElement(
                         'li',
-                        { onClick: this.goPage.bind(this, i), className: this.props.CONTENT.current_page == i ? "active" : "", key: i },
+                        { onClick: this.goPage.bind(this, i), className: this.state.currentPage == i ? "active" : "", key: i },
                         i
                     ));
                 }
                 pages.push(_react2.default.createElement('li', { className: 'next', onClick: this.goNext.bind(this), key: last_page + 1 }));
             } else {
-                pages.push(_react2.default.createElement('li', { className: 'prev', onClick: this.goPrev.bind(this), key: 0 }));
-                for (var i = this.state.startPage; i < this.state.startPage + this.state.groupCount; i++) {
+                if (currentPage <= groupCount) {
+                    pages.push(_react2.default.createElement('li', { className: 'prev', onClick: this.goPrev.bind(this), key: 0 }));
+                    for (var i = 1; i <= groupCount; i++) {
+                        pages.push(_react2.default.createElement(
+                            'li',
+                            { onClick: this.goPage.bind(this, i), className: this.state.currentPage == i ? "active ab" : "", key: i },
+                            i
+                        ));
+                    }
+                    if (currentPage == groupCount) {
+                        pages.push(_react2.default.createElement(
+                            'li',
+                            { onClick: this.goPage.bind(this, groupCount + 1), className: this.state.currentPage == groupCount + 1 ? "active" : "", key: groupCount + 1 },
+                            groupCount + 1
+                        ));
+                    }
                     pages.push(_react2.default.createElement(
                         'li',
-                        { onClick: this.goPage.bind(this, i), className: this.props.CONTENT.current_page == i ? "active" : "", key: i },
-                        i
+                        { key: -2 },
+                        '\xB7\xB7\xB7'
                     ));
-                }
-                if (last_page - this.state.startPage > 7) {
+                    pages.push(_react2.default.createElement(
+                        'li',
+                        { key: last_page, onClick: this.goPage.bind(this, last_page) },
+                        last_page
+                    ));
+                    pages.push(_react2.default.createElement('li', { className: 'next', onClick: this.goNext.bind(this), key: last_page + 1 }));
+                } else if (currentPage > groupCount && currentPage <= this.state.pages - groupCount) {
+                    pages.push(_react2.default.createElement('li', { className: 'prev', onClick: this.goPrev.bind(this), key: 0 }));
+                    pages.push(_react2.default.createElement(
+                        'li',
+                        { key: 1, onClick: this.goPage.bind(this, 1) },
+                        1
+                    ));
                     pages.push(_react2.default.createElement(
                         'li',
                         { key: -1 },
                         '\xB7\xB7\xB7'
                     ));
+                    for (var i = currentPage - 2; i <= currentPage + 2; i++) {
+                        pages.push(_react2.default.createElement(
+                            'li',
+                            { onClick: this.goPage.bind(this, i), className: this.state.currentPage == i ? "active" : "", key: i },
+                            i
+                        ));
+                    }
+                    pages.push(_react2.default.createElement(
+                        'li',
+                        { key: -2 },
+                        '\xB7\xB7\xB7'
+                    ));
+                    pages.push(_react2.default.createElement(
+                        'li',
+                        { key: last_page, onClick: this.goPage.bind(this, last_page) },
+                        last_page
+                    ));
+                    pages.push(_react2.default.createElement('li', { className: 'next', onClick: this.goNext.bind(this), key: last_page + 1 }));
+                } else if (currentPage > this.state.pages - groupCount) {
+                    pages.push(_react2.default.createElement('li', { className: 'prev', onClick: this.goPrev.bind(this), key: 0 }));
+                    pages.push(_react2.default.createElement(
+                        'li',
+                        { key: 1, onClick: this.goPage.bind(this, 1) },
+                        1
+                    ));
+                    pages.push(_react2.default.createElement(
+                        'li',
+                        { key: -1 },
+                        '\xB7\xB7\xB7'
+                    ));
+                    if (currentPage == this.state.pages - groupCount + 1) {
+                        pages.push(_react2.default.createElement(
+                            'li',
+                            { onClick: this.goPage.bind(this, this.state.pages - groupCount), key: this.state.pages - groupCount },
+                            this.state.pages - groupCount
+                        ));
+                    }
+                    for (var i = this.state.pages - groupCount + 1; i <= this.state.pages; i++) {
+                        pages.push(_react2.default.createElement(
+                            'li',
+                            { onClick: this.goPage.bind(this, i), className: this.state.currentPage == i ? "active" : "", key: i },
+                            i
+                        ));
+                    }
+                    pages.push(_react2.default.createElement('li', { className: 'next', onClick: this.goNext.bind(this), key: last_page + 1 }));
                 }
-                pages.push(_react2.default.createElement(
-                    'li',
-                    { className: this.state.currentPage == i ? "active" : "", key: last_page, onClick: this.goPage.bind(this, last_page) },
-                    last_page
-                ));
-                pages.push(_react2.default.createElement('li', { className: 'next', onClick: this.goNext.bind(this), key: last_page + 1 }));
             }
-
             return pages;
         }
     }, {
         key: 'goPage',
         value: function goPage(num) {
-            debugger;
-            var groupCount = this.state.groupCount;
-            if (num % groupCount === 1 && this.props.CONTENT.last_page - num > this.state.groupCount) {
-                this.setState({
-                    startPage: num
-                });
-            }
-            if (num % groupCount === 0) {
-                this.setState({
-                    startPage: num - groupCount + 1
-                });
-            }
-            if (this.props.CONTENT.last_page - num < 1) {
-                this.setState({
-                    startPage: this.props.CONTENT.last_page - groupCount
-                });
-            }
             this.setState({
                 currentPage: num
             });
@@ -1487,56 +1657,20 @@ var pageFooter = function (_Component) {
     }, {
         key: 'goPrev',
         value: function goPrev() {
-
-            var groupCount = this.state.groupCount;
-            if (this.props.CONTENT.current_page == 1) {
+            if (this.state.currentPage == 1) {
                 return;
             }
-
             var num = this.state.currentPage - 1;
-            if (!(num % groupCount)) {
-                this.setState({
-                    startPage: this.state.currentPage - groupCount
-                });
-            }
-            if (this.props.CONTENT.last_page - this.state.currentPage == this.state.groupCount) {
-                this.setState({
-                    startPage: Math.floor(num / this.state.groupCount) * this.state.groupCount + 1
-                });
-            }
-            this.setState({
-                currentPage: num
-            });
-            var url = this.props.CONTENT.last_page_url.match(/(\S*)page=/)[1];
-            var head = { head: 'Authorization', value: 'Bearer ' + utils.token };
-            AJAX.AJAX(url + '?page=' + num, 'GET', false, head, this.props.isLogin, this.error);
+            this.goPage(num);
         }
     }, {
         key: 'goNext',
         value: function goNext() {
-            debugger;
-            var groupCount = this.state.groupCount;
-            if (this.props.CONTENT.current_page == this.props.CONTENT.last_page) {
+            if (this.state.currentPage == this.state.pages) {
                 return;
             }
-            var num = this.props.CONTENT.current_page + 1;
-            if (!(this.state.currentPage % groupCount) && this.props.CONTENT.last_page - this.state.currentPage > 1) {
-                if (this.props.CONTENT.last_page - this.state.currentPage < this.state.groupCount) {
-                    this.setState({
-                        startPage: this.props.CONTENT.last_page - this.state.groupCount
-                    });
-                } else {
-                    this.setState({
-                        startPage: num
-                    });
-                }
-            }
-            this.setState({
-                currentPage: num
-            });
-            var url = this.props.CONTENT.last_page_url.match(/(\S*)page=/)[1];
-            var head = { head: 'Authorization', value: 'Bearer ' + utils.token };
-            AJAX.AJAX(this.props.CONTENT.path + '?page=' + num, 'GET', false, head, this.props.isLogin, this.error);
+            var num = this.state.currentPage + 1;
+            this.goPage(num);
         }
     }, {
         key: 'goText',
@@ -1546,27 +1680,18 @@ var pageFooter = function (_Component) {
                 return;
             }
             var num = Number(target.value);
-            if (num > this.props.CONTENT.last_page) {
-                alert('当前页码数不能超过总页码数！');
-                return;
+            if (num > this.state.pages) {
+                num = this.state.pages;
+            } else if (num < 1) {
+                num = 1;
             }
-            if (this.props.CONTENT.last_page - num <= 7) {
-                this.setState({
-                    startPage: this.props.CONTENT.last_page - this.state.groupCount
-                });
-            } else {
-                this.setState({
-                    startPage: Math.floor(num / this.state.groupCount) * this.state.groupCount + 1
-                });
-            }
-
             this.goPage(num);
         }
     }, {
         key: 'render',
         value: function render() {
             var _this = this;
-            var Pages = this.create.bind(this)();
+            var Pages = _this.create.bind(_this)();
             return _react2.default.createElement(
                 'footer',
                 { className: 'pageFooter' },
@@ -1612,8 +1737,8 @@ exports.default = _default;
         return;
     }
 
-    reactHotLoader.register(pageFooter, 'pageFooter', '/Users/yuhao/Documents/project_code/code/react-code/src/component/footer.js');
-    reactHotLoader.register(_default, 'default', '/Users/yuhao/Documents/project_code/code/react-code/src/component/footer.js');
+    reactHotLoader.register(pageFooter, 'pageFooter', '/Users/yuhao/Documents/\u5E93\u5B58\u7BA1\u7406\u7CFB\u7EDF/code/react-code/src/component/footer.js');
+    reactHotLoader.register(_default, 'default', '/Users/yuhao/Documents/\u5E93\u5B58\u7BA1\u7406\u7CFB\u7EDF/code/react-code/src/component/footer.js');
     leaveModule(module);
 })();
 
@@ -1622,11 +1747,11 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 69:
+/***/ 71:
 /***/ (function(module, exports, __webpack_require__) {
 
-var api = __webpack_require__(57);
-            var content = __webpack_require__(70);
+var api = __webpack_require__(59);
+            var content = __webpack_require__(72);
 
             content = content.__esModule ? content.default : content;
 
@@ -1649,11 +1774,11 @@ module.exports = exported;
 
 /***/ }),
 
-/***/ 70:
+/***/ 72:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(58);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(60);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.i, ".pageFooter {\n  -moz-user-select: none;\n  -o-user-select: none;\n  -khtml-user-select: none;\n  -webkit-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  width: 100%;\n  height: 50px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 20px;\n  font-size: 12px;\n  color: #A6A6A6;\n}\n.pageFooter ul li {\n  float: left;\n  width: 25px;\n  height: 25px;\n  border: 2px solid #F3F3F3;\n  border-radius: 5px;\n  font-size: 12px;\n  text-align: center;\n  line-height: 25px;\n  margin-left: 5px;\n  color: #A6A6A6;\n  cursor: pointer;\n}\n.pageFooter ul .active {\n  background: #2A79D8 !important;\n  color: #FFFFFF !important;\n}\n.pageFooter ul .prev {\n  background: url('/dist/images/prev.png') center;\n  background-size: 20px 20px;\n}\n.pageFooter ul .next {\n  background: url('/dist/images/next.png') center;\n  background-size: 20px 20px;\n}\n.pageFooter span {\n  margin-left: 15px;\n  margin-right: 15px;\n}\n.pageFooter input {\n  width: 25px;\n  height: 25px;\n  border: 2px solid #F3F3F3;\n  border-radius: 5px;\n  color: #A6A6A6;\n}\n", ""]);

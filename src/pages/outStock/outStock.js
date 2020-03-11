@@ -22,7 +22,7 @@ export default class OutStock extends Component {
         var _this = this;
         _this.getData();
     }
-    getData(){
+    getData=()=>{
         var head = {head:'Authorization',value:'Bearer '+utils.token};
         AJAX.AJAX('http://106.12.194.98/api/goods/reduce/history','GET',false,head,this.isLogin,this.error);
     }
@@ -76,6 +76,7 @@ export default class OutStock extends Component {
         _this.setState({
             searchType:type
         })
+        // ,{title:'商品图片',name:'goods_images'}  ,{title:'商品图片',name:'images'}
     }
     render() {
         var _this = this;
@@ -114,19 +115,24 @@ export default class OutStock extends Component {
                             <div className="enterBtn2" onClick={this.showCustomer}>客户录入</div>
                         </div>
                         <CommonContent 
-                            HEAD={[{title:'日期',name:'create_time'},{title:'客户名称',name:'customer'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},{title:'单价(1g)',
-                            name:'weight'},{title:'当前银价(1g)',name:'current_price'},{title:'商品重量',name:'weight'},{title:'总计件数',name:'num'},{title:'总计克重(g)',name:'weight_all'},
-                            {title:'总价($)',name:'price_all'},{title:'经办人',name:'operator'},{title:'商品图片',name:'images'}]}
+                            HEAD={[{title:'日期',name:'create_time'},{title:'供应商',name:'supplier'},{title:'客户名称',name:'customer'},{title:'种类',name:'category'},
+                            {title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},{title:'工费类型',name:'goods_type'},{title:'料价(1g)',name:'current_price'},
+                            {title:'工费',name:'laborcost'},{title:'商品重量',name:'weight'},{title:'总计件数',name:'num'},{title:'总计克重(g)',name:'weight_all'},
+                            {title:'总价($)',name:'price_all'},{title:'经办人',name:'operator'},{title:'操作',name:'退货'}]}
                             CONTENT={_this.state.data}
                             deleteFlag={_this.state.deleteFlag}
                             AllData = {_this.state.allData}
+                            isOutStock = {true}
+                            getData={_this.getData}
                         />
                         {_this.state.isentry && <Entry 
                             close={()=>{_this.setState({isentry:false}); _this.getData()}}
                             isOutStock = {true}
-                            HEAD={[{title:'状态',name:'未录入'},{title:'客户名称',name:'customer'},{title:'商品编号',name:'goods_number'},{title:'出货件数',name:'num'},
-                            {title:'当前银价',name:'current_price'},
-                            {title:'总价($)',name:'price_all'},{title:'经办人',name:'operator'},{title:'商品图片',name:'goods_images'}]}
+                            HEAD={[{title:'状态',name:'未录入'},{title:'商品编号',name:'goods_number'},{title:'客户名称',name:'customer'},
+                            {title:'工费类型',name:'goods_type'},{title:'料价(1g)',name:'current_price'},{title:'工费',name:'goods_laborcost'},
+                            {title:'商品重量(件/g)',name:'weight'},{title:'总计件数',name:'num'},
+                            {title:'合计克重(g)',name:'weight_all'},{title:'合计价钱($)',name:'price_all'},
+                            {title:'经办人',name:'operator'}]}
                         />}
                         <PageFooter CONTENT={_this.state.allData} isLogin={this.isLogin}/>
                     </div>
