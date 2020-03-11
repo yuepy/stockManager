@@ -203,3 +203,82 @@ table { border-collapse:collapse; border-spacing:0; }
 		}
     }
 }
+
+
+.showSupplier{
+    .alertBox{
+        position:fixed;
+        width: 500px;
+        height: 300px;
+        background:#FFFFFF;
+        top: 30%;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        z-index: 999999;
+        padding:5px 10px;
+        .showContent{
+            width: 100%;
+            height: 200px;
+            border:1px solid #FeFeFe;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            li{
+                list-style: none;
+                width: 100px;
+                height: 30px;
+                background:#F00;
+                padding: 2px;
+                margin-right: 15px;
+                line-height: 30px;
+                text-align: center;
+                border-radius:3px;
+                font-size: 12px;
+                float: left;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space:nowrap;
+            }
+        }
+        .inputContent{
+            display: flex;
+            align-items:center;
+            margin-top: 30px;
+            input{
+                width: 150px;
+                height: 26px;
+                font-size: 12px;
+                border:1px solid rgba(0,0,0,0.2);
+                border-radius:5px;
+                color: #000000;
+                text-indent: 3px;
+                margin-left: 10px;
+                outline: none;
+            }
+            .enterBtn{
+                width: 60px;
+                height: 24px;
+                background:#2B79D9;
+                color: #FFFFFF;
+                border-radius:3px;
+                text-align: center;
+                line-height: 24px;
+                font-size: 12px;
+                margin-left: 15px;
+                border:1px #2B79D9 solid;
+                cursor: pointer;
+            }
+        }
+    }
+    .mask{
+        position:fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        width: 100vw;
+        background:rgba(0,0,0,0.2);
+        z-index: 99990;
+    }
+}
+
+
