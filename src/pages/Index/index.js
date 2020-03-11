@@ -32,7 +32,6 @@ export default class Index extends Component {
         })
     }
     searchBtn(e){
-        debugger
         var _this = this;
         var target = e.target;
         var select = target.ownerDocument.querySelector('.searchSelect');

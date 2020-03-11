@@ -8,7 +8,7 @@ import AlertBox from 'component/alertBox.js';
 import * as AJAX from 'component/AJAX.js';
 import * as utils from 'component/utils.js';
 import Entry from 'component/entry.js';
-import { Link } from 'react-router';
+import * as DATE from 'component/getDate.js';
 export default class Warehousing extends Component {
     constructor(props) {
         super(props);
@@ -28,7 +28,7 @@ export default class Warehousing extends Component {
     getData=()=>{
         var _this = this;
         var head = {head:'Authorization',value:'Bearer '+utils.token};
-        AJAX.AJAX('http://106.12.194.98/api/goods/add/history','GET',false,head,this.isLogin.bind(_this),_this.error);
+        AJAX.AJAX('http://106.12.194.98/api/goods/add/history?date_start='+DATE.getDate('day','-')+'&date_end='+DATE.getDate('day','-'),'GET',false,head,this.isLogin.bind(_this),_this.error);
     }
     isLogin=(res)=>{
         var _this = this;
@@ -81,7 +81,6 @@ export default class Warehousing extends Component {
         _this.childFn = ref;
     }
     searchBtn(e){
-        debugger
         var _this = this;
         var target = e.target;
         var select = target.ownerDocument.querySelector('.searchSelect');

@@ -23,7 +23,7 @@ export default class Entry extends Component{
             fromData.append('goods_number' , tr.querySelector('#goods_number').value);
             fromData.append('price' , '00');
             fromData.append('goods_type' , tr.querySelector('#goods_type').value);
-            fromData.append('goods_laborcost' , tr.querySelector('#goods_laborcost').value);
+            fromData.append('goods_laborcost' ,  tr.querySelector('#goods_laborcost').value);
             fromData.append('weight' , tr.querySelector('#weight').value);
             fromData.append('num' ,tr.querySelector('#num').value); 
             fromData.append('weight_all' , tr.querySelector('#weight_all').value);  
@@ -37,7 +37,7 @@ export default class Entry extends Component{
         if(_this.props.isOutStock){
                 fromData.append('customer' ,tr.querySelector('#customer').value);
                 fromData.append('goods_number' , tr.querySelector('#goods_number').value);
-                fromData.append('current_price' , tr.querySelector('#current_price').value);
+                fromData.append('current_price' , '0.0000001');
                 fromData.append('num' ,tr.querySelector('#num').value);
                 fromData.append('price_all' , tr.querySelector('#price_all').value);
                 fromData.append('operator' , tr.querySelector('#operator').value);
@@ -163,10 +163,9 @@ export default class Entry extends Component{
         var num = window.isNaN(parseFloat(tr.querySelector('#num').value))?'':parseFloat(tr.querySelector('#num').value);
         var weight = window.isNaN(parseFloat(tr.querySelector('#weight').value))?'':parseFloat(tr.querySelector('#weight').value);
         var weight_all = window.isNaN(parseFloat(tr.querySelector('#weight_all').value))?'':parseFloat(tr.querySelector('#weight_all').value);
-        var price = !tr.querySelector('#price') ?0:!this.props.isOutStock?parseFloat(tr.querySelector('#price').value):parseFloat(tr.querySelector('#current_price').value);
+        var price = !tr.querySelector('#price') ?0:!this.props.isOutStock?parseFloat(tr.querySelector('#price').value):(!tr.querySelector('#current_price') ? 0 : parseFloat(tr.querySelector('#current_price').value));
         price = window.isNaN(price)?'' : price;
         var price_all = window.isNaN(parseFloat(tr.querySelector('#price_all').value))?'':parseFloat(tr.querySelector('#price_all').value);
-        debugger;
         if(tr.querySelector('#goods_type').value == '1'){
             if(name == 'price' ){
                 if(price == '' ){
@@ -176,7 +175,7 @@ export default class Entry extends Component{
                 if(num == '' || goods_laborcost == ''){
                     return ;
                 }
-                tr.querySelector('#price_all').value = weight_all*price + num * goods_laborcost;
+                tr.querySelector('#price_all').value = (weight_all*price + num * goods_laborcost).toFixed(2);
                 _this.isShowSave(tr.querySelector('#price_all'));
             }
             if(name == 'num' || name == 'weight'){
@@ -188,11 +187,10 @@ export default class Entry extends Component{
                 var total = weight*num;
                 tr.querySelector('#weight_all').value = total;
                 _this.isShowSave(tr.querySelector('#weight_all'))
-                debugger;
                 if(price === '' || goods_laborcost == ''){
                     return ;
                 }
-                tr.querySelector('#price_all').value = price * total + num * goods_laborcost;
+                tr.querySelector('#price_all').value = (price * total + num * goods_laborcost).toFixed(2);
                 _this.isShowSave(tr.querySelector('#price_all'));
             }
             if(name == 'goods_laborcost'){
@@ -201,7 +199,7 @@ export default class Entry extends Component{
                     tr.querySelector('#price_all').value = '';
                     return;
                 }
-                tr.querySelector('#price_all').value = (goods_laborcost*num) + (num * weight * price);
+                tr.querySelector('#price_all').value = ((goods_laborcost*num) + (num * weight * price)).toFixed(2);
                 _this.isShowSave(tr.querySelector('#price_all'))
             }
         }
@@ -211,7 +209,7 @@ export default class Entry extends Component{
                     tr.querySelector('#price_all').value = '';
                     return ;
                 }
-                tr.querySelector('#price_all').value = price * weight_all + weight_all*goods_laborcost;
+                tr.querySelector('#price_all').value = (price * weight_all + weight_all*goods_laborcost).toFixed(2);
                 _this.isShowSave(tr.querySelector('#price_all'));
             }
             
@@ -293,10 +291,10 @@ export default class Entry extends Component{
         //选择商品工费类型
         var _this = this;
         var dataDom = '';
-        if(!dom){
+        if(dom.target){
             event.target.parentNode.querySelector('input').value = event.target.value;
             var tr = event.target.parentNode.parentNode;
-            dataDom = event.taget;
+            dataDom = event.target;
         }else{
             dataDom = dom;
             var tr = dom.parentNode.parentNode;
@@ -327,7 +325,7 @@ export default class Entry extends Component{
     entryBlur(e){
         //输入商品编号带出数据
         var _this = this;
-        if(e.target.id != 'goods_number'){
+        if(e.target.id != 'goods_number' || e.target.value.replace(/\s/,'') == ''){
             return ;
         }
         var tr = event.target.parentNode.parentNode;

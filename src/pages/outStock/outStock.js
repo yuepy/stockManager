@@ -7,6 +7,7 @@ import * as utils from 'component/utils.js';
 import CommonContent from 'component/commonContent.js';
 import PageFooter from 'component/footer.js';
 import Entry from 'component/entry.js';
+import * as DATE from 'component/getDate.js';
 export default class OutStock extends Component {
     constructor(props) {
         super(props);
@@ -24,7 +25,7 @@ export default class OutStock extends Component {
     }
     getData=()=>{
         var head = {head:'Authorization',value:'Bearer '+utils.token};
-        AJAX.AJAX('http://106.12.194.98/api/goods/reduce/history','GET',false,head,this.isLogin,this.error);
+        AJAX.AJAX('http://106.12.194.98/api/goods/reduce/history?date_start='+DATE.getDate('day','-')+'&date_end='+DATE.getDate('day','-'),'GET',false,head,this.isLogin,this.error);
     }
     isLogin=(res)=>{
         var _this = this;
@@ -44,7 +45,6 @@ export default class OutStock extends Component {
         })
     }
     searchBtn(e){
-        debugger
         var _this = this;
         var target = e.target;
         var select = target.ownerDocument.querySelector('.searchSelect');
@@ -116,7 +116,7 @@ export default class OutStock extends Component {
                         </div>
                         <CommonContent 
                             HEAD={[{title:'日期',name:'create_time'},{title:'供应商',name:'supplier'},{title:'客户名称',name:'customer'},{title:'种类',name:'category'},
-                            {title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},{title:'工费类型',name:'goods_type'},{title:'料价(1g)',name:'current_price'},
+                            {title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},{title:'工费类型',name:'goods_type'},
                             {title:'工费',name:'laborcost'},{title:'商品重量',name:'weight'},{title:'总计件数',name:'num'},{title:'总计克重(g)',name:'weight_all'},
                             {title:'总价($)',name:'price_all'},{title:'经办人',name:'operator'},{title:'操作',name:'退货'}]}
                             CONTENT={_this.state.data}
@@ -129,7 +129,7 @@ export default class OutStock extends Component {
                             close={()=>{_this.setState({isentry:false}); _this.getData()}}
                             isOutStock = {true}
                             HEAD={[{title:'状态',name:'未录入'},{title:'商品编号',name:'goods_number'},{title:'客户名称',name:'customer'},
-                            {title:'工费类型',name:'goods_type'},{title:'料价(1g)',name:'current_price'},{title:'工费',name:'goods_laborcost'},
+                            {title:'工费类型',name:'goods_type'},{title:'工费',name:'goods_laborcost'},
                             {title:'商品重量(件/g)',name:'weight'},{title:'总计件数',name:'num'},
                             {title:'合计克重(g)',name:'weight_all'},{title:'合计价钱($)',name:'price_all'},
                             {title:'经办人',name:'operator'}]}

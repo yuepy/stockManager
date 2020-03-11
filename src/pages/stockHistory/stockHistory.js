@@ -30,18 +30,7 @@ export default class StockHistory extends Component {
             allData : res.data
         })
     }
-    loadData=(data)=>{
-        var _this = this;
-        if(!_this.state.data){
-            return (<div>暂无数据</div>)
-        }
-        debugger;
-        _this.state.data.map(function(item,index){
-            return<tr>123</tr>
-            })
-    }
     searchBtn(e){
-        debugger
         var _this = this;
         var target = e.target;
         var select = target.ownerDocument.querySelector('.searchSelect');
