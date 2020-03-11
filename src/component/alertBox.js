@@ -11,7 +11,7 @@ export default class CommonContent extends Component{
     render(){
         var _this = this;
         return(
-           <div>
+           <div style={{display:'none'}}>
                 <div className="showContent">
                     <li><span>虚拟供货商1</span><i></i></li>
                 </div>
