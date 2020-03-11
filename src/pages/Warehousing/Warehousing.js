@@ -18,7 +18,7 @@ export default class Warehousing extends Component {
            allData:'',
            deleteFlag:false,
            searchType:'commodity',
-           alertBox:'block'
+           alertBox:'none'
         }
     }
     componentDidMount=()=>{
