@@ -107,7 +107,11 @@ export default class Warehousing extends Component {
         AJAX.AJAX(this.state.allData.path,'GET',false,head,this.isLogin,this.error);
     }
     showSupplier(){
-
+        var _this = this;
+        var show = _this.state.alertBox=='none'?'block':'none';
+        _this.setState({
+            alertBox:show
+        })
     }
     searchType(e){
         var _this = this;
@@ -150,11 +154,11 @@ export default class Warehousing extends Component {
                         </div>
                         <div className="optContent twoLine">                            
                             <div className="enterBtn2" onClick={this.showEntry}>商品录入</div>
-                            <div className="enterBtn2" onClick={this.showSupplier}>供应商录入</div>
+                            <div className="enterBtn2" onClick={_this.showSupplier.bind(_this)}>供应商录入</div>
                             {_this.state.deleteFlag && <div className='enterBtn2 isDelete' onClick={_this.isConfirm.bind(_this)}>确认删除</div>}
                             <div className="enterBtn2" onClick={_this.selectDelete.bind(_this)}>{this.state.deleteFlag?'取消':'批量删除'}</div>
                         </div>
-                        <AlertBox Show={_this.state.alertBox}/>      
+                        <AlertBox Show={_this.state.alertBox} close={_this.showSupplier.bind(_this)}/>      
                 		<CommonContent 
                             HEAD={[{title:'日期',name:'create_time'},{title:'供应商',name:'supplier'},{title:'商品种类',name:'category'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},
                             {title:'工费类型',name:'goods_type'},{title:'工费',name:'laborcost'},{title:'商品重量(件/g)',name:'weight'},{title:'总计件数',name:'num'},
