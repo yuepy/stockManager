@@ -16,12 +16,14 @@ export default class OutStock extends Component {
            deleteFlag:false,
            allData:'',
            isentry:false,
-           searchType:'commodity'
+           searchType:'commodity',
+           customer:''
         }
     }
     componentDidMount=()=>{
         var _this = this;
         _this.getData();
+        _this.getCustomer();
     }
     getData=()=>{
         var head = {head:'Authorization',value:'Bearer '+utils.token};
@@ -33,10 +35,17 @@ export default class OutStock extends Component {
         if(res.msg == '身份失效'){
             window.location.href = '/';
         }
-        _this.setState({
-            data : res.data.data,
-            allData:res.data
-        })
+        if(res.msg =='成功'){
+            _this.setState({
+                data : res.data.data,
+                allData : res.data
+            })
+        }
+        if(res.msg == '获取成功'){
+            _this.setState({
+                customer : res.data.data,
+            })
+        }
     }
     showEntry=()=>{
         var _this = this;
@@ -69,7 +78,6 @@ export default class OutStock extends Component {
         var head = {head:'Authorization',value:'Bearer '+utils.token};
         AJAX.AJAX(this.state.allData.path,'GET',false,head,this.isLogin,this.error);
     }
-    showCustomer(){}
     searchType(e){
         var _this = this;
         var type = e.target.querySelectorAll('option')[e.target.selectedIndex].id;
@@ -77,6 +85,11 @@ export default class OutStock extends Component {
             searchType:type
         })
         // ,{title:'商品图片',name:'goods_images'}  ,{title:'商品图片',name:'images'}
+    }
+    getCustomer(){
+        var _this = this;
+        var head = {head:'Authorization',value:'Bearer '+utils.token};
+        AJAX.AJAX('http://106.12.194.98/api/customer/list','GET',false,head,this.isLogin.bind(_this),_this.error);
     }
     render() {
         var _this = this;
@@ -133,6 +146,7 @@ export default class OutStock extends Component {
                             {title:'商品重量(件/g)',name:'weight'},{title:'总计件数',name:'num'},
                             {title:'合计克重(g)',name:'weight_all'},{title:'合计价钱($)',name:'price_all'},
                             {title:'经办人',name:'operator'}]}
+                            supplier = {_this.state.customer}
                         />}
                         <PageFooter CONTENT={_this.state.allData} isLogin={this.isLogin}/>
                     </div>
