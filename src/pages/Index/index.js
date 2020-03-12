@@ -91,6 +91,7 @@ export default class Index extends Component {
                                 <div className="enterBtn" onClick={_this.searchBtn.bind(_this)}>搜索</div>
                                 <div className="enterBtn clear" onClick={_this.clear.bind(_this)}>重置</div>
                             </div> */}
+                            <div className='allStockIndex'><h1>全部商品库存</h1></div>
                         </div>
                         
                         <CommonContent 
