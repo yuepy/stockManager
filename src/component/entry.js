@@ -8,7 +8,8 @@ export default class Entry extends Component{
         this.state={
             currentDate:'',
             rownum:'',
-            trID:''
+            trID:'',
+            nullSupplierORCustomer:false
         }
     }
     save(elem){
@@ -377,11 +378,29 @@ export default class Entry extends Component{
         return <td>
             <input type='text' style={{display:'none'}} id={name} name={name} />
             <select onChange={_this.selectSupplier.bind(_this)}>
-                {_this.props && _this.props.supplier.map((item,index)=>{
+                <option value =''>{!_this.props.isOutStock?'请选择供应商':'请选择出货客户'}</option>
+                {_this.props && _this.props.supplier != '' && _this.props.supplier.map((item,index)=>{
                     return <option value ={item.nam}>{item.name}</option>
                 }) }
             </select>
         </td>
+    }
+    randomWord(randomFlag, min, max){
+        //随机生成指定区间位数字符0-9 A-Z 或者指定位数  randomFlag判断位数是否指定
+        var _this = this;
+        var str = "",
+            range = min,
+            arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+        if(randomFlag){
+            range = Math.round(Math.random() * (max-min)) + min;
+        }
+        for(var i=0; i<range; i++){
+            var pos = Math.round(Math.random() * (arr.length-1));
+            str += arr[pos];
+        }
+        event.target.parentNode.querySelector('input').value = str;
+        // return str;
+        _this.isShowSave(event.target.parentNode.querySelector('input'));
     }
     render(){
         var _this = this;
@@ -408,7 +427,10 @@ export default class Entry extends Component{
                                  <input type='text' name={item.name}  id={item.name} style={{display:"none"}}/><span onClick={_this.uploadClick.bind(_this)} id='file_name'>上传图片</span></td>:
                                  (item.title == '工费类型' ? <td><input type='text' style={{display:'none'}} id={item.name} name={item.name} defaultValue='1'/>
                                  <select onChange={_this.selectType.bind(_this)}><option value='1'>件</option><option value='2'>克</option></select></td>:
-                                 ( item.title== '供应商'?_this.getSupplier(item.name):<td><input type='text' name={item.name}  id={item.name}/></td>))))) 
+                                 ( item.title== '供应商'?_this.getSupplier(item.name):
+                                 (item.title == '商品编号' && !_this.props.isOutStock?<td className='number'><input type='text' name={item.name}  id={item.name}/><button onClick={_this.randomWord.bind(_this,true,6,8)}>生成</button></td>:
+                                 (item.title == '客户名称' && _this.props.isOutStock?_this.getSupplier(item.name):
+                                 <td><input type='text' name={item.name}  id={item.name}/></td>))))))) 
                                 })}
                             </tr>})}
                         </tbody>

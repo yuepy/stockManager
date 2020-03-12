@@ -8,7 +8,7 @@ export default class CommonContent extends Component{
         this.state={
             indexFlag:false,
             trID:'',
-            total_laborcost:0
+            total_laborcost:false
         }
     }
     componentDidMount(){
@@ -122,7 +122,7 @@ export default class CommonContent extends Component{
         var laborcostTd = document.querySelectorAll('#laborcost');
         if(laborcostTd.length < 1){
             _this.setState({
-                total_laborcost : 1
+                total_laborcost : 0
             })
             return ;
         }

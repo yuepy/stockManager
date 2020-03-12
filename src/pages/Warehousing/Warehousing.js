@@ -38,10 +38,12 @@ export default class Warehousing extends Component {
         if(res.msg == '身份失效'){
             window.location.href = '/';
         }
-        _this.setState({
-            data : res.data.data,
-            allData : res.data
-        })
+        if(res.msg =='成功'){
+            _this.setState({
+                data : res.data.data,
+                allData : res.data
+            })
+        }
         if(res.msg == '获取成功'){
             _this.setState({
                 supplier : res.data.data,
