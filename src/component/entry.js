@@ -367,6 +367,22 @@ export default class Entry extends Component{
         }
         _this.selectType(tr.querySelector('#goods_type'));
     }
+    selectSupplier(e){
+        //选择供应商
+        e.target.parentNode.querySelector('input').value = e.target.value;
+    }
+    getSupplier(name){
+        //渲染全部供应商
+        var _this = this;
+        return <td>
+            <input type='text' style={{display:'none'}} id={name} name={name} />
+            <select onChange={_this.selectSupplier.bind(_this)}>
+                {_this.props && _this.props.supplier.map((item,index)=>{
+                    return <option value ={item.nam}>{item.name}</option>
+                }) }
+            </select>
+        </td>
+    }
     render(){
         var _this = this;
         var arr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]; // 表示第一次渲染多少行空表格 (待录入数据)
@@ -392,7 +408,7 @@ export default class Entry extends Component{
                                  <input type='text' name={item.name}  id={item.name} style={{display:"none"}}/><span onClick={_this.uploadClick.bind(_this)} id='file_name'>上传图片</span></td>:
                                  (item.title == '工费类型' ? <td><input type='text' style={{display:'none'}} id={item.name} name={item.name} defaultValue='1'/>
                                  <select onChange={_this.selectType.bind(_this)}><option value='1'>件</option><option value='2'>克</option></select></td>:
-                                 <td><input type='text' name={item.name}  id={item.name}/></td>)))) 
+                                 ( item.title== '供应商'?_this.getSupplier(item.name):<td><input type='text' name={item.name}  id={item.name}/></td>))))) 
                                 })}
                             </tr>})}
                         </tbody>

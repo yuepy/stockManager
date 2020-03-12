@@ -18,12 +18,14 @@ export default class Warehousing extends Component {
            allData:'',
            deleteFlag:false,
            searchType:'commodity',
-           alertBox:'none'
+           alertBox:'none',
+           supplier:''
         }
     }
     componentDidMount=()=>{
         var _this = this;
         _this.getData();
+        _this.getSupplier();
     }
     getData=()=>{
         var _this = this;
@@ -40,6 +42,11 @@ export default class Warehousing extends Component {
             data : res.data.data,
             allData : res.data
         })
+        if(res.msg == '获取成功'){
+            _this.setState({
+                supplier : res.data.data,
+            })
+        }
     }
     error(res){
         alert(res.msg);
@@ -113,11 +120,17 @@ export default class Warehousing extends Component {
         })
     }
     searchType(e){
+        //选择工费类型并赋值
         var _this = this;
         var type = e.target.querySelectorAll('option')[e.target.selectedIndex].id;
         _this.setState({
             searchType:type
         })
+    }
+    getSupplier(){
+        var _this = this;
+        var head = {head:'Authorization',value:'Bearer '+utils.token};
+        AJAX.AJAX('http://106.12.194.98/api/supplier/list','GET',false,head,this.isLogin.bind(_this),_this.error);
     }
     render(){
         var _this = this;
@@ -177,6 +190,7 @@ export default class Warehousing extends Component {
                             {title:'工费类型',name:'goods_type'},{title:'工费',name:'goods_laborcost'},{title:'商品重量(件/g)',name:'weight'},{title:'总计件数',name:'num'},
                             {title:'总计克重(g)',name:'weight_all'},{title:'工费总价($)',name:'price_all'},
                             {title:'经办人',name:'operator'}]}
+                            supplier = {_this.state.supplier}
                         />}
                 		<PageFooter CONTENT={_this.state.allData} isLogin={this.isLogin}/>
                 	</div>
