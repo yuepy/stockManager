@@ -70,7 +70,8 @@ module.exports = {
     },
     plugins:[
         new ManifestPlugin(),
-        new ExtractTextPlugin('css/index.css')
+        new ExtractTextPlugin('css/index.css'),
+        
     ],
     //new uglify()  正式环境 打包压缩
     resolve: {

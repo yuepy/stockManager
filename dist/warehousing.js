@@ -34,7 +34,7 @@ var _footer = __webpack_require__(70);
 
 var _footer2 = _interopRequireDefault(_footer);
 
-var _alertBox = __webpack_require__(79);
+var _alertBox = __webpack_require__(73);
 
 var _alertBox2 = _interopRequireDefault(_alertBox);
 
@@ -46,11 +46,11 @@ var _utils = __webpack_require__(60);
 
 var utils = _interopRequireWildcard(_utils);
 
-var _entry = __webpack_require__(73);
+var _entry = __webpack_require__(74);
 
 var _entry2 = _interopRequireDefault(_entry);
 
-var _getDate = __webpack_require__(76);
+var _getDate = __webpack_require__(77);
 
 var DATE = _interopRequireWildcard(_getDate);
 
@@ -96,10 +96,12 @@ var Warehousing = function (_Component) {
             if (res.msg == '身份失效') {
                 window.location.href = '/';
             }
-            _this.setState({
-                data: res.data.data,
-                allData: res.data
-            });
+            if (res.msg == '成功') {
+                _this.setState({
+                    data: res.data.data,
+                    allData: res.data
+                });
+            }
             if (res.msg == '获取成功') {
                 _this.setState({
                     supplier: res.data.data
@@ -331,7 +333,7 @@ var Warehousing = function (_Component) {
                                 this.state.deleteFlag ? '取消' : '批量删除'
                             )
                         ),
-                        _react2.default.createElement(_alertBox2.default, { Show: _this.state.alertBox, close: _this.showSupplier.bind(_this) }),
+                        _react2.default.createElement(_alertBox2.default, { Show: _this.state.alertBox, Type: 'supplier', close: _this.showSupplier.bind(_this) }),
                         _react2.default.createElement(_commonContent2.default, {
                             HEAD: [{ title: '日期', name: 'create_time' }, { title: '供应商', name: 'supplier' }, { title: '商品种类', name: 'category' }, { title: '商品名称', name: 'goods_name' }, { title: '商品编号', name: 'goods_number' }, { title: '工费类型', name: 'goods_type' }, { title: '工费', name: 'laborcost' }, { title: '商品重量(件/g)', name: 'weight' }, { title: '总计件数', name: 'num' }, { title: '总计克重(g)', name: 'weight_all' }, { title: '工费总价($)', name: 'price_all' }, { title: '经办人', name: 'operator' }, { title: '操作', name: '删除' }],
                             CONTENT: _this.state.data,
@@ -929,7 +931,7 @@ module.exports = exported;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(62);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "body,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\np,\nblockquote,\ndl,\ndt,\ndd,\nul,\nol,\nli,\npre,\nform,\nfieldset,\nlegend,\nbutton,\ninput,\ntextarea,\nth,\ntd {\n  margin: 0;\n  padding: 0;\n}\nbody,\nbutton,\ninput,\nselect,\ntextarea {\n  font: 12px/1.5tahoma, arial, \\5b8b\\4f53;\n}\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: 100%;\n}\naddress,\ncite,\ndfn,\nem,\nvar {\n  font-style: normal;\n}\ncode,\nkbd,\npre,\nsamp {\n  font-family: couriernew, courier, monospace;\n}\nsmall {\n  font-size: 12px;\n}\nul,\nol {\n  list-style: none;\n}\na {\n  text-decoration: none;\n}\na:hover {\n  text-decoration: underline;\n}\nsup {\n  vertical-align: text-top;\n}\nsub {\n  vertical-align: text-bottom;\n}\nlegend {\n  color: #000;\n}\nfieldset,\nimg {\n  border: 0;\n}\nbutton,\ninput,\nselect,\ntextarea {\n  font-size: 100%;\n}\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n.allStock {\n  display: flex;\n}\n.rightContent {\n  display: flex;\n  flex-direction: column;\n}\n.rightContent {\n  position: absolute;\n  top: 50px;\n  bottom: 0;\n  left: 200px;\n  right: 0;\n  background: #f0f0f0;\n  display: flex;\n  flex-direction: column;\n}\n.rightContent .rightHeader {\n  width: 100%;\n  height: 60px;\n  background: #FFFFFF;\n  display: flex;\n  align-items: center;\n}\n.rightContent .rightHeader span {\n  display: block;\n  width: 100px;\n  height: 20px;\n  line-height: 20px;\n  border-left: 4px solid #0077fb;\n  margin-left: 15px;\n  padding-left: 5px;\n}\n.rightContent .dataContent {\n  width: 98%;\n  margin: 0 auto;\n  margin-top: 20px;\n  background: #FFFFFF;\n  overflow-y: auto;\n}\n.rightContent .dataContent .optContent {\n  width: 95%;\n  margin: 0 auto;\n  height: 50px;\n  margin-top: 20px;\n  display: flex;\n  align-items: center;\n}\n.rightContent .dataContent .optContent .search {\n  width: 120px;\n  height: 30px;\n  font-size: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 5px;\n  color: #000000;\n  text-indent: 3px;\n  cursor: pointer;\n  outline: none;\n  margin-right: 15px;\n}\n.rightContent .dataContent .optContent .opt {\n  width: 95%;\n  display: flex;\n  align-items: center;\n}\n.rightContent .dataContent .optContent .opt .searchSelect {\n  width: 120px;\n  height: 30px;\n  font-size: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 5px;\n  color: #000000;\n  text-indent: 3px;\n  cursor: pointer;\n  outline: none;\n}\n.rightContent .dataContent .optContent .opt .searchValue {\n  width: 150px;\n  height: 26px;\n  font-size: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 5px;\n  color: #000000;\n  text-indent: 3px;\n  margin-left: 10px;\n  outline: none;\n}\n.rightContent .dataContent .optContent .opt .enterBtn {\n  width: 60px;\n  height: 24px;\n  background: #2B79D9;\n  color: #FFFFFF;\n  border-radius: 3px;\n  text-align: center;\n  line-height: 24px;\n  font-size: 12px;\n  margin-left: 15px;\n  border: 1px #2B79D9 solid;\n  cursor: pointer;\n}\n.rightContent .dataContent .optContent .opt .clear {\n  background: #FEFEFE !important;\n  color: #000000 !important;\n  border: 1px #807575 solid;\n}\n.rightContent .dataContent .optContent .opt .DateInput {\n  width: 120px;\n  height: 25px;\n  font-size: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 5px;\n  color: #000000;\n  text-indent: 3px;\n  outline: none;\n}\n.rightContent .dataContent .optContent .opt .lastBtn {\n  margin-left: auto;\n}\n.rightContent .dataContent .optContent .opt .isDelete {\n  background-color: red!important;\n  border: 1px solid red!important;\n}\n.rightContent .dataContent .twoLine {\n  margin-top: 5px;\n}\n.rightContent .dataContent .twoLine .enterBtn2 {\n  width: 60px;\n  height: 24px;\n  background: #2B79D9;\n  color: #FFFFFF;\n  border-radius: 3px;\n  text-align: center;\n  line-height: 24px;\n  font-size: 12px;\n  margin-right: 15px;\n  border: 1px #2B79D9 solid;\n  cursor: pointer;\n}\n.rightContent .dataContent table {\n  width: 95%;\n  margin: 0 auto;\n  margin-top: 10px;\n  margin-bottom: 50px;\n  font-size: 12px;\n  border-left: 1px solid #e6e6e6;\n  border-top: 1px solid #e6e6e6;\n}\n.rightContent .dataContent table tr th {\n  background: #FAFAFA;\n  border: 1px solid #ececec;\n  height: 40px;\n  line-height: 40px;\n  text-align: left;\n  text-indent: 15px;\n  border-top: none;\n  border-left: none;\n}\n.rightContent .dataContent table tr td {\n  border: 1px solid #e6e6e6;\n  height: 35px;\n  line-height: 35px;\n  text-indent: 15px;\n  border-top: none;\n  border-left: none;\n}\n.rightContent .dataContent table tr .deleteFlag {\n  color: #e4393c;\n}\n.rightContent .dataContent table tr .showInput {\n  display: block;\n}\n.rightContent .dataContent table tr .hideInput {\n  display: none;\n}\n.rightContent .dataContent table .total td {\n  border: 1px solid #e6e6e6;\n  border-top: none;\n  border-left: none;\n  background: #F2F2F2;\n  height: 35px;\n  line-height: 35px;\n  text-indent: 15px;\n}\n.showSupplier .alertBox {\n  position: fixed;\n  width: 500px;\n  height: 300px;\n  background: #FFFFFF;\n  top: 30%;\n  left: 0;\n  right: 0;\n  margin: 0 auto;\n  z-index: 999999;\n  padding: 5px 10px;\n}\n.showSupplier .alertBox .showContent {\n  width: 100%;\n  height: 200px;\n  border: 1px solid #FeFeFe;\n  overflow-y: scroll;\n  overflow-x: hidden;\n}\n.showSupplier .alertBox .showContent li {\n  list-style: none;\n  width: 100px;\n  height: 30px;\n  background: #F00;\n  padding: 2px;\n  margin-right: 15px;\n  line-height: 30px;\n  text-align: center;\n  border-radius: 3px;\n  font-size: 12px;\n  float: left;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n.showSupplier .alertBox .inputContent {\n  display: flex;\n  align-items: center;\n  margin-top: 30px;\n}\n.showSupplier .alertBox .inputContent input {\n  width: 150px;\n  height: 26px;\n  font-size: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 5px;\n  color: #000000;\n  text-indent: 3px;\n  margin-left: 10px;\n  outline: none;\n}\n.showSupplier .alertBox .inputContent .enterBtn {\n  width: 60px;\n  height: 24px;\n  background: #2B79D9;\n  color: #FFFFFF;\n  border-radius: 3px;\n  text-align: center;\n  line-height: 24px;\n  font-size: 12px;\n  margin-left: 15px;\n  border: 1px #2B79D9 solid;\n  cursor: pointer;\n}\n.showSupplier .mask {\n  position: fixed;\n  left: 0;\n  top: 0;\n  height: 100vh;\n  width: 100vw;\n  background: rgba(0, 0, 0, 0.2);\n  z-index: 99990;\n}\n.allStockIndex {\n  width: 100%;\n  text-align: center;\n  font-size: 22px;\n}\n.number #goods_number {\n  width: 60%!important;\n}\n.number button {\n  margin: 0!important;\n  font-size: 12px!important;\n  padding: 2px 4px !important;\n}\n", ""]);
+exports.push([module.i, "body,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\np,\nblockquote,\ndl,\ndt,\ndd,\nul,\nol,\nli,\npre,\nform,\nfieldset,\nlegend,\nbutton,\ninput,\ntextarea,\nth,\ntd {\n  margin: 0;\n  padding: 0;\n}\nbody,\nbutton,\ninput,\nselect,\ntextarea {\n  font: 12px/1.5tahoma, arial, \\5b8b\\4f53;\n}\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: 100%;\n}\naddress,\ncite,\ndfn,\nem,\nvar {\n  font-style: normal;\n}\ncode,\nkbd,\npre,\nsamp {\n  font-family: couriernew, courier, monospace;\n}\nsmall {\n  font-size: 12px;\n}\nul,\nol {\n  list-style: none;\n}\na {\n  text-decoration: none;\n}\na:hover {\n  text-decoration: underline;\n}\nsup {\n  vertical-align: text-top;\n}\nsub {\n  vertical-align: text-bottom;\n}\nlegend {\n  color: #000;\n}\nfieldset,\nimg {\n  border: 0;\n}\nbutton,\ninput,\nselect,\ntextarea {\n  font-size: 100%;\n}\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n.allStock {\n  display: flex;\n}\n.rightContent {\n  display: flex;\n  flex-direction: column;\n}\n.rightContent {\n  position: absolute;\n  top: 50px;\n  bottom: 0;\n  left: 200px;\n  right: 0;\n  background: #f0f0f0;\n  display: flex;\n  flex-direction: column;\n}\n.rightContent .rightHeader {\n  width: 100%;\n  height: 60px;\n  background: #FFFFFF;\n  display: flex;\n  align-items: center;\n}\n.rightContent .rightHeader span {\n  display: block;\n  width: 100px;\n  height: 20px;\n  line-height: 20px;\n  border-left: 4px solid #0077fb;\n  margin-left: 15px;\n  padding-left: 5px;\n}\n.rightContent .dataContent {\n  width: 98%;\n  margin: 0 auto;\n  margin-top: 20px;\n  background: #FFFFFF;\n  overflow-y: auto;\n}\n.rightContent .dataContent .optContent {\n  width: 95%;\n  margin: 0 auto;\n  height: 50px;\n  margin-top: 20px;\n  display: flex;\n  align-items: center;\n}\n.rightContent .dataContent .optContent .search {\n  width: 120px;\n  height: 30px;\n  font-size: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 5px;\n  color: #000000;\n  text-indent: 3px;\n  cursor: pointer;\n  outline: none;\n  margin-right: 15px;\n}\n.rightContent .dataContent .optContent .opt {\n  width: 95%;\n  display: flex;\n  align-items: center;\n}\n.rightContent .dataContent .optContent .opt .searchSelect {\n  width: 120px;\n  height: 30px;\n  font-size: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 5px;\n  color: #000000;\n  text-indent: 3px;\n  cursor: pointer;\n  outline: none;\n}\n.rightContent .dataContent .optContent .opt .searchValue {\n  width: 150px;\n  height: 26px;\n  font-size: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 5px;\n  color: #000000;\n  text-indent: 3px;\n  margin-left: 10px;\n  outline: none;\n}\n.rightContent .dataContent .optContent .opt .enterBtn {\n  width: 60px;\n  height: 24px;\n  background: #2B79D9;\n  color: #FFFFFF;\n  border-radius: 3px;\n  text-align: center;\n  line-height: 24px;\n  font-size: 12px;\n  margin-left: 15px;\n  border: 1px #2B79D9 solid;\n  cursor: pointer;\n}\n.rightContent .dataContent .optContent .opt .clear {\n  background: #FEFEFE !important;\n  color: #000000 !important;\n  border: 1px #807575 solid;\n}\n.rightContent .dataContent .optContent .opt .DateInput {\n  width: 120px;\n  height: 25px;\n  font-size: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 5px;\n  color: #000000;\n  text-indent: 3px;\n  outline: none;\n}\n.rightContent .dataContent .optContent .opt .lastBtn {\n  margin-left: auto;\n}\n.rightContent .dataContent .optContent .opt .isDelete {\n  background-color: red!important;\n  border: 1px solid red!important;\n}\n.rightContent .dataContent .twoLine {\n  margin-top: 5px;\n}\n.rightContent .dataContent .twoLine .enterBtn2 {\n  width: 60px;\n  height: 24px;\n  background: #2B79D9;\n  color: #FFFFFF;\n  border-radius: 3px;\n  text-align: center;\n  line-height: 24px;\n  font-size: 12px;\n  margin-right: 15px;\n  border: 1px #2B79D9 solid;\n  cursor: pointer;\n}\n.rightContent .dataContent table {\n  width: 95%;\n  margin: 0 auto;\n  margin-top: 10px;\n  margin-bottom: 50px;\n  font-size: 12px;\n  border-left: 1px solid #e6e6e6;\n  border-top: 1px solid #e6e6e6;\n}\n.rightContent .dataContent table tr th {\n  background: #FAFAFA;\n  border: 1px solid #ececec;\n  height: 40px;\n  line-height: 40px;\n  text-align: left;\n  text-indent: 15px;\n  border-top: none;\n  border-left: none;\n}\n.rightContent .dataContent table tr td {\n  border: 1px solid #e6e6e6;\n  height: 35px;\n  line-height: 35px;\n  text-indent: 15px;\n  border-top: none;\n  border-left: none;\n}\n.rightContent .dataContent table tr .deleteFlag {\n  color: #e4393c;\n}\n.rightContent .dataContent table tr .showInput {\n  display: block;\n}\n.rightContent .dataContent table tr .hideInput {\n  display: none;\n}\n.rightContent .dataContent table .total td {\n  border: 1px solid #e6e6e6;\n  border-top: none;\n  border-left: none;\n  background: #F2F2F2;\n  height: 35px;\n  line-height: 35px;\n  text-indent: 15px;\n}\n.showSupplier .alertBox {\n  position: fixed;\n  width: 500px;\n  height: 300px;\n  background: #FFFFFF;\n  top: 30%;\n  left: 0;\n  right: 0;\n  margin: 0 auto;\n  z-index: 999999;\n  padding: 5px 10px;\n}\n.showSupplier .alertBox .showContent {\n  width: 100%;\n  height: 200px;\n  overflow-y: scroll;\n  overflow-x: hidden;\n  margin-top: 20px;\n}\n.showSupplier .alertBox .showContent li {\n  list-style: none;\n  width: 100px;\n  height: 30px;\n  background: #FFFFFF;\n  border: 1px solid #F00;\n  padding: 2px;\n  margin-right: 10px;\n  margin-top: 10px;\n  line-height: 30px;\n  text-align: center;\n  border-radius: 3px;\n  font-size: 12px;\n  float: left;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n.showSupplier .alertBox .showContent::-webkit-scrollbar {\n  width: 5px;\n  height: 200px;\n}\n.showSupplier .alertBox .showContent::-webkit-scrollbar-track {\n  -webkit-box-shadow: inset0 6px rgba(0, 0, 0, 0.3);\n  border-radius: 10px;\n  background-color: #F5F5F5;\n}\n.showSupplier .alertBox .showContent::-webkit-scrollbar-thumb {\n  border-radius: 10px;\n  -webkit-box-shadow: inset0 6px rgba(0, 0, 0, 0.3);\n  background-color: #555;\n}\n.showSupplier .alertBox .inputContent {\n  display: flex;\n  align-items: center;\n  margin-top: 30px;\n}\n.showSupplier .alertBox .inputContent input {\n  width: 150px;\n  height: 26px;\n  font-size: 12px;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 5px;\n  color: #000000;\n  text-indent: 3px;\n  margin-left: 10px;\n  outline: none;\n}\n.showSupplier .alertBox .inputContent .enterBtn {\n  width: 60px;\n  height: 24px;\n  background: #2B79D9;\n  color: #FFFFFF;\n  border-radius: 3px;\n  text-align: center;\n  line-height: 24px;\n  font-size: 12px;\n  margin-left: 15px;\n  border: 1px #2B79D9 solid;\n  cursor: pointer;\n}\n.showSupplier .mask {\n  position: fixed;\n  left: 0;\n  top: 0;\n  height: 100vh;\n  width: 100vw;\n  background: rgba(0, 0, 0, 0.2);\n  z-index: 99990;\n}\n.allStockIndex {\n  width: 100%;\n  text-align: center;\n  font-size: 22px;\n}\n.number #goods_number {\n  width: 60%!important;\n}\n.number button {\n  margin: 0!important;\n  font-size: 12px!important;\n  padding: 2px 4px !important;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -1067,7 +1069,7 @@ var CommonLeftMenu = function (_Component) {
                             _react2.default.createElement(
                                 _reactRouterDom.Link,
                                 { to: '/stockHistory' },
-                                '\u5546\u54C1\u51FA\u5E93\u8BB0\u5F55'
+                                '\u5546\u54C1\u51FA\u5165\u5E93\u8BB0\u5F55'
                             )
                         )
                     )
@@ -1395,7 +1397,6 @@ var CommonContent = function (_Component) {
         value: function componentDidUpdate(prevProps, prevState) {
             //统计当前页面 工费 合计
             var _this = this;
-            debugger;
             if (prevProps != _this.props) {
                 _this.total_laborcost();
             }
@@ -1457,7 +1458,7 @@ var CommonContent = function (_Component) {
             var laborcostTd = document.querySelectorAll('#laborcost');
             if (laborcostTd.length < 1) {
                 _this.setState({
-                    total_laborcost: true
+                    total_laborcost: 0
                 });
                 return;
             }
@@ -1948,7 +1949,234 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(74);
+var _AJAX = __webpack_require__(59);
+
+var AJAX = _interopRequireWildcard(_AJAX);
+
+var _utils = __webpack_require__(60);
+
+var utils = _interopRequireWildcard(_utils);
+
+var _reactRouterDom = __webpack_require__(18);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+(function () {
+    var enterModule = __webpack_require__(1).enterModule;
+
+    enterModule && enterModule(module);
+})();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var CommonContent = function (_Component) {
+    _inherits(CommonContent, _Component);
+
+    function CommonContent() {
+        _classCallCheck(this, CommonContent);
+
+        var _this2 = _possibleConstructorReturn(this, (CommonContent.__proto__ || Object.getPrototypeOf(CommonContent)).call(this));
+
+        _this2.componentDidMount = function () {
+            var _this = _this2;
+            _this.getData();
+        };
+
+        _this2.getData = function () {
+            var _this = _this2;
+            var url = _this.props.Type == 'supplier' ? 'http://106.12.194.98/api/supplier/list' : 'http://106.12.194.98/api/customer/list';
+            var head = { head: 'Authorization', value: 'Bearer ' + utils.token };
+            AJAX.AJAX(url + '?num=1000', 'GET', false, head, _this2.isLogin.bind(_this), _this.error);
+        };
+
+        _this2.isLogin = function (res) {
+            var _this = _this2;
+            res = JSON.parse(res);
+            if (res.msg == '身份失效') {
+                window.location.href = '/';
+            }
+            _this.setState({
+                data: res.data.data
+            });
+        };
+
+        _this2.ischangeLogin = function (res) {
+            var _this = _this2;
+            res = JSON.parse(res);
+            if (res.msg == '身份失效') {
+                window.location.href = '/';
+            }
+            _this.getData();
+        };
+
+        _this2.state = {
+            data: ''
+        };
+        return _this2;
+    }
+
+    _createClass(CommonContent, [{
+        key: 'save',
+        value: function save(e) {
+            debugger;
+            var _this = this;
+            if (_this.props.Type == 'supplier') {
+                if (e.target.ownerDocument.querySelector('#supplierValue').value == '') {
+                    return;
+                }
+                var value = e.target.ownerDocument.querySelector('#supplierValue').value;
+                e.target.ownerDocument.querySelector('#supplierValue').value = '';
+                var url = 'http://106.12.194.98/api/supplier/add?name=' + value;
+            } else if (_this.props.Type == 'customer') {
+                if (e.target.ownerDocument.querySelector('#customerValue').value == '') {
+                    return;
+                }
+                var customerValue = e.target.ownerDocument.querySelector('#customerValue').value;
+                var telValue = e.target.ownerDocument.querySelector('#telValue').value;
+                e.target.ownerDocument.querySelector('#customerValue').value = '';
+                e.target.ownerDocument.querySelector('#telValue').value = '';
+                var url = 'http://106.12.194.98/api/customer/add?name=' + customerValue + '&mobile=' + telValue;
+            }
+            var head = { head: 'Authorization', value: 'Bearer ' + utils.token };
+            AJAX.AJAX(url, 'POST', false, head, _this.ischangeLogin.bind(_this), _this.error);
+        }
+    }, {
+        key: 'isConfirm',
+        value: function isConfirm(e) {
+            var _this = this;
+            var value = e.target.textContent;
+            var id = e.target.id;
+            var isStatus = confirm('确认删除：' + value + '?');
+            if (isStatus) {
+                _this.delete(value, id);
+            }
+        }
+    }, {
+        key: 'delete',
+        value: function _delete(val, id) {
+            debugger;
+            var _this = this;
+            if (_this.props.Type == 'supplier') {
+                var url = 'http://106.12.194.98/api/supplier/delete?name=' + val + '&ids=' + id;
+            } else if (_this.props.Type == 'customer') {
+                var url = 'http://106.12.194.98/api/customer/delete?name=' + val + '&ids=' + id;
+            }
+            var head = { head: 'Authorization', value: 'Bearer ' + utils.token };
+            AJAX.AJAX(url, 'POST', false, head, _this.ischangeLogin.bind(_this), _this.error);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this = this;
+            return _react2.default.createElement(
+                'div',
+                { className: 'showSupplier', style: { display: _this.props.Show } },
+                _react2.default.createElement('div', { className: 'mask' }),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'alertBox' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'showContent' },
+                        _this.state && _this.state.data !== '' && _this.state.data.data !== '' && _this.state.data.map(function (d, i) {
+                            return _react2.default.createElement(
+                                'li',
+                                { title: d.name, onClick: _this.isConfirm.bind(_this), id: d.id },
+                                d.name
+                            );
+                        })
+                    ),
+                    _this.props.Type == 'supplier' ? _react2.default.createElement(
+                        'div',
+                        { className: 'inputContent' },
+                        _react2.default.createElement('input', { id: 'supplierValue', placeholder: '\u8BF7\u8F93\u5165\u4F9B\u5E94\u5546\u540D\u79F0\uFF08\u5FC5\u586B\u9879\uFF09' }),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'enterBtn', onClick: _this.save.bind(_this) },
+                            '\u63D0\u4EA4'
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'enterBtn', onClick: _this.props.close.bind(_this) },
+                            '\u5173\u95ED'
+                        )
+                    ) : _react2.default.createElement(
+                        'div',
+                        { className: 'inputContent' },
+                        _react2.default.createElement('input', { id: 'customerValue', placeholder: '\u8BF7\u8F93\u5165\u5BA2\u6237\u540D\u79F0\uFF08\u5FC5\u586B\u9879\uFF09' }),
+                        _react2.default.createElement('input', { id: 'telValue', placeholder: '\u8BF7\u8F93\u5165\u7535\u8BDD\u53F7\u7801' }),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'enterBtn', onClick: _this.save.bind(_this) },
+                            '\u63D0\u4EA4'
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'enterBtn', onClick: _this.props.close.bind(_this) },
+                            '\u5173\u95ED'
+                        )
+                    )
+                )
+            );
+        }
+    }, {
+        key: '__reactstandin__regenerateByEval',
+        // @ts-ignore
+        value: function __reactstandin__regenerateByEval(key, code) {
+            // @ts-ignore
+            this[key] = eval(code);
+        }
+    }]);
+
+    return CommonContent;
+}(_react.Component);
+
+var _default = CommonContent;
+exports.default = _default;
+;
+
+(function () {
+    var reactHotLoader = __webpack_require__(1).default;
+
+    var leaveModule = __webpack_require__(1).leaveModule;
+
+    if (!reactHotLoader) {
+        return;
+    }
+
+    reactHotLoader.register(CommonContent, 'CommonContent', '/Users/yuhao/Documents/\u5E93\u5B58\u7BA1\u7406\u7CFB\u7EDF/code/react-code/src/component/alertBox.js');
+    reactHotLoader.register(_default, 'default', '/Users/yuhao/Documents/\u5E93\u5B58\u7BA1\u7406\u7CFB\u7EDF/code/react-code/src/component/alertBox.js');
+    leaveModule(module);
+})();
+
+;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)(module)))
+
+/***/ }),
+
+/***/ 74:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(module) {
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+__webpack_require__(75);
 
 var _AJAX = __webpack_require__(59);
 
@@ -2031,7 +2259,8 @@ var Entry = function (_Component) {
         _this2.state = {
             currentDate: '',
             rownum: '',
-            trID: ''
+            trID: '',
+            nullSupplierORCustomer: false
         };
         return _this2;
     }
@@ -2394,7 +2623,12 @@ var Entry = function (_Component) {
                 _react2.default.createElement(
                     'select',
                     { onChange: _this.selectSupplier.bind(_this) },
-                    _this.props && _this.props.supplier.map(function (item, index) {
+                    _react2.default.createElement(
+                        'option',
+                        { value: '' },
+                        !_this.props.isOutStock ? '请选择供应商' : '请选择出货客户'
+                    ),
+                    _this.props && _this.props.supplier != '' && _this.props.supplier.map(function (item, index) {
                         return _react2.default.createElement(
                             'option',
                             { value: item.nam },
@@ -2403,6 +2637,25 @@ var Entry = function (_Component) {
                     })
                 )
             );
+        }
+    }, {
+        key: 'randomWord',
+        value: function randomWord(randomFlag, min, max) {
+            //随机生成指定区间位数字符0-9 A-Z 或者指定位数  randomFlag判断位数是否指定
+            var _this = this;
+            var str = "",
+                range = min,
+                arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+            if (randomFlag) {
+                range = Math.round(Math.random() * (max - min)) + min;
+            }
+            for (var i = 0; i < range; i++) {
+                var pos = Math.round(Math.random() * (arr.length - 1));
+                str += arr[pos];
+            }
+            event.target.parentNode.querySelector('input').value = str;
+            // return str;
+            _this.isShowSave(event.target.parentNode.querySelector('input'));
         }
     }, {
         key: 'render',
@@ -2497,10 +2750,10 @@ var Entry = function (_Component) {
                                             _react2.default.createElement('input', { type: 'text', name: item.name, id: item.name }),
                                             _react2.default.createElement(
                                                 'button',
-                                                null,
+                                                { onClick: _this.randomWord.bind(_this, true, 6, 8) },
                                                 '\u751F\u6210'
                                             )
-                                        ) : _react2.default.createElement(
+                                        ) : item.title == '客户名称' && _this.props.isOutStock ? _this.getSupplier(item.name) : _react2.default.createElement(
                                             'td',
                                             null,
                                             _react2.default.createElement('input', { type: 'text', name: item.name, id: item.name })
@@ -2548,11 +2801,11 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 74:
+/***/ 75:
 /***/ (function(module, exports, __webpack_require__) {
 
 var api = __webpack_require__(61);
-            var content = __webpack_require__(75);
+            var content = __webpack_require__(76);
 
             content = content.__esModule ? content.default : content;
 
@@ -2575,7 +2828,7 @@ module.exports = exported;
 
 /***/ }),
 
-/***/ 75:
+/***/ 76:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -2589,7 +2842,7 @@ module.exports = exports;
 
 /***/ }),
 
-/***/ 76:
+/***/ 77:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2630,199 +2883,6 @@ var getDate = exports.getDate = function getDate(type, str) {
     }
 
     reactHotLoader.register(getDate, 'getDate', '/Users/yuhao/Documents/\u5E93\u5B58\u7BA1\u7406\u7CFB\u7EDF/code/react-code/src/component/getDate.js');
-    leaveModule(module);
-})();
-
-;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)(module)))
-
-/***/ }),
-
-/***/ 79:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(module) {
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(2);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _AJAX = __webpack_require__(59);
-
-var AJAX = _interopRequireWildcard(_AJAX);
-
-var _utils = __webpack_require__(60);
-
-var utils = _interopRequireWildcard(_utils);
-
-var _reactRouterDom = __webpack_require__(18);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-(function () {
-    var enterModule = __webpack_require__(1).enterModule;
-
-    enterModule && enterModule(module);
-})();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var CommonContent = function (_Component) {
-    _inherits(CommonContent, _Component);
-
-    function CommonContent() {
-        _classCallCheck(this, CommonContent);
-
-        var _this2 = _possibleConstructorReturn(this, (CommonContent.__proto__ || Object.getPrototypeOf(CommonContent)).call(this));
-
-        _this2.componentDidMount = function () {
-            var _this = _this2;
-            _this.getData();
-        };
-
-        _this2.getData = function () {
-            var _this = _this2;
-            var head = { head: 'Authorization', value: 'Bearer ' + utils.token };
-            AJAX.AJAX('http://106.12.194.98/api/supplier/list', 'GET', false, head, _this2.isLogin.bind(_this), _this.error);
-        };
-
-        _this2.isLogin = function (res) {
-            var _this = _this2;
-            res = JSON.parse(res);
-            if (res.msg == '身份失效') {
-                window.location.href = '/';
-            }
-            _this.setState({
-                data: res.data.data
-            });
-        };
-
-        _this2.ischangeLogin = function (res) {
-            var _this = _this2;
-            res = JSON.parse(res);
-            if (res.msg == '身份失效') {
-                window.location.href = '/';
-            }
-            _this.getData();
-        };
-
-        _this2.state = {
-            data: ''
-        };
-        return _this2;
-    }
-
-    _createClass(CommonContent, [{
-        key: 'save',
-        value: function save(e) {
-            debugger;
-            var _this = this;
-            var value = e.target.ownerDocument.querySelector('#supplierValue').value;
-            e.target.ownerDocument.querySelector('#supplierValue').value = '';
-            var url = 'http://106.12.194.98/api/supplier/add?name=' + value;
-            var head = { head: 'Authorization', value: 'Bearer ' + utils.token };
-            AJAX.AJAX(url, 'POST', false, head, _this.ischangeLogin.bind(_this), _this.error);
-        }
-    }, {
-        key: 'isConfirm',
-        value: function isConfirm(e) {
-            var _this = this;
-            var value = e.target.textContent;
-            var id = e.target.id;
-            var isStatus = confirm('确认删除：' + value + '?');
-            if (isStatus) {
-                _this.delete(value, id);
-            }
-        }
-    }, {
-        key: 'delete',
-        value: function _delete(val, id) {
-            debugger;
-            var _this = this;
-            var url = 'http://106.12.194.98/api/supplier/delete?name=' + val + '&ids=' + id;
-            var head = { head: 'Authorization', value: 'Bearer ' + utils.token };
-            AJAX.AJAX(url, 'POST', false, head, _this.ischangeLogin.bind(_this), _this.error);
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var _this = this;
-            return _react2.default.createElement(
-                'div',
-                { className: 'showSupplier', style: { display: _this.props.Show } },
-                _react2.default.createElement('div', { className: 'mask' }),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'alertBox' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'showContent' },
-                        _this.state.data !== '' && _this.state.data.data !== '' && _this.state.data.map(function (d, i) {
-                            return _react2.default.createElement(
-                                'li',
-                                { title: d.name, onClick: _this.isConfirm.bind(_this), id: d.id },
-                                d.name
-                            );
-                        })
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'inputContent' },
-                        _react2.default.createElement('input', { id: 'supplierValue' }),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'enterBtn', onClick: _this.save.bind(_this) },
-                            '\u63D0\u4EA4'
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'enterBtn', onClick: _this.props.close.bind(_this) },
-                            '\u5173\u95ED'
-                        )
-                    )
-                )
-            );
-        }
-    }, {
-        key: '__reactstandin__regenerateByEval',
-        // @ts-ignore
-        value: function __reactstandin__regenerateByEval(key, code) {
-            // @ts-ignore
-            this[key] = eval(code);
-        }
-    }]);
-
-    return CommonContent;
-}(_react.Component);
-
-var _default = CommonContent;
-exports.default = _default;
-;
-
-(function () {
-    var reactHotLoader = __webpack_require__(1).default;
-
-    var leaveModule = __webpack_require__(1).leaveModule;
-
-    if (!reactHotLoader) {
-        return;
-    }
-
-    reactHotLoader.register(CommonContent, 'CommonContent', '/Users/yuhao/Documents/\u5E93\u5B58\u7BA1\u7406\u7CFB\u7EDF/code/react-code/src/component/alertBox.js');
-    reactHotLoader.register(_default, 'default', '/Users/yuhao/Documents/\u5E93\u5B58\u7BA1\u7406\u7CFB\u7EDF/code/react-code/src/component/alertBox.js');
     leaveModule(module);
 })();
 
