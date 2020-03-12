@@ -86,7 +86,7 @@ export default class StockHistory extends Component {
                             </div>
                             <div className="searchOpt opt" style={{display:_this.state.searchType=='commodity'?'flex':'none'}}>
                                 <select className="searchSelect">
-                                    <option id="customer">客户名称</option>
+                                    {/* <option id="customer">客户名称</option> */}
                                     <option id="goods_name">商品名称</option>
                                     <option id="goods_number">商品编号</option>
                                 </select>
