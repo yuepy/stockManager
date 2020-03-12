@@ -86,6 +86,7 @@ export default class CommonContent extends Component{
             <div className="showSupplier" style={{display:_this.props.Show}}>
                 <div className="mask"></div>
                 <div className="alertBox">
+                    <span className="alertTitle">{_this.props.Type=='supplier'?'供应商列表':'客户列表'}</span>
                     <div className="showContent">
                         {_this.state&&_this.state.data!==''&&_this.state.data.data!==''&&_this.state.data.map(function(d,i){
                             return(<li title={d.name} onClick={_this.isConfirm.bind(_this)} id={d.id}>{d.name}</li>)
