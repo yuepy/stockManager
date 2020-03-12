@@ -276,7 +276,7 @@ table {
 .showSupplier .alertBox {
   position: fixed;
   width: 500px;
-  height: 300px;
+  height: 320px;
   background: #FFFFFF;
   top: 30%;
   left: 0;
@@ -285,25 +285,36 @@ table {
   z-index: 999999;
   padding: 5px 10px;
 }
+.showSupplier .alertBox .alertTitle {
+  display: block;
+  width: 100px;
+  height: 20px;
+  line-height: 20px;
+  border-left: 4px solid #1AA194;
+  padding-left: 5px;
+  margin-top: 5px;
+}
 .showSupplier .alertBox .showContent {
   width: 100%;
-  height: 200px;
+  height: 210px;
   overflow-y: scroll;
   overflow-x: hidden;
   margin-top: 20px;
 }
 .showSupplier .alertBox .showContent li {
   list-style: none;
-  width: 100px;
-  height: 30px;
-  background: #FFFFFF;
-  border: 1px solid #F00;
-  padding: 2px;
-  margin-right: 10px;
+  width: 70px;
+  height: 25px;
+  background: #1AA194;
+  border: 1px solid #E7EAED;
+  color: #FFFFFF;
+  padding: 2px 10px;
+  margin-right: 20px;
+  margin-left: 10px;
   margin-top: 10px;
-  line-height: 30px;
+  line-height: 25px;
   text-align: center;
-  border-radius: 3px;
+  border-radius: 5px;
   font-size: 12px;
   float: left;
   text-overflow: ellipsis;
@@ -340,17 +351,20 @@ table {
   margin-left: 10px;
   outline: none;
 }
+.showSupplier .alertBox .inputContent input::placeholder {
+  color: #ccc;
+}
 .showSupplier .alertBox .inputContent .enterBtn {
   width: 60px;
   height: 24px;
-  background: #2B79D9;
+  background: #1AA194;
   color: #FFFFFF;
   border-radius: 3px;
   text-align: center;
   line-height: 24px;
   font-size: 12px;
   margin-left: 15px;
-  border: 1px #2B79D9 solid;
+  border: 1px #1AA194 solid;
   cursor: pointer;
 }
 .showSupplier .mask {
@@ -366,4 +380,12 @@ table {
   width: 100%;
   text-align: center;
   font-size: 22px;
+}
+.number #goods_number {
+  width: 60%!important;
+}
+.number button {
+  margin: 0!important;
+  font-size: 12px!important;
+  padding: 2px 4px !important;
 }
