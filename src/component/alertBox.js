@@ -68,7 +68,7 @@ export default class CommonContent extends Component{
                 <div className="mask"></div>
                 <div className="alertBox">
                     <div className="showContent">
-                        {_this.state.data!==''&&_this.state.data.data!==''&&_this.state.data.map(function(d,i){
+                        {_this.state&&_this.state.data!==''&&_this.state.data.data!==''&&_this.state.data.map(function(d,i){
                             return(<li title={d.name} onClick={_this.isConfirm.bind(_this)} id={d.id}>{d.name}</li>)
                         })}
                     </div>

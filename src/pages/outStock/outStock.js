@@ -6,6 +6,7 @@ import * as AJAX from 'component/AJAX.js';
 import * as utils from 'component/utils.js';
 import CommonContent from 'component/commonContent.js';
 import PageFooter from 'component/footer.js';
+import AlertBox from 'component/alertBox.js';
 import Entry from 'component/entry.js';
 import * as DATE from 'component/getDate.js';
 export default class OutStock extends Component {
@@ -16,7 +17,8 @@ export default class OutStock extends Component {
            deleteFlag:false,
            allData:'',
            isentry:false,
-           searchType:'commodity'
+           searchType:'commodity',
+           alertBox:'none'
         }
     }
     componentDidMount=()=>{
@@ -69,7 +71,13 @@ export default class OutStock extends Component {
         var head = {head:'Authorization',value:'Bearer '+utils.token};
         AJAX.AJAX(this.state.allData.path,'GET',false,head,this.isLogin,this.error);
     }
-    showCustomer(){}
+    showCustomer(){
+        var _this = this;
+        var show = _this.state.alertBox=='none'?'block':'none';
+        _this.setState({
+            alertBox:show
+        })
+    }
     searchType(e){
         var _this = this;
         var type = e.target.querySelectorAll('option')[e.target.selectedIndex].id;
@@ -112,8 +120,9 @@ export default class OutStock extends Component {
                         </div>
                         <div className="optContent twoLine">
                             <div className="enterBtn2" onClick={this.showEntry}>出库录入</div>
-                            <div className="enterBtn2" onClick={this.showCustomer}>客户录入</div>
+                            <div className="enterBtn2" onClick={_this.showCustomer.bind(_this)}>客户录入</div>
                         </div>
+                        <AlertBox Show={_this.state.alertBox} Type={'customer'} close={_this.showCustomer.bind(_this)}/>
                         <CommonContent 
                             HEAD={[{title:'日期',name:'create_time'},{title:'供应商',name:'supplier'},{title:'客户名称',name:'customer'},{title:'种类',name:'category'},
                             {title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},{title:'工费类型',name:'goods_type'},
