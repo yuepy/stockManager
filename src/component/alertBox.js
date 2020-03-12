@@ -15,8 +15,9 @@ export default class CommonContent extends Component{
     }
     getData=()=>{
         var _this = this;
+        var url = _this.props.Type=='supplier'?'http://106.12.194.98/api/supplier/list':'http://106.12.194.98/api/customer/list';
         var head = {head:'Authorization',value:'Bearer '+utils.token};
-        AJAX.AJAX('http://106.12.194.98/api/supplier/list','GET',false,head,this.isLogin.bind(_this),_this.error);
+        AJAX.AJAX(url+'?num=1000','GET',false,head,this.isLogin.bind(_this),_this.error);
     }
     isLogin=(res)=>{
         var _this = this;
@@ -39,9 +40,23 @@ export default class CommonContent extends Component{
     save(e){
         debugger
         var _this = this;
-        var value = e.target.ownerDocument.querySelector('#supplierValue').value;
-        e.target.ownerDocument.querySelector('#supplierValue').value = '';
-        var url = 'http://106.12.194.98/api/supplier/add?name='+value; 
+        if(_this.props.Type=='supplier'){
+            if(e.target.ownerDocument.querySelector('#supplierValue').value==''){
+                return;
+            }
+            var value = e.target.ownerDocument.querySelector('#supplierValue').value;
+            e.target.ownerDocument.querySelector('#supplierValue').value = '';
+            var url = 'http://106.12.194.98/api/supplier/add?name='+value; 
+        }else if(_this.props.Type=='customer'){
+            if(e.target.ownerDocument.querySelector('#customerValue').value==''){
+                return;
+            }
+            var customerValue = e.target.ownerDocument.querySelector('#customerValue').value;
+            var telValue = e.target.ownerDocument.querySelector('#telValue').value;
+            e.target.ownerDocument.querySelector('#customerValue').value = '';
+            e.target.ownerDocument.querySelector('#telValue').value = '';
+            var url = 'http://106.12.194.98/api/customer/add?name='+customerValue+'&mobile='+telValue;
+        }
         var head = {head:'Authorization',value:'Bearer '+utils.token};
         AJAX.AJAX(url,'POST',false,head,_this.ischangeLogin.bind(_this),_this.error); 
     }
@@ -57,7 +72,11 @@ export default class CommonContent extends Component{
     delete(val,id){
         debugger
         var _this = this;
-        var url = 'http://106.12.194.98/api/supplier/delete?name='+val+'&ids='+id; 
+        if(_this.props.Type=='supplier'){
+           var url = 'http://106.12.194.98/api/supplier/delete?name='+val+'&ids='+id;  
+        }else if(_this.props.Type=='customer'){
+           var url = 'http://106.12.194.98/api/customer/delete?name='+val+'&ids='+id;  
+        }
         var head = {head:'Authorization',value:'Bearer '+utils.token};
         AJAX.AJAX(url,'POST',false,head,_this.ischangeLogin.bind(_this),_this.error);    
     }
@@ -72,11 +91,19 @@ export default class CommonContent extends Component{
                             return(<li title={d.name} onClick={_this.isConfirm.bind(_this)} id={d.id}>{d.name}</li>)
                         })}
                     </div>
+                    {_this.props.Type=='supplier'?
                     <div className="inputContent">
-                        <input id="supplierValue"/>
+                        <input id="supplierValue" placeholder="请输入供应商名称（必填项）"/>
+                        <div className="enterBtn" onClick={_this.save.bind(_this)}>提交</div>
+                        <div className="enterBtn" onClick={_this.props.close.bind(_this)}>关闭</div>
+                    </div>:
+                    <div className="inputContent">
+                        <input id="customerValue" placeholder="请输入客户名称（必填项）"/>
+                        <input id="telValue" placeholder="请输入电话号码"/>
                         <div className="enterBtn" onClick={_this.save.bind(_this)}>提交</div>
                         <div className="enterBtn" onClick={_this.props.close.bind(_this)}>关闭</div>
                     </div>
+                    }
                </div>
             </div>
            
