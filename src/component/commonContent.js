@@ -61,6 +61,20 @@ export default class CommonContent extends Component{
         var header = {head:'Authorization',value:'Bearer '+utils.token};
         AJAX.AJAX('http://106.12.194.98/api/goods/reduce/delete','POST',fromData,header,_this.refundsClick,_this.error);
     }
+    isSubmit(num){
+        var _this = this;
+        var isPwd  = prompt('请输入密码');
+        if(isPwd != 'luolong88'){
+            // if(num < 2){
+            //     _this.isSubmit(num+=1);
+            // }
+            alert('密码不正确!');
+            return false;
+        }else{
+            return true;
+        }
+        
+    }
     isConfirm(e){
         var _this = this;
         if(event.target.className !='deleteFlag'){
@@ -68,12 +82,20 @@ export default class CommonContent extends Component{
         }
         if(this.props.isOutStock){
             var isStatus = confirm('是否确认商品已退货?');
-            if(isStatus){
+            if(!isStatus){
+                return false;
+            }
+            var isTrue = _this.isSubmit(0);
+            if(isStatus && isTrue){
                 _this.searchData();
             }
         }else{
             var isStatus = confirm('确认删除?');
-            if(isStatus){
+            if(!isStatus){
+                return false;
+            }
+            var isTrue = _this.isSubmit(0);
+            if(isStatus && isTrue){
                 _this.deleteClick();
             }
         }
@@ -119,7 +141,7 @@ export default class CommonContent extends Component{
     total_laborcost(){
         var _this = this;
         //当前页面 工费 字段合计
-        var laborcostTd = document.querySelectorAll('#laborcost');
+        var laborcostTd = document.querySelectorAll('#allLaborcost');
         if(laborcostTd.length < 1){
             _this.setState({
                 total_laborcost : 0
@@ -158,6 +180,11 @@ export default class CommonContent extends Component{
                         if(v.title == '商品图片' ){
                             var imgURL = item[v.name] && item[v.name].length > 0 ? item[v.name][0] : false;
                         }
+                        if(v.title == '总计工费' && v.name == 'allLaborcost'){
+                            var totalLaborcost  = item.goods_type == '1' ? parseFloat(item.laborcost*item.num) : parseFloat(item.laborcost * item.weight_all);
+                            totalLaborcost = totalLaborcost.toFixed(2);
+                            
+                        }
                     return <td  className={v.title == '操作'? 'deleteFlag':''}  id={v.name} onClick={_this.isConfirm.bind(_this)}>{v.name == 'create_time' ?time : 
                     (v.title == '操作' && !this.props.deleteFlag ? v.name:
                     (v.title=='商品图片'?<a target='_blank' href={imgURL?imgURL:''}>{imgURL?item.goods_name+'图片':'无商品图片'}</a>:
@@ -167,7 +194,7 @@ export default class CommonContent extends Component{
                         search:'?'+item[v.name],
                         state: { fromWechat: true }
                     }}>{item[v.name]}</Link>:
-                    item[v.name]))))}</td>
+                    (v.title == '总计工费' && v.name == 'allLaborcost' ? (totalLaborcost?totalLaborcost:0) :item[v.name])))))}</td>
                     })}
                     </tr>
                 })}</tbody>
@@ -187,8 +214,8 @@ export default class CommonContent extends Component{
                                 var output = _this.props.AllData.stat_price_total;
                             }else if(d.title=='总计克重(g)'){
                                 var output = _this.props.AllData.stat_weight_total;
-                            }else if(d.title=='工费' ){
-                                var output = _this.state.total_laborcost;
+                            }else if(d.title=='总计工费' ){
+                                 var output = _this.state.total_laborcost;
                             }else{
                                 var output = '';
                             }

@@ -28,7 +28,7 @@ export default class navHeader extends Component {
         return (
             <header className="navHeader">
                 <div className="navLeft">
-                    <span>龍雅轩银楼</span>
+                    <span>龍雅轩</span>
                     <span>在线库存管理系统</span>
                 </div>
                 <div className="navRight">

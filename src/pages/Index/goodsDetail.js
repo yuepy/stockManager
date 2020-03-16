@@ -102,6 +102,7 @@ export default class Index extends Component {
                                 <select className="searchSelect">
                                     <option id="goods_name">商品名称</option>
                                     <option id="goods_number">商品编号</option>
+                                    <option id="supplier">供应商</option>
                                 </select>
                                 <input className="searchValue"/>
                                 <div className="enterBtn" onClick={_this.searchBtn.bind(_this)}>搜索</div>
@@ -109,8 +110,9 @@ export default class Index extends Component {
                             </div>
                         </div>
                         <CommonContent 
-                            HEAD={[{title:'供货商',name:'supplier'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},{title:'工费类型',name:'goods_type'},{title:'工费',name:'laborcost'},{title:'克重(件/g)',
-                                    name:'weight'},{title:'总计件数',name:'num'},{title:'总计克重(g)',name:'weight_all'}]}
+                            HEAD={[{title:'供货商',name:'supplier'},{title:'商品名称',name:'goods_name'},{title:'商品编号',name:'goods_number'},{title:'工费类型',name:'goods_type'},
+                            {title:'工费',name:'laborcost'},{title:'克重(件/g)',name:'weight'},{title:'总计件数',name:'num'},{title:'总计克重(g)',name:'weight_all'},
+                            {title:'总计工费',name:'allLaborcost'}]}
                             CONTENT={_this.state.data}
                             deleteFlag={_this.state.deleteFlag}
                             AllData = {_this.state.allData}

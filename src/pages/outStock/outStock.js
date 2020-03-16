@@ -126,6 +126,8 @@ export default class OutStock extends Component {
                                 <select className="searchSelect">
                                     <option id="goods_name">商品名称</option>
                                     <option id="goods_number">商品编号</option>
+                                    <option id="customer">客户名称</option>
+                                    <option id="operator">经办人</option>
                                 </select>
                                 <input className="searchValue"/>
                                 <div className="enterBtn" onClick={_this.searchBtn.bind(_this)}>搜索</div>

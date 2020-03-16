@@ -65,10 +65,25 @@ export default class Warehousing extends Component {
             deleteFlag:!_this.state.deleteFlag
         })
     }
+    isSubmit(num){
+        var _this = this;
+        var isPwd  = prompt('请输入密码');
+        if(isPwd != 'luolong88'){
+            alert('密码不正确请重新操作!');
+            return false;
+        }else{
+            return true;
+        }
+        
+    }
     isConfirm(){
         var _this = this;
         var isStatus = confirm('确认删除?');
-        if(isStatus){
+        if(!isStatus){
+            return ;
+        }
+        var isTrue = _this.isSubmit(0);
+        if(isStatus && isTrue ){
             _this.DELETE();
         }
     }
@@ -160,6 +175,8 @@ export default class Warehousing extends Component {
                                 <select className="searchSelect">
                                     <option id="goods_name">商品名称</option>
                                     <option id="goods_number">商品编号</option>
+                                    <option id="supplier">供货商</option>
+                                    <option id="operator">经办人</option>
                                 </select>
                                 <input className="searchValue"/>
                                 <div className="enterBtn" onClick={_this.searchBtn.bind(_this)}>搜索</div>
