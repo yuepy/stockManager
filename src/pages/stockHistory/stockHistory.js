@@ -40,6 +40,11 @@ export default class StockHistory extends Component {
             return;
         }
         var url = this.state.allData.path+'?'+id+'='+searchValue;
+        var searchDateStart = e.target.ownerDocument.querySelector('.searchDateStart').value;
+        var searchDateEnd = e.target.ownerDocument.querySelector('.searchDateEnd').value;
+        if(searchDateStart!==''&&searchDateEnd!==''){
+            url+='&date_start='+searchDateStart+'&date_end='+searchDateEnd
+        }
         var head = {head:'Authorization',value:'Bearer '+utils.token};
         AJAX.AJAX(url,'GET',false,head,this.isLogin,this.error);
     }
@@ -62,6 +67,12 @@ export default class StockHistory extends Component {
             searchType:type
         })
     }
+    focusChange(e){
+        e.target.type = 'date';
+    }
+    blurChange(e){
+        e.target.type = 'text';
+    }
     render(){
         var _this = this;
         return(
@@ -79,10 +90,10 @@ export default class StockHistory extends Component {
                                 <option id="date">日期查询</option>
                             </select>
                             <div className="DateOpt opt" style={{display:_this.state.searchType=='date'?'flex':'none'}}>
-                                <input className="startDate DateInput" type="date"/>
+                                input className="startDate DateInput" placeholder="开始日期" type="text" onFocus={_this.focusChange.bind(_this)} onBlur={_this.blurChange.bind(_this)}/>
                                 &nbsp;-&nbsp;
-                                <input className="endDate DateInput" type="date"/>
-                                <div className="enterBtn" onClick={_this.dateChange.bind(_this)}>确定</div>
+                                <input className="endDate DateInput" placeholder="开始日期" type="text" onFocus={_this.focusChange.bind(_this)} onBlur={_this.blurChange.bind(_this)}/>
+                             <div className="enterBtn" onClick={_this.dateChange.bind(_this)}>确定</div>
                             </div>
                             <div className="searchOpt opt" style={{display:_this.state.searchType=='commodity'?'flex':'none'}}>
                                 <select className="searchSelect">
@@ -91,6 +102,9 @@ export default class StockHistory extends Component {
                                     <option id="goods_number">商品编号</option>
                                 </select>
                                 <input className="searchValue"/>
+                                <input className="dateSearch searchDateStart"  placeholder="开始日期" type="text" onFocus={_this.focusChange.bind(_this)} onBlur={_this.blurChange.bind(_this)}/>
+                                &nbsp;-&nbsp;
+                                <input className="dateSearch searchDateEnd"  placeholder="结束日期" type="text" onFocus={_this.focusChange.bind(_this)} onBlur={_this.blurChange.bind(_this)}/>
                                 <div className="enterBtn" onClick={_this.searchBtn.bind(_this)}>搜索</div>
                                 <div className="enterBtn clear" onClick={_this.clear.bind(_this)}>重置</div>
                             </div>
